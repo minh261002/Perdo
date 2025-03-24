@@ -12,6 +12,8 @@ class ServiceServiceProvider extends ServiceProvider
         'App\Admin\Services\Role\RoleServiceInterface' => 'App\Admin\Services\Role\RoleService',
         'App\Admin\Services\Admin\AdminServiceInterface' => 'App\Admin\Services\Admin\AdminService',
         'App\Admin\Services\User\UserServiceInterface' => 'App\Admin\Services\User\UserService',
+        'App\Admin\Services\Post\PostServiceInterface' => 'App\Admin\Services\Post\PostService',
+        'App\Admin\Services\Post\PostCatalogueServiceInterface' => 'App\Admin\Services\Post\PostCatalogueService',
     ];
     public function register(): void
     {

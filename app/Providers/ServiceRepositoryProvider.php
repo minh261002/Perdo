@@ -13,6 +13,8 @@ class ServiceRepositoryProvider extends ServiceProvider
         'App\Repositories\Role\RoleRepositoryInterface' => 'App\Repositories\Role\RoleRepository',
         'App\Repositories\Admin\AdminRepositoryInterface' => 'App\Repositories\Admin\AdminRepository',
         'App\Repositories\User\UserRepositoryInterface' => 'App\Repositories\User\UserRepository',
+        'App\Repositories\Post\PostRepositoryInterface' => 'App\Repositories\Post\PostRepository',
+        'App\Repositories\Post\PostCatalogueRepositoryInterface' => 'App\Repositories\Post\PostCatalogueRepository',
     ];
     /**
      * Register services.

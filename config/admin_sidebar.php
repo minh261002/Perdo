@@ -85,48 +85,48 @@ return [
     //         ]
     //     ]
     // ],
-    // [
-    //     'active' => ['admin.post_catalogue.*'],
-    //     'show' => ['admin.post_catalogue.*'],
-    //     'title' => 'Chuyên mục',
-    //     'icon' => 'ti ti-list-letters fs-2',
-    //     'permission' => ['viewCatalogue', 'createCatalogue', 'editCatalogue', 'deleteCatalogue'],
-    //     'children' => [
-    //         [
-    //             'title' => 'Thêm mới',
-    //             'route' => 'admin.post_catalogue.create',
-    //             'icon' => 'ti ti-plus fs-3 me-2',
-    //             'permission' => 'createCatalogue'
-    //         ],
-    //         [
-    //             'title' => 'Danh sách',
-    //             'route' => 'admin.post_catalogue.index',
-    //             'icon' => 'ti ti-list fs-3 me-2',
-    //             'permission' => 'viewCatalogue'
-    //         ]
-    //     ]
-    // ],
-    // [
-    //     'active' => ['admin.post.*'],
-    //     'show' => ['admin.post.*'],
-    //     'title' => 'Bài viết',
-    //     'icon' => 'ti ti-inbox fs-2',
-    //     'permission' => ['viewPost', 'createPost', 'editPost', 'deletePost'],
-    //     'children' => [
-    //         [
-    //             'title' => 'Thêm mới',
-    //             'route' => 'admin.post.create',
-    //             'icon' => 'ti ti-plus fs-3 me-2',
-    //             'permission' => 'createPost'
-    //         ],
-    //         [
-    //             'title' => 'Danh sách',
-    //             'route' => 'admin.post.index',
-    //             'icon' => 'ti ti-list fs-3 me-2',
-    //             'permission' => 'viewPost'
-    //         ]
-    //     ]
-    // ],
+    [
+        'active' => ['admin.post_catalogue.*'],
+        'show' => ['admin.post_catalogue.*'],
+        'title' => 'Chuyên mục',
+        'icon' => 'ti ti-list-letters fs-2',
+        'permission' => ['viewCatalogue', 'createCatalogue', 'editCatalogue', 'deleteCatalogue'],
+        'children' => [
+            [
+                'title' => 'Thêm mới',
+                'route' => 'admin.post_catalogue.create',
+                'icon' => 'ti ti-plus fs-3 me-2',
+                'permission' => 'createCatalogue'
+            ],
+            [
+                'title' => 'Danh sách',
+                'route' => 'admin.post_catalogue.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewCatalogue'
+            ]
+        ]
+    ],
+    [
+        'active' => ['admin.post.*'],
+        'show' => ['admin.post.*'],
+        'title' => 'Bài viết',
+        'icon' => 'ti ti-inbox fs-2',
+        'permission' => ['viewPost', 'createPost', 'editPost', 'deletePost'],
+        'children' => [
+            [
+                'title' => 'Thêm mới',
+                'route' => 'admin.post.create',
+                'icon' => 'ti ti-plus fs-3 me-2',
+                'permission' => 'createPost'
+            ],
+            [
+                'title' => 'Danh sách',
+                'route' => 'admin.post.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewPost'
+            ]
+        ]
+    ],
     // [
     //     'active' => ['admin.slider.*'],
     //     'show' => ['admin.slider.*'],
