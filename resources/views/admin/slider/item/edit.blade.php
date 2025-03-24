@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('admin.layouts.master')
 @section('title', 'Chỉnh sửa thông tin')
 
 @push('styles')
@@ -99,13 +99,11 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <span class="image img-cover image-target"><img class="w-100"
-                                                    src="{{ $item->image ? $item->image : asset('admin/images/not-found.jpg') }}"
+                                                    src="{{ $item->image ? $item->image : asset('/images/not-found.jpg') }}"
                                                     alt=""></span>
                                             <input type="hidden" name="image" value="{{ $item->image }}">
                                         </div>
-                                        @error('image')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+
                                     </div>
                                 </div>
                             </div>
@@ -118,13 +116,11 @@
                                     <div class="card-body">
                                         <div class="form-group">
                                             <span class="image img-cover image-target"><img class="w-100"
-                                                    src="{{ $item->mobile_image ? $item->mobile_image : asset('admin/images/not-found.jpg') }}"
+                                                    src="{{ $item->mobile_image ? $item->mobile_image : asset('/images/not-found.jpg') }}"
                                                     alt=""></span>
                                             <input type="hidden" name="mobile_image" value="{{ $item->mobile_image }}">
                                         </div>
-                                        @error('image_mobile')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+
                                     </div>
                                 </div>
                             </div>
@@ -154,5 +150,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('admin/js/finder.js') }}"></script>
+    <script src="{{ asset('/js/finder.js') }}"></script>
 @endpush

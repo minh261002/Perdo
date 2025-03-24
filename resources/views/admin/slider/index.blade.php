@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('admin.layouts.master')
 
 @section('title', 'Quản lý slider')
 
@@ -48,7 +48,7 @@
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        @include('admin.layout.partials.toggle-column')
+                        @include('admin.layouts.partials.toggle-column')
                         {{ $dataTable->table(['class' => 'table table-bordered table-striped'], true) }}
                     </div>
                 </div>
@@ -58,14 +58,14 @@
 @endsection
 
 @push('libs-js')
-    <script src="{{ asset('admin/js/buttons.server-side.js') }}"></script>
+    <script src="{{ asset('/js/buttons.server-side.js') }}"></script>
 @endpush
 
 
 @push('scripts')
     {{ $dataTable->scripts() }}
 
-    @include('admin.layout.partials.scripts', [
+    @include('admin.layouts.partials.scripts', [
         'id_table' => $dataTable->getTableAttribute('id'),
     ])
 

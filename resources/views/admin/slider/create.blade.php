@@ -1,4 +1,4 @@
-@extends('admin.layout.master')
+@extends('admin.layouts.master')
 @section('title', 'Thêm slider mới')
 
 @push('styles')
@@ -109,5 +109,5 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('admin/js/finder.js') }}"></script>
+    <script src="{{ asset('/js/finder.js') }}"></script>
 @endpush
