@@ -16,6 +16,8 @@ class ServiceServiceProvider extends ServiceProvider
         'App\Admin\Services\Post\PostCatalogueServiceInterface' => 'App\Admin\Services\Post\PostCatalogueService',
         'App\Admin\Services\Slider\SliderServiceInterface' => 'App\Admin\Services\Slider\SliderService',
         'App\Admin\Services\Slider\SliderItemServiceInterface' => 'App\Admin\Services\Slider\SliderItemService',
+        'App\Admin\Services\Category\CategoryServiceInterface' => 'App\Admin\Services\Category\CategoryService',
+        'App\Admin\Services\Brand\BrandServiceInterface' => 'App\Admin\Services\Brand\BrandService',
     ];
     public function register(): void
     {

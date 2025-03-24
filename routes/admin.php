@@ -12,6 +12,8 @@ use App\Admin\Http\Controllers\User\UserController;
 use App\Admin\Http\Controllers\Post\PostCatalogueController;
 use App\Admin\Http\Controllers\Post\PostController;
 use App\Admin\Http\Controllers\Slider\SliderController;
+use App\Admin\Http\Controllers\Brand\BrandController;
+use App\Admin\Http\Controllers\Category\CategoryController;
 
 Route::prefix('admin')->as('admin.')->group(function () {
 
@@ -220,5 +222,47 @@ Route::prefix('admin')->as('admin.')->group(function () {
             Route::put('slider-item/update', [SliderController::class, 'updateItem'])->name('slider.item.update');
         });
 
+        Route::prefix('brand')->as('brand.')->group(function () {
+            Route::middleware(['permission:viewBrand'])->group(function () {
+                Route::get('/', [BrandController::class, 'index'])->name('index');
+            });
+
+            Route::middleware(['permission:createBrand'])->group(function () {
+                Route::get('/create', [BrandController::class, 'create'])->name('create');
+                Route::post('/store', [BrandController::class, 'store'])->name('store');
+            });
+
+            Route::middleware(['permission:editBrand'])->group(function () {
+                Route::get('/edit/{id}', [BrandController::class, 'edit'])->name('edit');
+                Route::put('/update', [BrandController::class, 'update'])->name('update');
+                Route::patch('/update-status', [BrandController::class, 'updateStatus'])->name('update.status');
+            });
+
+            Route::middleware(['permission:deleteBrand'])->group(function () {
+                Route::delete('/delete/{id}', [BrandController::class, 'delete'])->name('delete');
+            });
+        });
+
+        Route::prefix('category')->as('category.')->group(function () {
+            Route::middleware(['permission:viewCategory'])->group(function () {
+                Route::get('/', [CategoryController::class, 'index'])->name('index');
+                Route::get('/get', [CategoryController::class, 'get'])->name('get');
+            });
+
+            Route::middleware(['permission:createCategory'])->group(function () {
+                Route::get('/create', [CategoryController::class, 'create'])->name('create');
+                Route::post('/store', [CategoryController::class, 'store'])->name('store');
+            });
+
+            Route::middleware(['permission:editCategory'])->group(function () {
+                Route::get('/edit/{id}', [CategoryController::class, 'edit'])->name('edit');
+                Route::put('/update', [CategoryController::class, 'update'])->name('update');
+                Route::patch('/update-status', [CategoryController::class, 'updateStatus'])->name('update.status');
+            });
+
+            Route::middleware(['permission:deleteCategory'])->group(function () {
+                Route::delete('/delete/{id}', [CategoryController::class, 'delete'])->name('delete');
+            });
+        });
     });
 });

@@ -17,6 +17,8 @@ class ServiceRepositoryProvider extends ServiceProvider
         'App\Repositories\Post\PostCatalogueRepositoryInterface' => 'App\Repositories\Post\PostCatalogueRepository',
         'App\Repositories\Slider\SliderRepositoryInterface' => 'App\Repositories\Slider\SliderRepository',
         'App\Repositories\Slider\SliderItemRepositoryInterface' => 'App\Repositories\Slider\SliderItemRepository',
+        'App\Repositories\Category\CategoryRepositoryInterface' => 'App\Repositories\Category\CategoryRepository',
+        'App\Repositories\Brand\BrandRepositoryInterface' => 'App\Repositories\Brand\BrandRepository',
     ];
     /**
      * Register services.

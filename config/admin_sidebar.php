@@ -1,90 +1,49 @@
 <?php
 
 return [
-    // [
-    //     'active' => ['admin.notification.*'],
-    //     'show' => ['admin.notification.*'],
-    //     'title' => 'Thông báo',
-    //     'icon' => 'ti ti-bell fs-2',
-    //     'permission' => ['viewNotification', 'createNotification', 'editNotification', 'deleteNotification'],
-    //     'children' => [
-    //         [
-    //             'title' => 'Thêm mới',
-    //             'route' => 'admin.notification.create',
-    //             'icon' => 'ti ti-plus fs-3 me-2',
-    //             'permission' => 'createNotification'
-    //         ],
-    //         [
-    //             'title' => 'Danh sách',
-    //             'route' => 'admin.notification.index',
-    //             'icon' => 'ti ti-list fs-3 me-2',
-    //             'permission' => 'viewNotification'
-    //         ]
-    //     ]
-    // ],
-    // [
-    //     'active' => ['admin.category.*'],
-    //     'show' => ['admin.category.*'],
-    //     'title' => 'Danh mục',
-    //     'icon' => 'ti ti-list-check fs-2',
-    //     'permission' => ['viewCategory', 'createCategory', 'editCategory', 'deleteCategory'],
-    //     'children' => [
-    //         [
-    //             'title' => 'Thêm mới',
-    //             'route' => 'admin.category.create',
-    //             'icon' => 'ti ti-plus fs-3 me-2',
-    //             'permission' => 'createCategory'
-    //         ],
-    //         [
-    //             'title' => 'Danh sách',
-    //             'route' => 'admin.category.index',
-    //             'icon' => 'ti ti-list fs-3 me-2',
-    //             'permission' => 'viewCategory'
-    //         ]
-    //     ]
-    // ],
-    // [
-    //     'active' => ['admin.amenity.*'],
-    //     'show' => ['admin.amenity.*'],
-    //     'title' => 'Tiện ích',
-    //     'icon' => 'ti ti-augmented-reality fs-2',
-    //     'permission' => ['viewAmenities', 'createAmenities', 'editAmenities', 'deleteAmenities'],
-    //     'children' => [
-    //         [
-    //             'title' => 'Thêm mới',
-    //             'route' => 'admin.amenity.create',
-    //             'icon' => 'ti ti-plus fs-3 me-2',
-    //             'permission' => 'createAmenities'
-    //         ],
-    //         [
-    //             'title' => 'Danh sách',
-    //             'route' => 'admin.amenity.index',
-    //             'icon' => 'ti ti-list fs-3 me-2',
-    //             'permission' => 'viewAmenities'
-    //         ]
-    //     ]
-    // ],
-    // [
-    //     'active' => ['admin.service.*'],
-    //     'show' => ['admin.service.*'],
-    //     'title' => 'Dịch vụ',
-    //     'icon' => 'ti ti-device-gamepad-3 fs-2',
-    //     'permission' => ['viewService', 'createService', 'editService', 'deleteService'],
-    //     'children' => [
-    //         [
-    //             'title' => 'Thêm mới',
-    //             'route' => 'admin.service.create',
-    //             'icon' => 'ti ti-plus fs-3 me-2',
-    //             'permission' => 'createService'
-    //         ],
-    //         [
-    //             'title' => 'Danh sách',
-    //             'route' => 'admin.service.index',
-    //             'icon' => 'ti ti-list fs-3 me-2',
-    //             'permission' => 'viewService'
-    //         ]
-    //     ]
-    // ],
+
+    [
+        'active' => ['admin.category.*'],
+        'show' => ['admin.category.*'],
+        'title' => 'Danh mục',
+        'icon' => 'ti ti-list-check fs-2',
+        'permission' => ['viewCategory', 'createCategory', 'editCategory', 'deleteCategory'],
+        'children' => [
+            [
+                'title' => 'Thêm mới',
+                'route' => 'admin.category.create',
+                'icon' => 'ti ti-plus fs-3 me-2',
+                'permission' => 'createCategory'
+            ],
+            [
+                'title' => 'Danh sách',
+                'route' => 'admin.category.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewCategory'
+            ]
+        ]
+    ],
+    [
+        'active' => ['admin.brand.*'],
+        'show' => ['admin.brand.*'],
+        'title' => 'Thương hiệu',
+        'icon' => 'ti ti-crown fs-2',
+        'permission' => ['viewBrand', 'createBrand', 'editBrand', 'deleteBrand'],
+        'children' => [
+            [
+                'title' => 'Thêm mới',
+                'route' => 'admin.brand.create',
+                'icon' => 'ti ti-plus fs-3 me-2',
+                'permission' => 'createBrand'
+            ],
+            [
+                'title' => 'Danh sách',
+                'route' => 'admin.brand.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewBrand'
+            ]
+        ]
+    ],
     [
         'active' => ['admin.post_catalogue.*'],
         'show' => ['admin.post_catalogue.*'],
