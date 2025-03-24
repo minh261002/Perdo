@@ -1,6 +1,6 @@
 @php
     $adminSidebar = config('admin_sidebar');
-    $admin = Auth::user();
+    $admin = Auth::guard('admin')->user();
 @endphp
 
 <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
@@ -10,8 +10,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <h1 class="navbar-brand navbar-brand-autodark p-2">
-            <a href="{{ route('dashboard') }}">
-                <img src="{{ asset('images/logo.svg') }}" alt="Logo" class="navbar-brand-image" style="height:2em">
+            <a href="{{ route('admin.dashboard') }}">
+                <img src="{{ asset('images/admin-logo.svg') }}" alt="Logo" class="navbar-brand-image"
+                    style="height: 30px">
             </a>
         </h1>
 
@@ -30,7 +31,7 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <form action="{{ route('logout') }}" method="POST">
+                    <form action="{{ route('admin.logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="dropdown-item">Đăng xuất</button>
                     </form>
@@ -41,7 +42,8 @@
         <div class="collapse navbar-collapse" id="sidebar-menu">
             <ul class="navbar-nav pt-lg-3">
                 <li class="nav-item {{ setSidebarActive(['admin.dashboard']) }}">
-                    <a class="nav-link  {{ setSidebarShow(['admin.dashboard']) }}" href="{{ route('dashboard') }}">
+                    <a class="nav-link  {{ setSidebarShow(['admin.dashboard']) }}"
+                        href="{{ route('admin.dashboard') }}">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <i class="ti ti-home-2 fs-2"></i>
                         </span>
@@ -52,7 +54,7 @@
                 </li>
 
                 @foreach ($adminSidebar as $menu)
-                    @if (auth()->user()->checkPermissions($menu['permission']) || in_array('Developer', $menu['permission']))
+                    @if (auth('admin')->user()->checkPermissions($menu['permission']) || in_array('Root', $menu['permission']))
                         <li class="nav-item dropdown {{ setSidebarActive([$menu['active']]) }}">
                             <a class="nav-link dropdown-toggle {{ setSidebarShow($menu['show']) }}" href="#"
                                 data-bs-toggle="dropdown" data-bs-auto-close="false" role="button"
@@ -64,11 +66,11 @@
                             </a>
 
                             @if (!empty($menu['children']))
-                                @if (auth()->user()->checkPermissions($menu['permission']) || in_array('Developer', $menu['permission']))
+                                @if (auth('admin')->user()->checkPermissions($menu['permission']) || in_array('Root', $menu['permission']))
                                     <div class="dropdown-menu {{ setSidebarShow($menu['show']) }}">
                                         <div class="dropdown-menu-columns">
                                             @foreach ($menu['children'] as $child)
-                                                @if (isset($child['permission']) && !auth()->guard()->user()->can($child['permission']))
+                                                @if (isset($child['permission']) && !auth()->guard('admin')->user()->can($child['permission']))
                                                     @continue
                                                 @endif
                                                 <a class="dropdown-item" href="{{ route($child['route']) }}">

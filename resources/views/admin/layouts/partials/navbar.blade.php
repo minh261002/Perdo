@@ -1,5 +1,5 @@
 @php
-    $admin = Auth::user();
+    $admin = Auth::guard('admin')->user();
 @endphp
 
 <header class="navbar navbar-expand-md d-none d-lg-flex d-print-none">
@@ -59,7 +59,7 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <form action="{{ route('logout') }}" method="POST">
+                    <form action="{{ route('admin.logout') }}" method="POST">
                         @csrf
                         <button type="submit" class="dropdown-item">Đăng xuất</button>
                     </form>
