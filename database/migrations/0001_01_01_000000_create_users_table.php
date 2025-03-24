@@ -1,11 +1,13 @@
 <?php
 
+use App\Enums\ActiveStatus;
+use App\Enums\User\UserLoginType;
+use App\Enums\User\UserRole;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -14,9 +16,19 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('phone', 20)->nullable();
+            $table->string('address')->nullable();
+            $table->string('lat')->nullable();
+            $table->string('lng')->nullable();
+            $table->dateTime('birthday')->nullable();
+            $table->string('image')->default('/images/not-found.jpg');
+            $table->text('description')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->nullable();
+            $table->enum('status', ActiveStatus::getValues())->default(ActiveStatus::Active->value);
+            $table->enum('login_type', UserLoginType::getValues())->default(UserLoginType::Email->value);
+            $table->enum('role', UserRole::getValues())->default(UserRole::Guest->value);
             $table->rememberToken();
             $table->timestamps();
         });
