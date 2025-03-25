@@ -14,6 +14,18 @@
                 <img src="{{ asset('/images/logo.svg') }}" class="img-fluid" width="90px" />
             </a>
         </div>
+        <form class="navbar-search d-none d-md-flex ms-2 w-50">
+            <div class="input-group input-group-merge search-bar">
+                <input type="text" class="form-control" placeholder="Tìm kiếm" aria-label="Search…"
+                    aria-describedby="topbar-addon">
+                {{-- <span class="input-group-text" id="topbar-addon">
+                    <span class="ti ti-search"></span>
+                </span> --}}
+                <button class="input-group-text btn btn-primary" id="topbar-addon">
+                    <span class="ti ti-search"></span>
+                </button>
+            </div>
+        </form>
         <div class="navbar-nav flex-row order-md-last">
             @if (Auth::guard('web')->check())
                 <div class="nav-item dropdown">
@@ -47,6 +59,9 @@
                             style="background-image: url('{{ asset('/images/not-found.jpg') }}')"></span>
                         <div class="d-none d-xl-block ps-2">
                             <div>Tài khoản</div>
+                            <div class="mt-1 small text-secondary">
+                                Khách hàng
+                            </div>
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">

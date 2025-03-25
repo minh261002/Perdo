@@ -18,7 +18,7 @@
     <link href="{{ asset('/css/demo.min.css?1692870487') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('/icons/tabler-icons-filled.css') }}">
     <link rel="stylesheet" href="{{ asset('/icons/tabler-icons.css') }}">
-    <link rel="shortcut icon" href="{{ asset('/images/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('/images/favicon.svg') }}" type="image/x-icon">
     <link rel="stylesheet" href="{{ asset('/css/custom.css') }}">
     <link rel="stylesheet" type="text/css"
         href="https://cdn.jsdelivr.net/gh/lelinh014756/fui-toast-js@master/assets/css/toast@1.0.1/fuiToast.min.css">

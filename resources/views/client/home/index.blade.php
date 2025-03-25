@@ -1,6 +1,6 @@
 @extends('client.layout.master')
 
-@section('title', 'Larana, Inc - Trang chủ')
+@section('title', 'Cửa hàng dành cho mẹ & bé trên toàn quốc')
 
 @section('content')
     @include('client.layout.partials.navbar')
