@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Enums\Module\ModuleStatus;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use PhpOffice\PhpSpreadsheet\Shared\OLE\PPS;
 
 class ModuleSeeder extends Seeder
 {
@@ -87,6 +88,46 @@ class ModuleSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'id' => 10,
+                'name' => 'Quản lý sản phẩm',
+                'description' => 'Quản lý sản phẩm',
+                'status' => ModuleStatus::Completed->value,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 11,
+                'name' => 'Quản lý thương hiệu',
+                'description' => 'Quản lý thương hiệu',
+                'status' => ModuleStatus::Completed->value,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 12,
+                'name' => 'Quản lý đơn hàng',
+                'description' => 'Quản lý đơn hàng',
+                'status' => ModuleStatus::Completed->value,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 13,
+                'name' => 'Quản lý giao dịch',
+                'description' => 'Quản lý giao dịch',
+                'status' => ModuleStatus::Completed->value,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 14,
+                'name' => 'Quản lý vận chuyển',
+                'description' => 'Quản lý vận chuyển',
+                'status' => ModuleStatus::Completed->value,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ]);
 
         //Permission
@@ -307,6 +348,90 @@ class ModuleSeeder extends Seeder
                 'guard_name' => 'admin',
                 'module_id' => 9,
             ],
+            [
+                'title' => 'Xem sản phẩm',
+                'name' => 'viewProduct',
+                'guard_name' => 'admin',
+                'module_id' => 10,
+            ],
+            [
+                'title' => 'Tạo sản phẩm',
+                'name' => 'createProduct',
+                'guard_name' => 'admin',
+                'module_id' => 10,
+            ],
+            [
+                'title' => 'Sửa sản phẩm',
+                'name' => 'editProduct',
+                'guard_name' => 'admin',
+                'module_id' => 10,
+            ],
+            [
+                'title' => 'Xóa sản phẩm',
+                'name' => 'deleteProduct',
+                'guard_name' => 'admin',
+                'module_id' => 10,
+            ],
+            [
+                'title' => 'Xem thương hiệu',
+                'name' => 'viewBrand',
+                'guard_name' => 'admin',
+                'module_id' => 11,
+            ],
+            [
+                'title' => 'Tạo thương hiệu',
+                'name' => 'createBrand',
+                'guard_name' => 'admin',
+                'module_id' => 11,
+            ],
+            [
+                'title' => 'Sửa thương hiệu',
+                'name' => 'editBrand',
+                'guard_name' => 'admin',
+                'module_id' => 11,
+            ],
+            [
+                'title' => 'Xóa thương hiệu',
+                'name' => 'deleteBrand',
+                'guard_name' => 'admin',
+                'module_id' => 11,
+            ],
+            [
+                'title' => 'Xem đơn hàng',
+                'name' => 'viewOrder',
+                'guard_name' => 'admin',
+                'module_id' => 12,
+            ],
+            [
+                'title' => 'Sửa đơn hàng',
+                'name' => 'editOrder',
+                'guard_name' => 'admin',
+                'module_id' => 12,
+            ],
+            [
+                'title' => 'Xem giao dịch',
+                'name' => 'viewTransaction',
+                'guard_name' => 'admin',
+                'module_id' => 13,
+            ],
+            [
+                'title' => 'Sửa giao dịch',
+                'name' => 'editTransaction',
+                'guard_name' => 'admin',
+                'module_id' => 14,
+            ],
+            [
+                'title' => 'Xem vận chuyển',
+                'name' => 'viewTransport',
+                'guard_name' => 'admin',
+                'module_id' => 14,
+            ],
+            [
+                'title' => 'Sửa vận chuyển',
+                'name' => 'editTransport',
+                'guard_name' => 'admin',
+                'module_id' => 14,
+            ]
         ]);
 
         //Role
@@ -465,6 +590,62 @@ class ModuleSeeder extends Seeder
             ],
             [
                 'permission_id' => 36,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 37,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 38,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 39,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 40,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 41,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 42,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 43,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 44,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 45,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 46,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 47,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 48,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 49,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 50,
                 'role_id' => 1,
             ],
         ]);

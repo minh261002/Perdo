@@ -61,7 +61,7 @@
 
 
 @push('libs-js')
-    <script src="{{ asset('admin/js/buttons.server-side.js') }}"></script>
+    <script src="{{ asset('/js/buttons.server-side.js') }}"></script>
 @endpush
 
 @push('scripts')

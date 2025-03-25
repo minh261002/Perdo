@@ -1,0 +1,73 @@
+@php
+    $user = Auth::guard('web')->user();
+@endphp
+
+<header class="navbar navbar-expand-md d-print-none">
+    <div class="container-xl">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
+            aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+            <a href=".">
+                <img src="{{ asset('/images/logo.svg') }}" class="img-fluid" width="90px" />
+            </a>
+        </div>
+        <form class="navbar-search d-none d-md-flex ms-2 w-50">
+            <div class="input-group input-group-merge search-bar">
+                <input type="text" class="form-control" placeholder="Tìm kiếm" aria-label="Search…"
+                    aria-describedby="topbar-addon">
+                <button class="input-group-text btn btn-primary" id="topbar-addon">
+                    <span class="ti ti-search"></span>
+                </button>
+            </div>
+        </form>
+        <div class="navbar-nav flex-row order-md-last">
+            @if (Auth::guard('web')->check())
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link d-flex lh-1 p-0 px-2" data-bs-toggle="dropdown"
+                        aria-label="Open user menu">
+                        <span class="avatar avatar-sm" style="background-image: url('{{ $user->image }}')"></span>
+                        <div class="d-none d-xl-block ps-2">
+                            <div>
+                                {{ $user->name }}
+                            </div>
+                            <div class="mt-1 small text-secondary">
+                                Khách hàng
+                            </div>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+
+
+                        <div class="dropdown-divider"></div>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="dropdown-item">Đăng xuất</button>
+                        </form>
+                    </div>
+                </div>
+            @else
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link d-flex lh-1 p-0 px-2" data-bs-toggle="dropdown"
+                        aria-label="Open user menu">
+                        <span class="avatar avatar-sm"
+                            style="background-image: url('{{ asset('/images/not-found.jpg') }}')"></span>
+                        <div class="d-none d-xl-block ps-2">
+                            <div>Tài khoản</div>
+                            <div class="mt-1 small text-secondary">
+                                Khách hàng
+                            </div>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                        <a href="{{ route('login') }}" class="dropdown-item">Đăng nhập</a>
+                        <a href="{{ route('register') }}" class="dropdown-item">Đăng ký</a>
+                    </div>
+                </div>
+            @endif
+
+        </div>
+    </div>
+</header>
