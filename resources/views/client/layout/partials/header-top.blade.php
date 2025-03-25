@@ -42,7 +42,7 @@
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <a href="{{ route('notification.index') }}" class="dropdown-item">Thông báo</a>
+
 
                         <div class="dropdown-divider"></div>
                         <form action="{{ route('logout') }}" method="POST">
