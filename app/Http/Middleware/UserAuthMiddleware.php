@@ -17,7 +17,10 @@ class UserAuthMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::guard('web')->check()) {
-            return redirect()->route('login')->with('error', 'Vui lòng đăng nhập để truy cập nội dung này');
+            return redirect()->route(
+                'login',
+                ['redirect' => $request->fullUrl()]
+            )->with('error', 'Vui lòng đăng nhập để truy cập nội dung này');
         }
         return $next($request);
     }

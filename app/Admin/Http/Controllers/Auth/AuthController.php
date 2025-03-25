@@ -16,9 +16,14 @@ class AuthController
     {
         $data = $request->validated();
         $remember = $data['remember'] ?? false;
+        $redirect = $data['redirect'] ?? null;
         unset($data['remember']);
+        unset($data['redirect']);
 
         if (Auth::guard('admin')->attempt($data, $remember)) {
+            if ($redirect) {
+                return redirect()->to($redirect)->with('success', 'Xin chào, ' . Auth::guard('admin')->user()->name);
+            }
             return redirect()->route('admin.dashboard')->with('success', 'Xin chào, ' . Auth::guard('admin')->user()->name);
         }
 

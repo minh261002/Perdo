@@ -11,6 +11,7 @@
         <form action="{{ route('admin.authenticate') }}" method="post" autocomplete="off" novalidate>
             @csrf
 
+            <input type="hidden" name="redirect" value="{{ request('redirect') }}">
             <div class="mb-3">
                 <label class="form-label">{{ __('Email') }}</label>
                 <input type="email" class="form-control" autocomplete="off" name="email" value="{{ old('email') }}"
