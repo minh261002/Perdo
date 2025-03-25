@@ -14,6 +14,7 @@ use App\Admin\Http\Controllers\Post\PostController;
 use App\Admin\Http\Controllers\Slider\SliderController;
 use App\Admin\Http\Controllers\Brand\BrandController;
 use App\Admin\Http\Controllers\Category\CategoryController;
+use App\Admin\Http\Controllers\Product\ProductController;
 
 Route::prefix('admin')->as('admin.')->group(function () {
 
@@ -264,5 +265,28 @@ Route::prefix('admin')->as('admin.')->group(function () {
                 Route::delete('/delete/{id}', [CategoryController::class, 'delete'])->name('delete');
             });
         });
+
+        Route::prefix('product')->as('product.')->group(function () {
+            Route::middleware(['permission:viewProduct'])->group(function () {
+                Route::get('/', [ProductController::class, 'index'])->name('index');
+                Route::get('/get', [ProductController::class, 'get'])->name('get');
+            });
+
+            Route::middleware(['permission:createProduct'])->group(function () {
+                Route::get('/create', [ProductController::class, 'create'])->name('create');
+                Route::post('/store', [ProductController::class, 'store'])->name('store');
+            });
+
+            Route::middleware(['permission:editProduct'])->group(function () {
+                Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
+                Route::put('/update', [ProductController::class, 'update'])->name('update');
+                Route::patch('/update-status', [ProductController::class, 'updateStatus'])->name('update.status');
+            });
+
+            Route::middleware(['permission:deleteProduct'])->group(function () {
+                Route::delete('/delete/{id}', [ProductController::class, 'delete'])->name('delete');
+            });
+        });
+
     });
 });

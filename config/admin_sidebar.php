@@ -24,6 +24,27 @@ return [
         ]
     ],
     [
+        'active' => ['admin.product.*'],
+        'show' => ['admin.product.*'],
+        'title' => 'Sản phẩm',
+        'icon' => 'ti ti-package fs-2',
+        'permission' => ['viewProduct', 'createProduct', 'editProduct', 'deleteProduct'],
+        'children' => [
+            [
+                'title' => 'Thêm mới',
+                'route' => 'admin.product.create',
+                'icon' => 'ti ti-plus fs-3 me-2',
+                'permission' => 'createProduct'
+            ],
+            [
+                'title' => 'Danh sách',
+                'route' => 'admin.product.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewProduct'
+            ]
+        ]
+    ],
+    [
         'active' => ['admin.brand.*'],
         'show' => ['admin.brand.*'],
         'title' => 'Thương hiệu',
