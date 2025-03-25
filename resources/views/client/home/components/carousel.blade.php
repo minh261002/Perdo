@@ -1,25 +1,27 @@
-<div id="carousel-indicators-thumb" class="carousel slide carousel-fade" data-bs-ride="carousel">
-    <div class="carousel-indicators carousel-indicators-thumb
-        <button type="button"
-        data-bs-target="#carousel-indicators-thumb" data-bs-slide-to="0" class="ratio ratio-4x3 active"
-        style="background-image: url({{ asset('uploads/images/hero_bg_1_1.jpg') }})"></button>
+<div class="container my-50px">
+    <div id="carousel-sample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            @foreach ($homeSlider->items as $key => $item)
+                <button type="button" data-bs-target="#carousel-sample" data-bs-slide-to="{{ $key }}"
+                    class="{{ $key == 0 ? 'active' : '' }}"></button>
+            @endforeach
+        </div>
+        <div class="carousel-inner">
+            @foreach ($homeSlider->items as $key => $item)
+                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                    <img class="d-block w-100 rounded-4" alt="" src="{{ $item->image }}" />
+                </div>
+            @endforeach
+        </div>
+
+        <a class="carousel-control-prev" data-bs-target="#carousel-sample" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control-next" data-bs-target="#carousel-sample" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </a>
     </div>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img class="d-block w-100" alt="" src="{{ asset('uploads/images/hero_bg_1_1.jpg') }}">
-        </div>
-        {{-- <div class="carousel-item">
-            <img class="d-block w-100" alt="" src="./static/photos/workplace-with-laptop-on-table-at-home.jpg">
-        </div>
-        <div class="carousel-item">
-            <img class="d-block w-100" alt=""
-                src="./static/photos/city-lights-reflected-in-the-water-at-night.jpg">
-        </div>
-        <div class="carousel-item">
-            <img class="d-block w-100" alt="" src="./static/photos/cryptocurrency-bitcoin-coins.jpg">
-        </div>
-        <div class="carousel-item">
-            <img class="d-block w-100" alt="" src="./static/photos/woman-read-book-and-drink-coffee-2.jpg">
-        </div> --}}
-    </div>
+
 </div>
