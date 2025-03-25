@@ -18,9 +18,6 @@
             <div class="input-group input-group-merge search-bar">
                 <input type="text" class="form-control" placeholder="Tìm kiếm" aria-label="Search…"
                     aria-describedby="topbar-addon">
-                {{-- <span class="input-group-text" id="topbar-addon">
-                    <span class="ti ti-search"></span>
-                </span> --}}
                 <button class="input-group-text btn btn-primary" id="topbar-addon">
                     <span class="ti ti-search"></span>
                 </button>
