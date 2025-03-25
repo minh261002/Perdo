@@ -111,6 +111,27 @@ return [
         ]
     ],
     [
+        'active' => ['admin.discount.*'],
+        'show' => ['admin.discount.*'],
+        'title' => 'Mã giảm giá',
+        'icon' => 'ti ti-ticket fs-2',
+        'permission' => ['viewDiscount', 'createDiscount', 'editDiscount', 'deleteDiscount'],
+        'children' => [
+            [
+                'title' => 'Thêm mới',
+                'route' => 'admin.discount.create',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewDiscount'
+            ],
+            [
+                'title' => 'Danh sách',
+                'route' => 'admin.discount.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewDiscount'
+            ]
+        ]
+    ],
+    [
         'active' => ['admin.post_catalogue.*'],
         'show' => ['admin.post_catalogue.*'],
         'title' => 'Chuyên mục',
