@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('admin.layouts.master')
 @section('title', 'Chỉnh sửa thông tin')
 
 @push('styles')
@@ -17,12 +17,12 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="{{ route('dashboard') }}">
+                                <a href="{{ route('admin.dashboard') }}">
                                     Dashboard
                                 </a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="{{ route('discount.index') }}">
+                                <a href="{{ route('admin.discount.index') }}">
                                     Quản lý mã giảm giá
                                 </a>
                             </li>
@@ -37,7 +37,7 @@
 
         <!-- Page body -->
         <div class="page-body">
-            <form action="{{ route('discount.update') }}" method="POST">
+            <form action="{{ route('admin.discount.update') }}" method="POST">
                 @csrf
                 @method('PUT')
 
@@ -131,13 +131,13 @@
                                         <select name="apply_for" id="apply_for" class="form-select">
                                             @foreach ($applyFor as $key => $value)
                                                 <option value="{{ $key }}"
-                                                    {{ $discount->apply_for == $key ? 'selected' : '' }}>
+                                                    {{ $discount->apply_for->value == $key ? 'selected' : '' }}>
                                                     {{ $value }}</option>
                                             @endforeach
                                         </select>
                                     </div>
 
-                                    @if ($discount->apply_for == \App\Enums\Discount\DiscountApplyFor::One->value)
+                                    @if ($discount->apply_for->value == \App\Enums\Discount\DiscountApplyFor::One->value)
                                         <div class="col-12 mb-3">
                                             <label class="form-label" for="user_id[]">Khách hàng</label>
                                             <select class="form-control select2-user-load" name="user_id[]"
@@ -201,7 +201,7 @@
                             </div>
 
                             <div class="card-body d-flex align-items-center justify-content-between gap-4">
-                                <a href="{{ route('discount.index') }}" class="btn btn-secondary w-100">
+                                <a href="{{ route('admin.discount.index') }}" class="btn btn-secondary w-100">
                                     Quay lại
                                 </a>
 

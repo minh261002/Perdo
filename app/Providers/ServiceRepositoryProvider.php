@@ -20,6 +20,7 @@ class ServiceRepositoryProvider extends ServiceProvider
         'App\Repositories\Category\CategoryRepositoryInterface' => 'App\Repositories\Category\CategoryRepository',
         'App\Repositories\Brand\BrandRepositoryInterface' => 'App\Repositories\Brand\BrandRepository',
         'App\Repositories\Product\ProductRepositoryInterface' => 'App\Repositories\Product\ProductRepository',
+        'App\Repositories\Discount\DiscountRepositoryInterface' => 'App\Repositories\Discount\DiscountRepository',
     ];
     /**
      * Register services.

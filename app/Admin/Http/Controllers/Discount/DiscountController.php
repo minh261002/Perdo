@@ -67,7 +67,7 @@ class DiscountController
     public function update(DiscountRequest $request)
     {
         $this->service->update($request);
-        return redirect()->route('discount.index')->with('success', 'Cập nhật mã giảm giá thành công');
+        return redirect()->route('admin.discount.index')->with('success', 'Cập nhật mã giảm giá thành công');
     }
 
     public function updateStatus(Request $request)

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('admin.layouts.master')
 @section('title', 'Quản lý mã giảm giá')
 
 @push('styles')
@@ -16,7 +16,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="{{ route('dashboard') }}">
+                                <a href="{{ route('admin.dashboard') }}">
                                     <i class="bi bi-house"></i>
                                     Dashboard
                                 </a>
@@ -39,7 +39,7 @@
                             Danh sách mã giảm giá
                         </h3>
                         <div class="card-actions">
-                            <a href="{{ route('discount.create') }}" class="btn btn-primary">
+                            <a href="{{ route('admin.discount.create') }}" class="btn btn-primary">
                                 <i class="ti ti-plus fs-4 me-1"></i>
                                 Thêm mới
                             </a>
@@ -50,7 +50,7 @@
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        @include('layouts.partials.toggle-column')
+                        @include('admin.layouts.partials.toggle-column')
                         {{ $dataTable->table(['class' => 'table table-bordered table-striped'], true) }}
                     </div>
                 </div>
@@ -66,7 +66,7 @@
 @push('scripts')
     {{ $dataTable->scripts() }}
 
-    @include('layouts.partials.scripts', [
+    @include('admin.layouts.partials.scripts', [
         'id_table' => $dataTable->getTableAttribute('id'),
     ])
 
@@ -78,7 +78,7 @@
             $.ajax({
                 type: 'PATCH',
                 dataType: 'json',
-                url: '{{ route('discount.update.status') }}',
+                url: '{{ route('admin.discount.update.status') }}',
                 data: {
                     '_token': '{{ csrf_token() }}',
                     'status': status,

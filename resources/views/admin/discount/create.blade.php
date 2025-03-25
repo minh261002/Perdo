@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('admin.layouts.master')
 @section('title', 'Thêm mã giảm giá mới')
 
 @push('styles')
@@ -17,12 +17,12 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="{{ route('dashboard') }}">
+                                <a href="{{ route('admin.dashboard') }}">
                                     Dashboard
                                 </a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="{{ route('discount.index') }}">
+                                <a href="{{ route('admin.discount.index') }}">
                                     Quản lý mã giảm giá
                                 </a>
                             </li>
@@ -37,7 +37,7 @@
 
         <!-- Page body -->
         <div class="page-body">
-            <form action="{{ route('discount.store') }}" method="POST">
+            <form action="{{ route('admin.discount.store') }}" method="POST">
                 @csrf
 
                 <div class="row">
@@ -174,7 +174,7 @@
                             </div>
 
                             <div class="card-body d-flex align-items-center justify-content-between gap-4">
-                                <a href="{{ route('discount.index') }}" class="btn btn-secondary w-100">
+                                <a href="{{ route('admin.discount.index') }}" class="btn btn-secondary w-100">
                                     Quay lại
                                 </a>
 
