@@ -87,6 +87,22 @@ class ModuleSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'id' => 10,
+                'name' => 'Quản lý sản phẩm',
+                'description' => 'Quản lý sản phẩm',
+                'status' => ModuleStatus::Completed->value,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 11,
+                'name' => 'Quản lý thương hiệu',
+                'description' => 'Quản lý thương hiệu',
+                'status' => ModuleStatus::Completed->value,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
         ]);
 
         //Permission
@@ -307,6 +323,54 @@ class ModuleSeeder extends Seeder
                 'guard_name' => 'admin',
                 'module_id' => 9,
             ],
+            [
+                'title' => 'Xem sản phẩm',
+                'name' => 'viewProduct',
+                'guard_name' => 'admin',
+                'module_id' => 10,
+            ],
+            [
+                'title' => 'Tạo sản phẩm',
+                'name' => 'createProduct',
+                'guard_name' => 'admin',
+                'module_id' => 10,
+            ],
+            [
+                'title' => 'Sửa sản phẩm',
+                'name' => 'editProduct',
+                'guard_name' => 'admin',
+                'module_id' => 10,
+            ],
+            [
+                'title' => 'Xóa sản phẩm',
+                'name' => 'deleteProduct',
+                'guard_name' => 'admin',
+                'module_id' => 10,
+            ],
+            [
+                'title' => 'Xem thương hiệu',
+                'name' => 'viewBrand',
+                'guard_name' => 'admin',
+                'module_id' => 11,
+            ],
+            [
+                'title' => 'Tạo thương hiệu',
+                'name' => 'createBrand',
+                'guard_name' => 'admin',
+                'module_id' => 11,
+            ],
+            [
+                'title' => 'Sửa thương hiệu',
+                'name' => 'editBrand',
+                'guard_name' => 'admin',
+                'module_id' => 11,
+            ],
+            [
+                'title' => 'Xóa thương hiệu',
+                'name' => 'deleteBrand',
+                'guard_name' => 'admin',
+                'module_id' => 11,
+            ],
         ]);
 
         //Role
@@ -465,6 +529,38 @@ class ModuleSeeder extends Seeder
             ],
             [
                 'permission_id' => 36,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 37,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 38,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 39,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 40,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 41,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 42,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 43,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 44,
                 'role_id' => 1,
             ],
         ]);
