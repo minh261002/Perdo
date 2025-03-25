@@ -66,6 +66,51 @@ return [
         ]
     ],
     [
+        'active' => ['admin.order.*'],
+        'show' => ['admin.order.*'],
+        'title' => 'Đơn hàng',
+        'icon' => 'ti ti-shopping-cart fs-2',
+        'permission' => ['viewOrder', 'editOrder',],
+        'children' => [
+            [
+                'title' => 'Danh sách',
+                'route' => 'admin.order.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewOrder'
+            ]
+        ]
+    ],
+    [
+        'active' => ['admin.transaction.*'],
+        'show' => ['admin.transaction.*'],
+        'title' => 'Giao dịch',
+        'icon' => 'ti ti-credit-card fs-2',
+        'permission' => ['viewOrder', 'editOrder',],
+        'children' => [
+            [
+                'title' => 'Danh sách',
+                'route' => 'admin.order.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewOrder'
+            ]
+        ]
+    ],
+    [
+        'active' => ['admin.transport.*'],
+        'show' => ['admin.transport.*'],
+        'title' => 'Vận chuyển',
+        'icon' => 'ti ti-truck fs-2',
+        'permission' => ['viewTransport', 'editTransport'],
+        'children' => [
+            [
+                'title' => 'Danh sách',
+                'route' => 'admin.transport.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewTransport'
+            ]
+        ]
+    ],
+    [
         'active' => ['admin.post_catalogue.*'],
         'show' => ['admin.post_catalogue.*'],
         'title' => 'Chuyên mục',

@@ -288,5 +288,38 @@ Route::prefix('admin')->as('admin.')->group(function () {
             });
         });
 
+        Route::prefix('order')->as('order.')->group(function () {
+            Route::middleware(['permission:viewOrder'])->group(function () {
+                Route::get('/', [ProductController::class, 'index'])->name('index');
+            });
+
+            Route::middleware(['permission:editOrder'])->group(function () {
+                Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
+                Route::put('/update', [ProductController::class, 'update'])->name('update');
+            });
+        });
+
+        Route::prefix('transaction')->as('transaction.')->group(function () {
+            Route::middleware(['permission:viewTransaction'])->group(function () {
+                Route::get('/', [ProductController::class, 'index'])->name('index');
+            });
+
+            Route::middleware(['permission:editTransaction'])->group(function () {
+                Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
+                Route::put('/update', [ProductController::class, 'update'])->name('update');
+            });
+        });
+
+        Route::prefix('transport')->as('transport.')->group(function () {
+            Route::middleware(['permission:viewTransport'])->group(function () {
+                Route::get('/', [ProductController::class, 'index'])->name('index');
+            });
+
+            Route::middleware(['permission:editTransport'])->group(function () {
+                Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
+                Route::put('/update', [ProductController::class, 'update'])->name('update');
+            });
+        });
+
     });
 });

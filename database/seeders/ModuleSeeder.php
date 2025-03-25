@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Enums\Module\ModuleStatus;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use PhpOffice\PhpSpreadsheet\Shared\OLE\PPS;
 
 class ModuleSeeder extends Seeder
 {
@@ -99,6 +100,30 @@ class ModuleSeeder extends Seeder
                 'id' => 11,
                 'name' => 'Quản lý thương hiệu',
                 'description' => 'Quản lý thương hiệu',
+                'status' => ModuleStatus::Completed->value,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 12,
+                'name' => 'Quản lý đơn hàng',
+                'description' => 'Quản lý đơn hàng',
+                'status' => ModuleStatus::Completed->value,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 13,
+                'name' => 'Quản lý giao dịch',
+                'description' => 'Quản lý giao dịch',
+                'status' => ModuleStatus::Completed->value,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 14,
+                'name' => 'Quản lý vận chuyển',
+                'description' => 'Quản lý vận chuyển',
                 'status' => ModuleStatus::Completed->value,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -371,6 +396,42 @@ class ModuleSeeder extends Seeder
                 'guard_name' => 'admin',
                 'module_id' => 11,
             ],
+            [
+                'title' => 'Xem đơn hàng',
+                'name' => 'viewOrder',
+                'guard_name' => 'admin',
+                'module_id' => 12,
+            ],
+            [
+                'title' => 'Sửa đơn hàng',
+                'name' => 'editOrder',
+                'guard_name' => 'admin',
+                'module_id' => 12,
+            ],
+            [
+                'title' => 'Xem giao dịch',
+                'name' => 'viewTransaction',
+                'guard_name' => 'admin',
+                'module_id' => 13,
+            ],
+            [
+                'title' => 'Sửa giao dịch',
+                'name' => 'editTransaction',
+                'guard_name' => 'admin',
+                'module_id' => 14,
+            ],
+            [
+                'title' => 'Xem vận chuyển',
+                'name' => 'viewTransport',
+                'guard_name' => 'admin',
+                'module_id' => 14,
+            ],
+            [
+                'title' => 'Sửa vận chuyển',
+                'name' => 'editTransport',
+                'guard_name' => 'admin',
+                'module_id' => 14,
+            ]
         ]);
 
         //Role
@@ -561,6 +622,30 @@ class ModuleSeeder extends Seeder
             ],
             [
                 'permission_id' => 44,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 45,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 46,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 47,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 48,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 49,
+                'role_id' => 1,
+            ],
+            [
+                'permission_id' => 50,
                 'role_id' => 1,
             ],
         ]);
