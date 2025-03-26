@@ -7,4 +7,6 @@
 
 
     @include('client.home.components.carousel')
+    @include('client.home.components.brand')
+    @include('client.home.components.discount')
 @endsection

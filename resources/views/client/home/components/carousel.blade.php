@@ -1,4 +1,4 @@
-<div class="container my-50px">
+<div class="container my-30px">
     <div id="carousel-sample" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             @foreach ($homeSlider->items as $key => $item)
@@ -9,7 +9,7 @@
         <div class="carousel-inner">
             @foreach ($homeSlider->items as $key => $item)
                 <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                    <img class="d-block w-100 rounded-4" alt="" src="{{ $item->image }}" />
+                    <img class="d-block w-100 rounded-2" alt="" src="{{ $item->image }}" />
                 </div>
             @endforeach
         </div>
