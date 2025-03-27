@@ -22,6 +22,8 @@ return new class extends Migration {
             $table->string('slug')->unique();
             $table->text('desc')->nullable();
             $table->enum('status', ActiveStatus::getValues())->default(ActiveStatus::Active->value);
+            $table->integer('stock')->default(0);
+            $table->integer('view_count')->default(0);
             $table->string('meta_title')->nullable();
             $table->text('meta_desc')->nullable();
             $table->string('meta_keywords')->nullable();
