@@ -116,7 +116,13 @@ class CartController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Cập nhật giỏ hàng thành công!'
+            'message' => 'Cập nhật giỏ hàng thành công!',
+            'subTotal' => array_sum(array_map(function ($item) {
+                return $item['price'] * $item['quantity'];
+            }, $cart)),
+            'totalPrice' => array_sum(array_map(function ($item) {
+                return $item['price'] * $item['quantity'];
+            }, $cart))
         ]);
     }
 

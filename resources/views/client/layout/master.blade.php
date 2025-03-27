@@ -48,6 +48,13 @@
 
     <script>
         const BASEURL = "{{ rtrim(env('APP_URL'), '/') }}/";
+
+        function format_price(price) {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(price);
+        }
     </script>
 
 </head>

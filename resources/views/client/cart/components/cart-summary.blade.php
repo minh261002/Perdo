@@ -25,12 +25,12 @@
             </div>
             <div class="d-flex justify-content-between text-sm">
                 <span class="text-muted">Phí vận chuyển</span>
-                <span class="fw-semibold" id="shipping_fee">10.000 đ</span>
+                <span class="fw-semibold" id="shipping_fee">0 ₫</span>
             </div>
 
             <div class="d-flex justify-content-between text-sm">
                 <span class="text-muted">Mã giảm giá</span>
-                <span class="fw-semibold text-primary" id="discount">-0 đ</span>
+                <span class="fw-semibold text-primary" id="discount">-0 ₫</span>
             </div>
             <input type="hidden" name="discount_amount" value="0">
         </div>
@@ -39,7 +39,7 @@
 
         <div class="d-flex justify-content-between align-items-center fs-4 fw-bold text-primary mb-4">
             <span>Tổng thanh toán</span>
-            <span id="total">{{ format_price($totalPrice + 10000) }}</span>
+            <span id="total">{{ format_price($totalPrice) }}</span>
         </div>
 
         <button type="submit" class="btn btn-primary w-100">
