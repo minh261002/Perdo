@@ -7,8 +7,8 @@
                 <img src="{{ asset('images/icon-title.svg') }}" alt="">
             </div>
 
-            {{-- <div class="row">
-                @foreach ($newProducts as $product)
+            <div class="row">
+                @forelse ($relatedProducts as $product)
                     @for ($i = 0; $i < 12; $i++)
                         <div class="col-6 col-md-2 pb-2 pb-md-3">
                             <div class="card rounded-2">
@@ -44,12 +44,12 @@
                             </div>
                         </div>
                     @endfor
-                @endforeach
-
-                <a href="" class="btn btn-primary w-25 mx-auto">
-                    Xem thêm
-                </a>
-            </div> --}}
+                @empty
+                    <div class="alert alert-info w-50 mx-auto">
+                        Không có sản phẩm liên quan
+                    </div>
+                @endforelse
+            </div>
         </div>
     </div>
 </div>

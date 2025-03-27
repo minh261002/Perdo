@@ -78,12 +78,35 @@
         </div>
     </div>
 
-    <div>
-        <button class="btn btn-primary w-25">
-            Thêm vào giỏ hàng
-        </button>
+    <div class="row mt-2">
+        <div class="col-md-6 mb-3">
+            <button class="btn btn-danger w-100">
+                <i class="ti ti-heart me-2 fs-1"></i>
+                <span class="fs-3">Yêu thích</span>
+            </button>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <button class="btn btn-primary w-100">
+                <i class="ti ti-shopping-cart me-2 fs-1"></i>
+                <span class="fs-3">Thêm vào giỏ hàng</span>
+            </button>
+        </div>
+
+        <div class="col-12">
+            <button class="btn btn-outline-azure w-100">
+                <i class="ti ti-map me-2 fs-1"></i>
+                <span class="fs-3">Tìm cửa hàng có sản phẩm</span>
+            </button>
+        </div>
+    </div>
+    <div class="hidden-content" id="content">
+        {!! $product->desc ?? 'Sản phẩm này không có mô tả' !!}
     </div>
 
+    @if ($product->desc)
+        <button id="toggleBtn" class="btn btn-outline-primary w-25 mx-auto">Xem thêm</button>
+    @endif
 </div>
 
 @push('scripts')
@@ -106,6 +129,15 @@
                 }
                 if (stock != '') {
                     $('#stock-error').text('');
+                }
+            });
+
+            $('#toggleBtn').click(function() {
+                $('#content').toggleClass('hidden-content');
+                if ($('#content').hasClass('hidden-content')) {
+                    $('#toggleBtn').text('Xem thêm');
+                } else {
+                    $('#toggleBtn').text('Thu gọn');
                 }
             });
         });
