@@ -1,5 +1,6 @@
 @php
     $user = Auth::guard('web')->user();
+    $cart_count = session()->has('cart') ? count(session('cart')) : 0;
 @endphp
 
 <header class="navbar navbar-expand-md d-print-none position-sticky top-0" style="z-index: 1020;">
@@ -23,7 +24,10 @@
                 <a href="{{ route('cart.index') }}" class="position-relative text-decoration-none">
                     <i class="ti ti-shopping-cart  d-block w-100 h-100" style="font-size: 30px"></i>
                     <span
-                        class="badge bg-red text-red-fg position-absolute top-0 start-100 translate-middle badge-circle">1</span>
+                        class="badge bg-red text-red-fg position-absolute top-0 start-100 translate-middle badge-circle"
+                        id="cart-count">
+                        {{ $cart_count }}
+                    </span>
                 </a>
             </div>
             @if (Auth::guard('web')->check())

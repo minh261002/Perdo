@@ -30,3 +30,57 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            //addToCart
+            $('#addToCart').on('click', function(e) {
+                e.preventDefault();
+
+                let id = {{ $product->id }};
+                let name = "{{ $product->name }}";
+                let price =
+                    "{{ $product->sale_price && $product->sale_price > 0 ? $product->sale_price : $product->price }}";
+                let image = "{{ $product->image }}";
+                let stock = "{{ $product->stock }}";
+                let quantity = $('input[name="stock"]').val();
+
+                $.ajax({
+                    url: "{{ route('cart.add') }}",
+                    method: 'POST',
+                    data: {
+                        id: id,
+                        name: name,
+                        price: price,
+                        image: image,
+                        stock: stock,
+                        quantity: quantity,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    beforeSend: function() {
+                        $('#addToCart').html(
+                            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>.'
+                        );
+                    },
+                    success: function(response) {
+                        if (response.status == 'success') {
+                            FuiToast.success(response.message);
+                            $('#cart-count').text(response.cartCount);
+                        } else {
+                            FuiToast.error(response.message);
+                        }
+                    },
+                    error: function(err) {
+                        FuiToast.error(err.responseJSON.message);
+                    },
+                    complete: function() {
+                        $('#addToCart').html(
+                            '<i class="ti ti-shopping-cart me-2 fs-1"></i><span class="fs-3">Thêm vào giỏ hàng</span>'
+                        );
+                    }
+                });
+            })
+        })
+    </script>
+@endpush

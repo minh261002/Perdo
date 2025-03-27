@@ -87,7 +87,7 @@
         </div>
 
         <div class="col-md-6 mb-3">
-            <button class="btn btn-primary w-100">
+            <button class="btn btn-primary w-100" id="addToCart">
                 <i class="ti ti-shopping-cart me-2 fs-1"></i>
                 <span class="fs-3">Thêm vào giỏ hàng</span>
             </button>

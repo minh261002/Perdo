@@ -32,6 +32,14 @@ Route::middleware('user.auth')->group(function () {
     Route::post('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
 });
 
-Route::get('/san-pham/{slug}', [ProductController::class, 'show'])->name('product.show');
+Route:: as('product.')->group(function () {
+    Route::get('/san-pham/{slug}', [ProductController::class, 'show'])->name('show');
+});
 
-Route::get('/gio-hang', [CartController::class, 'index'])->name('cart.index');
+Route:: as('cart.')->group(function () {
+    Route::get('/gio-hang', [CartController::class, 'index'])->name('index');
+    Route::post('/gio-hang', [CartController::class, 'addToCart'])->name('add');
+    Route::put('/gio-hang/cap-nhat', [CartController::class, 'update'])->name('update');
+    Route::delete('/gio-hang/xoa', [CartController::class, 'remove'])->name('remove');
+    Route::post('/gio-hang/lam-moi', [CartController::class, 'refresh'])->name('refresh');
+});
