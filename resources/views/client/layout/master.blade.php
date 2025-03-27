@@ -57,8 +57,16 @@
     <div id="fui-toast"></div>
 
     <div class="page ">
-        @include('client.layout.partials.header-top')
-        @include('client.layout.partials.navbar')
+        <div class="d-none d-md-block">
+            <div class="position-sticky w-100 z-index-sticky" style="z-index: 1020;">
+                @include('client.layout.partials.header-top')
+            </div>
+            @include('client.layout.partials.navbar')
+        </div>
+
+        <div class="d-block d-md-none">
+            @include('client.layout.partials.header-mobile')
+        </div>
 
         @yield('content')
 

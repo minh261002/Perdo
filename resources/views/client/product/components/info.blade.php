@@ -66,7 +66,7 @@
 
     <div>
         <label for="stock" class="form-label">Số lượng</label>
-        <div class="input-group w-25">
+        <div class="input-group w-50 w-md-25">
             <button class="btn btn-primary" type="button" id="button-minus">-</button>
             <input type="text" class="form-control text-center" value="1"
                 aria-label="Example text with button addon" aria-describedby="button-addon1" name="stock"
