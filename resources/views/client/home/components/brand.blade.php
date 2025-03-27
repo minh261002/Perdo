@@ -1,5 +1,5 @@
 <div class="container mb-30px">
-    <div class="card rounded-2">
+    <div class="card border-0">
         <div class="card-body">
             <div class="d-flex justify-content-center align-items-center gap-2 mb-5">
                 <img src="{{ asset('images/icon-title.svg') }}" alt="">

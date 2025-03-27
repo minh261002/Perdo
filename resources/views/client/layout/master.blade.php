@@ -56,8 +56,9 @@
     <script src="{{ asset('/js/demo-theme.min.js?1692870487') }}"></script>
     <div id="fui-toast"></div>
 
-    <div class="page bg-white">
+    <div class="page ">
         @include('client.layout.partials.header-top')
+        @include('client.layout.partials.navbar')
 
         @yield('content')
 
