@@ -27,6 +27,8 @@ class ProductController extends Controller
             $product->update(['view_count' => $product->view_count + 1]);
         }
 
+        $related_products = $this->repository->getRelatedProducts($product);
+
         return view('client.product.show', compact('product'));
     }
 }
