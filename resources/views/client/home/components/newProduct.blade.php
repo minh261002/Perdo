@@ -14,14 +14,16 @@
                             <div class="card rounded-2">
                                 <div class="ribbon bg-green">Mới</div>
                                 <div class="card-body">
-                                    <img src="{{ asset($product->image) }}" alt=""
-                                        class="w-100 h-100 rounded-xl" style="max-height: 250px;">
-
+                                    <a href="{{ route('product.show', $product->slug) }}">
+                                        <img src="{{ asset($product->image) }}" alt=""
+                                            class="w-100 h-100 rounded-xl" style="max-height: 250px;">
+                                    </a>
                                     <p class="text-left fw-bold text-primary fs-3 mt-2">
                                         {{ $product->brand->name }}
                                     </p>
 
-                                    <a href="" class="nav-link p-0 text-dark">
+                                    <a href="{{ route('product.show', $product->slug) }}"
+                                        class="nav-link p-0 text-dark">
                                         {{ limit_text($product->name, 40) }} </a>
 
                                     @if ($product->sale_price && $product->sale_price > 0)
