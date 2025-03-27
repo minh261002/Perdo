@@ -7,10 +7,10 @@
         <div class="card border-0">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-6 pe-5">
+                    <div class="col-md-6 pe-0 pe-md-5">
                         @include('client.product.components.gallery')
                     </div>
-                    <div class="col-md-6 ps-5">
+                    <div class="col-md-6 ps-0 ps-md-5 pt-5 pt-md-0">
                         @include('client.product.components.info')
                     </div>
                 </div>

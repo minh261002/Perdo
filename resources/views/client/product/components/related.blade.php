@@ -45,8 +45,8 @@
                         </div>
                     @endfor
                 @empty
-                    <div class="alert alert-info w-50 mx-auto">
-                        Không có sản phẩm liên quan
+                    <div class="col-12">
+                        <p class="text-center fs-3">Không có sản phẩm liên quan</p>
                     </div>
                 @endforelse
             </div>

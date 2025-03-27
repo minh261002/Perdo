@@ -100,13 +100,15 @@
             </button>
         </div>
     </div>
-    <div class="hidden-content" id="content">
-        {!! $product->desc ?? 'Sản phẩm này không có mô tả' !!}
-    </div>
+    <div class="position-relative ">
+        <div class="hidden-content" id="content">
+            {!! $product->desc ?? 'Sản phẩm này không có mô tả' !!}
+        </div>
 
-    @if ($product->desc)
-        <button id="toggleBtn" class="btn btn-outline-primary w-25 mx-auto">Xem thêm</button>
-    @endif
+        @if ($product->desc)
+            <button id="toggleBtn" class="">Xem thêm</button>
+        @endif
+    </div>
 </div>
 
 @push('scripts')
