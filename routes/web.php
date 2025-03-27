@@ -41,5 +41,5 @@ Route:: as('cart.')->group(function () {
     Route::post('/gio-hang', [CartController::class, 'addToCart'])->name('add');
     Route::put('/gio-hang/cap-nhat', [CartController::class, 'update'])->name('update');
     Route::delete('/gio-hang/xoa', [CartController::class, 'remove'])->name('remove');
-    Route::post('/gio-hang/lam-moi', [CartController::class, 'refresh'])->name('refresh');
+    Route::get('/gio-hang/lam-moi', [CartController::class, 'refresh'])->name('refresh');
 });

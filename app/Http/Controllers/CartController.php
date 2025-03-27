@@ -19,7 +19,11 @@ class CartController extends Controller
     public function index()
     {
         $cart = session()->get('cart', []);
-        return view('client.checkout.cart', compact('cart'));
+        $subTotal = $cart ? array_sum(array_map(function ($item) {
+            return $item['price'] * $item['quantity'];
+        }, $cart)) : 0;
+        $totalPrice = $subTotal;
+        return view('client.cart.index', compact('cart', 'subTotal', 'totalPrice'));
     }
 
     public function addToCart(AddToCartRequest $request)
@@ -57,9 +61,11 @@ class CartController extends Controller
 
             $cart[$data['id']] = [
                 'id' => $product->id,
+                'image' => $product->image,
                 'name' => $product->name,
                 'price' => $product->price,
-                'quantity' => $data['quantity']
+                'stock' => $product->stock,
+                'quantity' => $data['quantity'],
             ];
         }
 
@@ -114,4 +120,9 @@ class CartController extends Controller
         ]);
     }
 
+    public function refresh()
+    {
+        session()->forget('cart');
+        return redirect()->route('cart.index')->with('success', 'Xóa giỏ hàng thành công!');
+    }
 }

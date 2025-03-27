@@ -1,4 +1,5 @@
 @php
+    $user = Auth::guard('web')->user();
     $cart_count = session()->has('cart') ? count(session('cart')) : 0;
 @endphp
 
