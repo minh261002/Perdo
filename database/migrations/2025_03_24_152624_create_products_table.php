@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('brand_id')->constrained()->cascadeOnDelete();
             $table->string('name');
+            $table->string('sku')->unique();
             $table->text('image')->nullable();
             $table->json('gallery')->nullable();
             $table->integer('price')->default(0);

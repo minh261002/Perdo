@@ -74,6 +74,13 @@ return [
             'printable' => true,
             'addClass' => 'text-center align-middle',
         ],
+        'stock' => [
+            'title' => 'Tồn kho',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
         'status' => [
             'title' => 'Trạng thái',
             'orderable' => true,

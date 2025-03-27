@@ -36,10 +36,10 @@ class ProductDataTable extends BaseDataTable
     public function setColumnSearch(): void
     {
 
-        $this->columnAllSearch = [1, 2, 3];
+        $this->columnAllSearch = [1, 2, 3, 4];
         $this->columnSearchSelect = [
             [
-                'column' => 3,
+                'column' => 4,
                 'data' => ActiveStatus::asSelectArray()
             ],
 
