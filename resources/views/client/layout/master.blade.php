@@ -64,20 +64,54 @@
     <div id="fui-toast"></div>
 
     <div class="page ">
-        <div class="d-none d-md-block">
-            <div class="position-sticky w-100 z-index-sticky" style="z-index: 1020;">
-                @include('client.layout.partials.header-top')
-            </div>
-            @include('client.layout.partials.navbar')
-        </div>
-
-        <div class="d-block d-md-none">
-            @include('client.layout.partials.header-mobile')
-        </div>
+        @include('client.layout.partials.header-top')
+        @include('client.layout.partials.navbar')
 
         @yield('content')
 
         @include('client.layout.partials.footer')
+
+
+
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasStart" aria-labelledby="offcanvasStartLabel">
+            <div class="offcanvas-header">
+                <img src="{{ asset('/images/logo.svg') }}" class="img-fluid" width="60px" />
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                    aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <form class="navbar-search d-flex d-md-none w-100">
+                    <div class="input-group input-group-merge search-bar">
+                        <input type="text" class="form-control" placeholder="Tìm kiếm" aria-label="Search…"
+                            aria-describedby="topbar-addon">
+                        <button class="input-group-text btn btn-primary" id="topbar-addon">
+                            <span class="ti ti-search"></span>
+                        </button>
+                    </div>
+                </form>
+                <div class="mt-3">
+                    <div class="navbar">
+                        <div class="container-xl">
+                            <div class="row flex-fill align-items-center justify-content-center">
+                                <ul class="navbar-nav align-items-center justify-content-center">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="./">
+                                            <span class="nav-link-title"> Trang chủ </span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="./">
+                                            <span class="nav-link-title"> Bài viết </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         {{-- @include('client.layout.partials.pusher') --}}
     </div>
