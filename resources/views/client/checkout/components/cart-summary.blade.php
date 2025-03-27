@@ -9,9 +9,15 @@
                 MÃ PHIẾU GIẢM GIÁ
             </label>
             @if (Auth::guard('web')->check())
-                Bạn có thể sử dụng mã giảm giá ở bước tiếp theo
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Nhập mã giảm giá" name="discount_code"
+                        id="discount_code">
+                    <button class="btn btn-primary" type="button" id="apply_discount">
+                        <i class="ti ti-brand-apple-arcade fs-2"></i>
+                    </button>
+                </div>
             @else
-                <a href="{{ route('login', ['redirect' => route('cart.index')]) }}" class="">Đăng nhập để sử dụng
+                <a href="{{ route('login', ['redirect' => route('cart.index')]) }}" class="">Đăng nhập để dùng
                     mã giảm giá</a>
             @endif
         </div>
@@ -42,8 +48,8 @@
             <span id="total">{{ format_price($totalPrice) }}</span>
         </div>
 
-        <a href="{{ route('checkout.index') }}" type="submit" class="btn btn-primary w-100">
-            Tiến hành thanh toán
-        </a>
+        <button type="submit" class="btn btn-primary w-100">
+            Thanh toán
+        </button>
     </div>
 </div>

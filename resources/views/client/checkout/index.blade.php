@@ -1,5 +1,5 @@
 @extends('client.layout.master')
-@section('title', 'Giỏ hàng')
+@section('title', 'Thanh toán đơn hàng')
 
 @section('content')
     <div class="container my-30px">
@@ -7,22 +7,24 @@
             <div class="card border-0 mb-5">
                 <div class="card-body">
                     <ul class="steps steps-primary steps-counter py-2">
-                        <li class="step-item active">Giỏ hàng</li>
+                        <li class="step-item ">Giỏ hàng</li>
                         <li class="step-item active">Thanh toán</li>
-                        <li class="step-item">Hoàn thành</li>
+                        <li class="step-item active">Hoàn thành</li>
                     </ul>
                 </div>
             </div>
             <div class="card border-0">
                 <div class="card-body">
-                    <div class="row">
+                    <form class="row">
                         <div class="col-md-9">
-                            @include('client.cart.components.cart-table')
+                            @include('client.checkout.components.user-info')
+                            @include('client.checkout.components.cart-table')
                         </div>
                         <div class=" col-md-3">
-                            @include('client.cart.components.cart-summary')
+                            @include('client.checkout.components.method')
+                            @include('client.checkout.components.cart-summary')
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         @else
@@ -41,4 +43,7 @@
             </div>
         @endif
     </div>
+
+    @include('components.modal-pick-address')
+    @include('components.google-map-script')
 @endsection
