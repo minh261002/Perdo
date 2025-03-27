@@ -12,6 +12,7 @@ class LoginRequest extends BaseRequest
             'email' => 'required|email',
             'password' => 'required',
             'remember' => 'nullable',
+            'redirect' => 'nullable',
         ];
     }
 }

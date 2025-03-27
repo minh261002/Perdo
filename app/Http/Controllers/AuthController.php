@@ -32,6 +32,8 @@ class AuthController extends Controller
         $data = $request->validated();
 
         $remember = $data['remember'] ?? false;
+        $redirect = $data['redirect'] ?? null;
+        unset($data['redirect']);
         unset($data['remember']);
 
         $user = $this->repository->getByQueryBuilder(['email' => $data['email']])->first();
@@ -40,6 +42,10 @@ class AuthController extends Controller
         }
 
         if (Auth::guard('web')->attempt($data, $remember)) {
+            if ($redirect) {
+                return
+                    redirect()->to($redirect)->with('success', 'Xin chào, ' . Auth::guard('web')->user()->name);
+            }
             return redirect()->route('home')->with('success', 'Xin chào, ' . Auth::guard('web')->user()->name);
         }
 

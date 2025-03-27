@@ -1,6 +1,8 @@
 <?php
 
 use App\Enums\ActiveStatus;
+use App\Enums\Discount\DiscountApplyFor;
+use App\Enums\Discount\DiscountType;
 use App\Enums\Module\ModuleStatus;
 use App\Enums\User\UserLoginType;
 use App\Enums\User\UserRole;
@@ -23,4 +25,12 @@ return [
         UserRole::Guest->value => 'Khách hàng',
         UserRole::Host->value => 'Chủ nhà'
     ],
+    DiscountApplyFor::class => [
+        DiscountApplyFor::All->value => 'Áp dụng cho tất cả',
+        DiscountApplyFor::One->value => 'Áp dụng cho khách hàng cụ thể',
+    ],
+    DiscountType::class => [
+        DiscountType::Percentage->value => 'Phần trăm',
+        DiscountType::Fixed->value => 'Cố định',
+    ]
 ];

@@ -15,6 +15,7 @@ use App\Admin\Http\Controllers\Slider\SliderController;
 use App\Admin\Http\Controllers\Brand\BrandController;
 use App\Admin\Http\Controllers\Category\CategoryController;
 use App\Admin\Http\Controllers\Product\ProductController;
+use App\Admin\Http\Controllers\Discount\DiscountController;
 
 Route::prefix('admin')->as('admin.')->group(function () {
 
@@ -223,6 +224,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
             Route::put('slider-item/update', [SliderController::class, 'updateItem'])->name('slider.item.update');
         });
 
+        //quản lý brand
         Route::prefix('brand')->as('brand.')->group(function () {
             Route::middleware(['permission:viewBrand'])->group(function () {
                 Route::get('/', [BrandController::class, 'index'])->name('index');
@@ -244,6 +246,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
             });
         });
 
+        //quản lý category
         Route::prefix('category')->as('category.')->group(function () {
             Route::middleware(['permission:viewCategory'])->group(function () {
                 Route::get('/', [CategoryController::class, 'index'])->name('index');
@@ -266,6 +269,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
             });
         });
 
+        // quản lý sản phẩm
         Route::prefix('product')->as('product.')->group(function () {
             Route::middleware(['permission:viewProduct'])->group(function () {
                 Route::get('/', [ProductController::class, 'index'])->name('index');
@@ -288,6 +292,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
             });
         });
 
+        // quản lý đơn hàng
         Route::prefix('order')->as('order.')->group(function () {
             Route::middleware(['permission:viewOrder'])->group(function () {
                 Route::get('/', [ProductController::class, 'index'])->name('index');
@@ -299,6 +304,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
             });
         });
 
+        // quản lý giao dịch
         Route::prefix('transaction')->as('transaction.')->group(function () {
             Route::middleware(['permission:viewTransaction'])->group(function () {
                 Route::get('/', [ProductController::class, 'index'])->name('index');
@@ -310,6 +316,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
             });
         });
 
+        // quản lý vận chuyển
         Route::prefix('transport')->as('transport.')->group(function () {
             Route::middleware(['permission:viewTransport'])->group(function () {
                 Route::get('/', [ProductController::class, 'index'])->name('index');
@@ -318,6 +325,28 @@ Route::prefix('admin')->as('admin.')->group(function () {
             Route::middleware(['permission:editTransport'])->group(function () {
                 Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
                 Route::put('/update', [ProductController::class, 'update'])->name('update');
+            });
+        });
+
+        // quản lý giảm giá
+        Route::prefix('discount')->as('discount.')->group(function () {
+            Route::middleware(['permission:viewDiscount'])->group(function () {
+                Route::get('/', [DiscountController::class, 'index'])->name('index');
+            });
+
+            Route::middleware(['permission:createDiscount'])->group(function () {
+                Route::get('/create', [DiscountController::class, 'create'])->name('create');
+                Route::post('/store', [DiscountController::class, 'store'])->name('store');
+            });
+
+            Route::middleware(['permission:editDiscount'])->group(function () {
+                Route::get('/edit/{id}', [DiscountController::class, 'edit'])->name('edit');
+                Route::put('/update', [DiscountController::class, 'update'])->name('update');
+                Route::patch('/update-status', [DiscountController::class, 'updateStatus'])->name('update.status');
+            });
+
+            Route::middleware(['permission:deleteDiscount'])->group(function () {
+                Route::delete('/delete/{id}', [DiscountController::class, 'delete'])->name('delete');
             });
         });
 

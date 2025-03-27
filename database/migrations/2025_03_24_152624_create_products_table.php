@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('brand_id')->constrained()->cascadeOnDelete();
             $table->string('name');
+            $table->string('sku')->unique();
             $table->text('image')->nullable();
             $table->json('gallery')->nullable();
             $table->integer('price')->default(0);
@@ -22,6 +23,8 @@ return new class extends Migration {
             $table->string('slug')->unique();
             $table->text('desc')->nullable();
             $table->enum('status', ActiveStatus::getValues())->default(ActiveStatus::Active->value);
+            $table->integer('stock')->default(0);
+            $table->integer('view_count')->default(0);
             $table->string('meta_title')->nullable();
             $table->text('meta_desc')->nullable();
             $table->string('meta_keywords')->nullable();

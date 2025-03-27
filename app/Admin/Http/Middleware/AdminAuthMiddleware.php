@@ -17,7 +17,10 @@ class AdminAuthMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (!Auth::guard('admin')->check()) {
-            return redirect()->route('admin.login')->with('error', 'Vui lòng đăng nhập để truy cập nội dung này');
+            return redirect()->route(
+                'admin.login',
+                ['redirect' => $request->fullUrl()]
+            )->with('error', 'Vui lòng đăng nhập để truy cập nội dung này');
         }
         return $next($request);
     }

@@ -27,6 +27,10 @@
     <link rel="stylesheet" href="{{ asset('/libs/datatables/plugins/bs5/css/dataTables.bootstrap5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/libs/datatables/plugins/buttons/css/buttons.bootstrap5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/libs/datatables/plugins/responsive/css/responsive.bootstrap5.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/owl.theme.green.min.css') }}">
+
 
     @stack('styles')
 
@@ -52,14 +56,15 @@
     <script src="{{ asset('/js/demo-theme.min.js?1692870487') }}"></script>
     <div id="fui-toast"></div>
 
-    <div class="page">
+    <div class="page ">
         @include('client.layout.partials.header-top')
+        @include('client.layout.partials.navbar')
 
         @yield('content')
 
         @include('client.layout.partials.footer')
 
-        @include('client.layout.partials.pusher')
+        {{-- @include('client.layout.partials.pusher') --}}
     </div>
 
 
@@ -85,6 +90,7 @@
 
     <script src="{{ asset('plugins/ckeditor/ckeditor.js') }}"></script>
     <script src="{{ asset('plugins/ckfinder/ckfinder.js') }}"></script>
+    <script src="{{ asset('/js/owl.carousel.min.js') }}"></script>
 
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/gh/lelinh014756/fui-toast-js@master/assets/js/toast@1.0.1/fuiToast.min.js"></script>

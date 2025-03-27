@@ -55,6 +55,18 @@
                                         value="{{ old('product[name]', $product->name) }}">
                                 </div>
 
+                                <div class="col-md-6 mb-3">
+                                    <label for="sku" class="form-label">SKU</label>
+                                    <input type="text" class="form-control" id="sku" name="product[sku]"
+                                        value="{{ old('product[sku]', $product->sku) }}" readOnly>
+                                </div>
+
+                                <div class="col-md-6 mb-3">
+                                    <label for="stock" class="form-label">Số lượng</label>
+                                    <input type="number" class="form-control" id="stock" name="product[stock]"
+                                        value="{{ old('product[stock]', $product->stock) }}">
+                                </div>
+
                                 <div class="col-md-6 form-group mb-3">
                                     <label for="price" class="form-label">Giá sản phẩm</label>
                                     <input type="text" class="form-control" id="price" name="product[price]"
@@ -114,7 +126,8 @@
                                                 <div class="thumb">
                                                     <span class="span image img-scaledown">
                                                         <img src="{{ $val }}" alt="{{ $val }}">
-                                                        <input type="hidden" name="gallery[]" value="{{ $val }}">
+                                                        <input type="hidden" name="gallery[]"
+                                                            value="{{ $val }}">
                                                     </span>
                                                     <button class="delete-image">
                                                         <i class="ti ti-trash"></i>
