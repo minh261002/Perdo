@@ -71,9 +71,11 @@ class CartController extends Controller
 
         session()->put('cart', $cart);
 
+        $cartCount = count($cart);
         return response()->json([
             'status' => 'success',
-            'message' => 'Thêm sản phẩm vào giỏ hàng thành công!'
+            'message' => 'Thêm sản phẩm vào giỏ hàng thành công!',
+            'cartCount' => $cartCount
         ]);
     }
 
@@ -130,5 +132,34 @@ class CartController extends Controller
     {
         session()->forget('cart');
         return redirect()->route('cart.index')->with('success', 'Xóa giỏ hàng thành công!');
+    }
+
+    public function remove()
+    {
+        $cart = session()->get('cart', []);
+        $id = request()->id;
+
+        if (!isset($cart[$id])) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Sản phẩm không có trong giỏ hàng.'
+            ], 400);
+        }
+
+        unset($cart[$id]);
+
+        session()->put('cart', $cart);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Xóa sản phẩm khỏi giỏ hàng thành công!',
+            'subTotal' => array_sum(array_map(function ($item) {
+                return $item['price'] * $item['quantity'];
+            }, $cart)),
+            'totalPrice' => array_sum(array_map(function ($item) {
+                return $item['price'] * $item['quantity'];
+            }, $cart)),
+            'cartCount' => count($cart)
+        ]);
     }
 }

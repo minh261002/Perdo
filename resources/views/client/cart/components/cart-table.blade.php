@@ -17,7 +17,7 @@
                 </thead>
                 <tbody>
                     @foreach ($cart as $item)
-                        <tr>
+                        <tr data-row-id="{{ $item['id'] }}">
                             <td style="width: 100px;">
                                 <img src="{{ $item['image'] }}" alt="{{ $item['name'] }}" class="img-fluid"
                                     width="100px">
@@ -40,7 +40,7 @@
                                 {{ format_price($item['price'] * $item['quantity']) }}
                             </td>
                             <td>
-                                <button class="btn btn-danger" data-id="{{ $item['id'] }}">
+                                <button class="btn btn-danger" data-id="{{ $item['id'] }}" id="removeItem">
                                     <i class="ti ti-trash"></i>
                                 </button>
                             </td>
@@ -50,13 +50,12 @@
             </table>
         </div>
 
-        <a href="{{ route('cart.refresh') }}" class="btn btn-danger" id="clearCart">Xoá giỏ hàng</a>
+        <a href="{{ route('cart.refresh') }}" class="btn btn-danger mt-2" id="clearCart">Xoá giỏ hàng</a>
     </div>
 </div>
 
 @push('scripts')
     <script>
-        //cập nhật số lượng sản phẩm
         $(document).on('click', '#button-minus', function() {
             var input = $(this).parent().find('input');
             var id = input.data('id');
@@ -109,5 +108,38 @@
                 });
             }
         });
+
+        $('#removeItem').on('click', function() {
+            var id = $(this).data('id');
+            $.ajax({
+                url: "{{ route('cart.remove') }}",
+                method: 'DELETE',
+                data: {
+                    id: id,
+                    _token: "{{ csrf_token() }}"
+                },
+                beforeSend: function() {
+                    $('#removeItem').html(
+                        '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>.'
+                    );
+                },
+                success: function(response) {
+                    $('#total').html(format_price(response.totalPrice))
+                    $('#subTotal').html(format_price(response.subTotal))
+                    $('#tbl-subtotal').html(format_price(response.subTotal))
+                    $('tr[data-row-id="' + id + '"]').remove();
+
+                    if (response.cartCount == 0) {
+                        location.reload();
+                    }
+                },
+                error(err) {
+                    console.log(err)
+                },
+                complete: function() {
+                    $('#removeItem').html('<i class="ti ti-trash"></i>');
+                }
+            });
+        })
     </script>
 @endpush

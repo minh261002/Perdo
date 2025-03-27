@@ -92,13 +92,6 @@
                 <span class="fs-3">Thêm vào giỏ hàng</span>
             </button>
         </div>
-
-        <div class="col-12">
-            <button class="btn btn-outline-azure w-100">
-                <i class="ti ti-map me-2 fs-1"></i>
-                <span class="fs-3">Tìm cửa hàng có sản phẩm</span>
-            </button>
-        </div>
     </div>
     <div class="position-relative ">
         <div class="hidden-content" id="content">

@@ -34,7 +34,6 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            //addToCart
             $('#addToCart').on('click', function(e) {
                 e.preventDefault();
 
