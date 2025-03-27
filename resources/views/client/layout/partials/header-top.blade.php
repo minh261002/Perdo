@@ -20,7 +20,7 @@
         </form>
         <div class="navbar-nav flex-row order-md-last gap-3">
             <div class="nav-item">
-                <a href="" class="position-relative text-decoration-none">
+                <a href="{{ route('cart.index') }}" class="position-relative text-decoration-none">
                     <i class="ti ti-shopping-cart  d-block w-100 h-100" style="font-size: 30px"></i>
                     <span
                         class="badge bg-red text-red-fg position-absolute top-0 start-100 translate-middle badge-circle">1</span>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -32,3 +33,5 @@ Route::middleware('user.auth')->group(function () {
 });
 
 Route::get('/san-pham/{slug}', [ProductController::class, 'show'])->name('product.show');
+
+Route::get('/gio-hang', [CartController::class, 'index'])->name('cart.index');
