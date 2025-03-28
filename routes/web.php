@@ -59,5 +59,7 @@ Route:: as('checkout.')->group(function () {
 Route:: as('profile.')->group(function () {
     Route::get('/thong-tin-ca-nhan', [ProfileController::class, 'index'])->name('index');
     Route::put('/thong-tin-ca-nhan', [ProfileController::class, 'update'])->name('update');
+
+    Route::get('/thong-tin-ca-nhan/doi-mat-khau', [ProfileController::class, 'changePasswordForm'])->name('change.password.form');
     Route::put('/thong-tin-ca-nhan/doi-mat-khau', [ProfileController::class, 'changePassword'])->name('change.password');
 });

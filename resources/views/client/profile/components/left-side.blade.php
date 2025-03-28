@@ -5,8 +5,9 @@
                 class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.index']) }}">
                 Thông tin cá nhân
             </a>
-            <a href="{{ route('profile.change.password') }}"
-                class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.change.password']) }}">
+
+            <a href="{{ route('profile.change.password.form') }}"
+                class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.change.password.form']) }}">
                 Đổi mật khẩu
             </a>
         </div>
