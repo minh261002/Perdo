@@ -8,6 +8,7 @@ use App\Enums\Transaction\PaymentMethod;
 use App\Enums\Transaction\PaymentStatus;
 use App\Enums\User\UserLoginType;
 use App\Enums\User\UserRole;
+use App\Enums\Order\OrderStatus;
 
 return [
     ActiveStatus::class => [
@@ -45,5 +46,11 @@ return [
         PaymentStatus::Pending->value => 'Chờ thanh toán',
         PaymentStatus::Completed->value => 'Đã thanh toán',
         PaymentStatus::Cancelled->value => 'Đã hủy',
+    ],
+    OrderStatus::class => [
+        OrderStatus::Pending->value => 'Chờ xác nhận',
+        OrderStatus::Processing->value => 'Đã xác nhận',
+        OrderStatus::Completed->value => 'Hoàn thành',
+        OrderStatus::Cancelled->value => 'Đã hủy',
     ],
 ];

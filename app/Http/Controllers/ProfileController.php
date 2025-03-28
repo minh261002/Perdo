@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Request\Profile\UpdatePasswordRequest;
 use App\Http\Request\Profile\UpdateProfileRequest;
+use App\Repositories\Order\OrderRepositoryInterface;
 use App\Services\Profile\ProfileServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,10 +13,14 @@ class ProfileController extends Controller
 {
     protected $service;
 
+    protected $orderRepository;
+
     public function __construct(
-        ProfileServiceInterface $service
+        ProfileServiceInterface $service,
+        OrderRepositoryInterface $orderRepository
     ) {
         $this->service = $service;
+        $this->orderRepository = $orderRepository;
     }
 
     public function index()
@@ -40,4 +45,28 @@ class ProfileController extends Controller
         $response = $this->service->updatePassword($request);
         return redirect()->back()->with($response['type'], $response['message']);
     }
+
+    public function orders()
+    {
+        $query = $this->orderRepository->getByQueryBuilder([
+            'user_id' => Auth::guard('web')->id(),
+        ], [
+            'items',
+            'transaction',
+            'statuses'
+        ]);
+
+        if (request()->has('status')) {
+            $query = $query->whereHas('statuses', function ($q) {
+                $q->where('status', request('status'))
+                    ->orderBy('created_at', 'desc')
+                    ->limit(1);
+            });
+        }
+
+        $orders = $query->orderBy('created_at', 'desc')->paginate(10);
+
+        return view('client.profile.order', compact('orders'));
+    }
+
 }

@@ -29,9 +29,10 @@ class Order extends Model
         return $this->hasOne(Transaction::class);
     }
 
-    public function status()
+    public function statuses()
     {
-        return $this->hasOne(OrderStatus::class);
+        return $this->hasMany(OrderStatus::class, 'order_id'); // Quan hệ 1-n
     }
+
 
 }
