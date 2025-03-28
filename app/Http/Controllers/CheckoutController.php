@@ -38,7 +38,9 @@ class CheckoutController extends Controller
 
     public function review($order_code)
     {
-        $order = $this->repository->findByField('order_code', $order_code)->first();
+        $order = $this->repository->getByQueryBuilder([
+            'order_code' => $order_code
+        ])->first();
         return view('client.checkout.review', compact('order'));
     }
 

@@ -78,11 +78,12 @@ class OrderService implements OrderServiceInterface
             $transactionData['order_id'] = $order->id;
             $transactionData['transaction_code'] = 'GD' . time();
             $transactionData['amount'] = $order->total;
+
             $this->transactionRepository->create($transactionData);
 
             DB::commit();
 
-            // session()->forget('cart');
+            session()->forget('cart');
             $paymentMethod = $transactionData['payment_method'];
             if ($paymentMethod == PaymentMethod::VNPAY->value) {
                 $this->paymentVnPay($order);
@@ -91,12 +92,18 @@ class OrderService implements OrderServiceInterface
             } elseif ($paymentMethod == PaymentMethod::QRCODE->value) {
                 $this->paymentQrCode($order);
             } else {
-                echo "<script>window.location.href='" . route('checkout.review', $order->order_code) . "';</script>";
+                $this->cod($order);
             }
         } catch (\Exception $e) {
             DB::rollBack();
             \Log::error($e->getMessage());
         }
+    }
+
+
+    public function cod($order)
+    {
+        echo "<script>window.location.href='" . route('checkout.review', $order->order_code) . "';</script>";
     }
 
 
