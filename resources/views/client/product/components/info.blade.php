@@ -93,8 +93,8 @@
             </button>
         </div>
     </div>
-    <div class="position-relative ">
-        <div class="hidden-content" id="content">
+    <div class="position-relative w-100">
+        <div class="hidden-content w-100" id="content">
             {!! $product->desc ?? 'Sản phẩm này không có mô tả' !!}
         </div>
 

@@ -17,7 +17,7 @@
                     </button>
                 </div>
             @else
-                <a href="{{ route('login', ['redirect' => route('cart.index')]) }}" class="">Đăng nhập để dùng
+                <a href="{{ route('login', ['redirect' => route('checkout.index')]) }}" class="">Đăng nhập để dùng
                     mã giảm giá</a>
             @endif
         </div>
@@ -39,6 +39,48 @@
                 <span class="fw-semibold text-primary" id="discount">-0 ₫</span>
             </div>
             <input type="hidden" name="discount_amount" value="0">
+        </div>
+
+        <hr class="border-dashed mb-4 border-dark" />
+
+        <div class="d-flex flex-column">
+            <div class="d-flex flex-column gap-2">
+                <label class="d-block">
+                    <input type="radio" name="payment_method" value="cash_on_delivery" hidden checked />
+                    <div class="d-flex align-items-center justify-content-between p-2 check-payment-method">
+                        <span class="small fw-medium">Thanh toán khi nhận hàng</span>
+                        <img src="{{ asset('images/cod.svg') }}" width="60" height="60" alt="icon"
+                            class="img-fluid object-cover" />
+                    </div>
+                </label>
+
+                <label class="d-block">
+                    <input type="radio" name="payment_method" value="qrcode" hidden />
+                    <div class="d-flex align-items-center justify-content-between p-2 check-payment-method">
+                        <span class="small fw-medium">Thanh toán qua QRCode</span>
+                        <img src="{{ asset('images/vietqr.png') }}" width="60" height="60" alt="icon"
+                            class="img-fluid object-cover" />
+                    </div>
+                </label>
+
+                <label class="d-block">
+                    <input type="radio" name="payment_method" value="vnpay" hidden />
+                    <div class="d-flex align-items-center justify-content-between p-2 check-payment-method">
+                        <span class="small fw-medium">Cổng thanh toán VNPAY</span>
+                        <img src="{{ asset('images/vnpay.webp') }}" width="60" height="60" alt="icon"
+                            class="img-fluid object-cover" />
+                    </div>
+                </label>
+
+                <label class="d-block">
+                    <input type="radio" name="payment_method" value="momo" hidden />
+                    <div class="d-flex align-items-center justify-content-between p-2 check-payment-method">
+                        <span class="small fw-medium">Cổng thanh toán Momo</span>
+                        <img src="{{ asset('images/momo.svg') }}" width="60" height="60" alt="icon"
+                            class="img-fluid object-cover" />
+                    </div>
+                </label>
+            </div>
         </div>
 
         <hr class="border-dashed mb-4 border-dark" />

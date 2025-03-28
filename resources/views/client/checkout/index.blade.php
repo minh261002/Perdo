@@ -21,7 +21,6 @@
                             @include('client.checkout.components.cart-table')
                         </div>
                         <div class=" col-md-3">
-                            @include('client.checkout.components.method')
                             @include('client.checkout.components.cart-summary')
                         </div>
                     </form>

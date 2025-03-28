@@ -10,7 +10,7 @@
             <div class="row">
                 @foreach ($newProducts as $product)
                     @for ($i = 0; $i < 12; $i++)
-                        <div class="col-6 col-md-2 pb-2 pb-md-3">
+                        <div class="col-6 col-md-3 pb-2 pb-md-3">
                             <div class="card rounded-2">
                                 <div class="ribbon bg-green">Mới</div>
                                 <div class="card-body">
@@ -24,11 +24,11 @@
 
                                     <a href="{{ route('product.show', $product->slug) }}"
                                         class="nav-link p-0 text-dark">
-                                        {{ limit_text($product->name, 40) }} </a>
+                                        {{ limit_text($product->name, 100) }} </a>
 
                                     @if ($product->sale_price && $product->sale_price > 0)
-                                        <div class="d-flex flex-wrap align-items-center gap-0 gap-md-2">
-                                            <p class="text-left fs-3 fw-bold text-danger">
+                                        <div class="d-flex flex-wrap align-items-center gap-0 gap-md-3">
+                                            <p class="text-left fs-2 fw-bold text-danger">
                                                 {{ format_price($product->sale_price) }}
                                             </p>
                                             <p class="text-left fs-4 text-secondary">

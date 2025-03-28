@@ -40,7 +40,7 @@
                                 {{ format_price($item['price'] * $item['quantity']) }}
                             </td>
                             <td>
-                                <button class="btn btn-danger" data-id="{{ $item['id'] }}" id="removeItem">
+                                <button class="btn btn-danger removeItem" data-id="{{ $item['id'] }}">
                                     <i class="ti ti-trash"></i>
                                 </button>
                             </td>
@@ -109,37 +109,38 @@
             }
         });
 
-        $('#removeItem').on('click', function() {
-            var id = $(this).data('id');
+        $(document).on('click', '.removeItem', function() {
+            var button = $(this);
+            var id = button.data('id');
+
             $.ajax({
                 url: "{{ route('cart.remove') }}",
                 method: 'DELETE',
                 data: {
                     id: id,
-                    _token: "{{ csrf_token() }}"
+                    _token: "{{ csrf_token() }}",
                 },
                 beforeSend: function() {
-                    $('#removeItem').html(
-                        '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>.'
-                    );
+                    button.html('<div class="spinner-border spinner-border-sm" role="status"></div>');
                 },
                 success: function(response) {
-                    $('#total').html(format_price(response.totalPrice))
-                    $('#subTotal').html(format_price(response.subTotal))
-                    $('#tbl-subtotal').html(format_price(response.subTotal))
+                    $('#total').html(format_price(response.totalPrice));
+                    $('#subTotal').html(format_price(response.subTotal));
+                    $('#tbl-subtotal').html(format_price(response.subTotal));
                     $('tr[data-row-id="' + id + '"]').remove();
 
-                    if (response.cartCount == 0) {
+                    if (response.cartCount === 0) {
                         location.reload();
                     }
                 },
-                error(err) {
-                    console.log(err)
+                error: function(err) {
+                    console.log("Error:", err);
+                    alert("Xóa sản phẩm thất bại! Vui lòng thử lại.");
                 },
                 complete: function() {
-                    $('#removeItem').html('<i class="ti ti-trash"></i>');
+                    button.html('<i class="ti ti-trash"></i>');
                 }
             });
-        })
+        });
     </script>
 @endpush
