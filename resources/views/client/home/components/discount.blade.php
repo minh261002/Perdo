@@ -9,7 +9,7 @@
 
             <div class="row row-cols-1 row-cols-md-3 gap-4">
                 @forelse($homeDiscounts as $discount)
-                    <div class="col-6 col-md-4">
+                    <div class=" col-md-4">
                         <div class="bg-blue-lt w-100 rounded-xl d-flex">
 
                             <div class="d-flex flex-column  p-4 gap-2 w-100">

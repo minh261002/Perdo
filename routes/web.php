@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -28,4 +31,26 @@ Route::middleware('user.login')->group(function () {
 
 Route::middleware('user.auth')->group(function () {
     Route::post('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
+});
+
+Route:: as('product.')->group(function () {
+    Route::get('/san-pham/{slug}', [ProductController::class, 'show'])->name('show');
+});
+
+Route:: as('cart.')->group(function () {
+    Route::get('/gio-hang', [CartController::class, 'index'])->name('index');
+    Route::post('/gio-hang', [CartController::class, 'addToCart'])->name('add');
+    Route::put('/gio-hang/cap-nhat', [CartController::class, 'update'])->name('update');
+    Route::delete('/gio-hang/xoa', [CartController::class, 'remove'])->name('remove');
+    Route::get('/gio-hang/lam-moi', [CartController::class, 'refresh'])->name('refresh');
+});
+
+Route:: as('checkout.')->group(function () {
+    Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('index');
+    Route::post('/thanh-toan', [CheckoutController::class, 'store'])->name('store');
+    Route::get('/thanh-toan/{order_code}', [CheckoutController::class, 'review'])->name('review');
+
+    Route::get('/vnpay/callback', [CheckoutController::class, 'vnpayCallback'])->name('vnpay.callback');
+    Route::get('/momo/callback', [CheckoutController::class, 'momoCallback'])->name('momo.callback');
+    Route::get('/payos/callback', [CheckoutController::class, 'payosCallback'])->name('payos.callback');
 });

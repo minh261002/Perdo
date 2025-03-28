@@ -122,7 +122,7 @@
                                     </div>
 
                                     <div class="col-12 mb-3">
-                                        <label class="form-label" for="desc" class="form-label">Mô tả</label>
+                                        <label class="form-label" for="description" class="form-label">Mô tả</label>
                                         <textarea name="description" class="form-control">{{ old('description') }}</textarea>
                                     </div>
                                 </div>

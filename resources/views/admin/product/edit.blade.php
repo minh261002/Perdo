@@ -81,7 +81,7 @@
 
                                 <div class="col-12 mb-3">
                                     <label for="desc" class="form-label">Mô tả</label>
-                                    <textarea class="form-control ck-editor" id="desc" name="product[desc]" rows="5">{{ old('product[desc], $product->desc') }}</textarea>
+                                    <textarea class="form-control ck-editor" id="desc" name="product[desc]" rows="5">{{ old('product[desc]', $product->desc) }}</textarea>
                                 </div>
                             </div>
                         </div>

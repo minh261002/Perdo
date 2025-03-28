@@ -13,7 +13,25 @@ class Order extends Model
 
     protected $guarded = [];
 
-    protected $casts = [
 
-    ];
+    public function items()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function transaction()
+    {
+        return $this->hasOne(Transaction::class);
+    }
+
+    public function status()
+    {
+        return $this->hasOne(OrderStatus::class);
+    }
+
 }

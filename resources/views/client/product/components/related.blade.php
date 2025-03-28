@@ -3,12 +3,12 @@
         <div class="card-body">
             <div class="d-flex justify-content-center align-items-center gap-2 mb-5">
                 <img src="{{ asset('images/icon-title.svg') }}" alt="">
-                <h1 class="d-inline-block mb-0 text-primary fs-1">Sản phẩm mới ra mắt</h1>
+                <h1 class="d-inline-block mb-0 text-primary fs-1">Sản phẩm liên quan</h1>
                 <img src="{{ asset('images/icon-title.svg') }}" alt="">
             </div>
 
             <div class="row">
-                @foreach ($newProducts as $product)
+                @forelse ($relatedProducts as $product)
                     @for ($i = 0; $i < 12; $i++)
                         <div class="col-6 col-md-3 pb-2 pb-md-3">
                             <div class="card rounded-2">
@@ -24,10 +24,10 @@
 
                                     <a href="{{ route('product.show', $product->slug) }}"
                                         class="nav-link p-0 text-dark">
-                                        {{ limit_text($product->name, 100) }} </a>
+                                        {{ limit_text($product->name, 80) }} </a>
 
                                     @if ($product->sale_price && $product->sale_price > 0)
-                                        <div class="d-flex flex-wrap align-items-center gap-0 gap-md-3">
+                                        <div class="d-flex align-items-center gap-2">
                                             <p class="text-left fs-2 fw-bold text-danger">
                                                 {{ format_price($product->sale_price) }}
                                             </p>
@@ -44,11 +44,11 @@
                             </div>
                         </div>
                     @endfor
-                @endforeach
-
-                <a href="" class="btn btn-primary w-25 mx-auto">
-                    Xem thêm
-                </a>
+                @empty
+                    <div class="col-12">
+                        <p class="text-center fs-3">Không có sản phẩm liên quan</p>
+                    </div>
+                @endforelse
             </div>
         </div>
     </div>

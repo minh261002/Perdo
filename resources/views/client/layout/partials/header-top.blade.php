@@ -1,79 +1,25 @@
-@php
-    $user = Auth::guard('web')->user();
-@endphp
-
-<header class="navbar navbar-expand-md d-print-none position-sticky top-0" style="z-index: 1020;">
-    <div class="container-xl">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
-            aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
-            <a href=".">
-                <img src="{{ asset('/images/logo.svg') }}" class="img-fluid" width="90px" />
-            </a>
-        </div>
-        <form class="navbar-search d-none d-md-flex ms-2 w-50">
-            <div class="input-group input-group-merge search-bar">
-                <input type="text" class="form-control" placeholder="Tìm kiếm" aria-label="Search…"
-                    aria-describedby="topbar-addon">
-                <button class="input-group-text btn btn-primary" id="topbar-addon">
-                    <span class="ti ti-search"></span>
-                </button>
-            </div>
-        </form>
-        <div class="navbar-nav flex-row order-md-last gap-3">
-            <div class="nav-item">
-                <a href="" class="position-relative text-decoration-none">
-                    <i class="ti ti-shopping-cart  d-block w-100 h-100" style="font-size: 30px"></i>
-                    <span
-                        class="badge bg-red text-red-fg position-absolute top-0 start-100 translate-middle badge-circle">1</span>
-                </a>
-            </div>
-            @if (Auth::guard('web')->check())
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link d-flex lh-1 p-0 px-2" data-bs-toggle="dropdown"
-                        aria-label="Open user menu">
-                        <span class="avatar avatar-sm" style="background-image: url('{{ $user->image }}')"></span>
-                        <div class="d-none d-xl-block ps-2">
-                            <div>
-                                {{ $user->name }}
-                            </div>
-                            <div class="mt-1 small text-secondary">
-                                Khách hàng
-                            </div>
-                        </div>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-
-
-                        <div class="dropdown-divider"></div>
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="dropdown-item">Đăng xuất</button>
-                        </form>
-                    </div>
+<div class="w-100 bg-primary">
+    <div class="container">
+        <div id="topbar" class="carousel slide text-center text-white fs-4 py-1 fw-bold">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    Miễn phí vận chuyển đối với đơn hàng trên 500K
                 </div>
-            @else
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link d-flex lh-1 p-0 px-2" data-bs-toggle="dropdown"
-                        aria-label="Open user menu">
-                        <span class="avatar avatar-sm"
-                            style="background-image: url('{{ asset('/images/not-found.jpg') }}')"></span>
-                        <div class="d-none d-xl-block ps-2">
-                            <div>Tài khoản</div>
-                            <div class="mt-1 small text-secondary">
-                                Khách hàng
-                            </div>
-                        </div>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                        <a href="{{ route('login') }}" class="dropdown-item">Đăng nhập</a>
-                        <a href="{{ route('register') }}" class="dropdown-item">Đăng ký</a>
-                    </div>
+                <div class="carousel-item">
+                    Ưu đãi giảm giá 10% cho đơn hàng trên 1 triệu
                 </div>
-            @endif
+                <div class="carousel-item">
+                    Ưu đãi giảm giá 20% cho đơn hàng trên 2 triệu
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#topbar" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#topbar" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
         </div>
     </div>
-</header>
+</div>

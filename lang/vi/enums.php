@@ -4,6 +4,8 @@ use App\Enums\ActiveStatus;
 use App\Enums\Discount\DiscountApplyFor;
 use App\Enums\Discount\DiscountType;
 use App\Enums\Module\ModuleStatus;
+use App\Enums\Transaction\PaymentMethod;
+use App\Enums\Transaction\PaymentStatus;
 use App\Enums\User\UserLoginType;
 use App\Enums\User\UserRole;
 
@@ -32,5 +34,16 @@ return [
     DiscountType::class => [
         DiscountType::Percentage->value => 'Phần trăm',
         DiscountType::Fixed->value => 'Cố định',
-    ]
+    ],
+    PaymentMethod::class => [
+        PaymentMethod::COD->value => 'Thanh toán khi nhận hàng',
+        PaymentMethod::MOMO->value => 'Cổng thanh toán MOMO',
+        PaymentMethod::VNPAY->value => 'Cổng thanh toán VNPay',
+        PaymentMethod::QRCODE->value => 'Thanh toán qua mã QR',
+    ],
+    PaymentStatus::class => [
+        PaymentStatus::Pending->value => 'Chờ thanh toán',
+        PaymentStatus::Completed->value => 'Đã thanh toán',
+        PaymentStatus::Cancelled->value => 'Đã hủy',
+    ],
 ];
