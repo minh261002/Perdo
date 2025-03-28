@@ -48,4 +48,9 @@ Route:: as('cart.')->group(function () {
 Route:: as('checkout.')->group(function () {
     Route::get('/thanh-toan', [CheckoutController::class, 'index'])->name('index');
     Route::post('/thanh-toan', [CheckoutController::class, 'store'])->name('store');
+    Route::get('/thanh-toan/{order_code}', [CheckoutController::class, 'review'])->name('review');
+
+    Route::get('/vnpay/callback', [CheckoutController::class, 'vnpayCallback'])->name('vnpay.callback');
+    Route::get('/momo/callback', [CheckoutController::class, 'momoCallback'])->name('momo.callback');
+    Route::get('/payos/callback', [CheckoutController::class, 'payosCallback'])->name('payos.callback');
 });

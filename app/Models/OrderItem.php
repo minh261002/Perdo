@@ -11,6 +11,8 @@ class OrderItem extends Model
 
     protected $table = 'order_items';
 
+    protected $guarded = [];
+
     protected $casts = [
 
     ];

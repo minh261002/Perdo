@@ -19,7 +19,7 @@
             <div class="col-12">
                 <div class="mb-3">
                     <label for="name" class="form-label">Họ và tên</label>
-                    <input type="text" class="form-control" id="name" name="name"
+                    <input type="text" class="form-control" id="name" name="order[name]"
                         value="{{ old('name', $user->name ?? '') }}" placeholder="Nhập họ và tên">
                 </div>
             </div>
@@ -27,7 +27,7 @@
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email"
+                    <input type="email" class="form-control" id="email" name="order[email]"
                         value="{{ old('email', $user->email ?? '') }}" placeholder="Nhập email">
                 </div>
             </div>
@@ -35,7 +35,7 @@
             <div class="col-md-6">
                 <div class="mb-3">
                     <label for="phone" class="form-label">Số điện thoại</label>
-                    <input type="text" class="form-control" id="phone" name="phone"
+                    <input type="text" class="form-control" id="phone" name="order[phone]"
                         value="{{ old('phone', $user->phone ?? '') }}" placeholder="Nhập số điện thoại">
                 </div>
             </div>
@@ -44,7 +44,7 @@
                 @include('components.pick-address', [
                     'label' => 'Địa chỉ cụ thể',
                     'name' => 'address',
-                    'value' => old('address'),
+                    'value' => old('address', $user->address ?? ''),
                 ])
                 <input type="hidden" name="lat" value="{{ old('lat', $user->lat ?? '') }}">
                 <input type="hidden" name="lng" value="{{ old('lng', $user->lng ?? '') }}">
@@ -53,7 +53,7 @@
             <div class="col-12">
                 <div class="mb-3">
                     <label for="note" class="form-label">Ghi chú</label>
-                    <textarea class="form-control" id="note" name="note" rows="3" placeholder="Nhập ghi chú">{{ old('note') }}</textarea>
+                    <textarea class="form-control" id="note" name="order[note]" rows="3" placeholder="Nhập ghi chú">{{ old('note') }}</textarea>
                 </div>
             </div>
         </div>

@@ -15,7 +15,9 @@
             </div>
             <div class="card border-0">
                 <div class="card-body">
-                    <form class="row">
+                    <form class="row" action="{{ route('checkout.store') }}" method="POST">
+                        @csrf
+
                         <div class="col-md-9">
                             @include('client.checkout.components.user-info')
                             @include('client.checkout.components.cart-table')
