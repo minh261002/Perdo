@@ -32,6 +32,14 @@ Route::middleware('user.login')->group(function () {
 
 Route::middleware('user.auth')->group(function () {
     Route::post('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
+
+    Route:: as('profile.')->group(function () {
+        Route::get('/thong-tin-ca-nhan', [ProfileController::class, 'index'])->name('index');
+        Route::put('/thong-tin-ca-nhan', [ProfileController::class, 'update'])->name('update');
+
+        Route::get('/thong-tin-ca-nhan/doi-mat-khau', [ProfileController::class, 'changePasswordForm'])->name('change.password.form');
+        Route::put('/thong-tin-ca-nhan/doi-mat-khau', [ProfileController::class, 'changePassword'])->name('change.password');
+    });
 });
 
 Route:: as('product.')->group(function () {
@@ -54,12 +62,4 @@ Route:: as('checkout.')->group(function () {
     Route::get('/vnpay/callback', [CheckoutController::class, 'vnpayCallback'])->name('vnpay.callback');
     Route::get('/momo/callback', [CheckoutController::class, 'momoCallback'])->name('momo.callback');
     Route::get('/payos/callback', [CheckoutController::class, 'payosCallback'])->name('payos.callback');
-});
-
-Route:: as('profile.')->group(function () {
-    Route::get('/thong-tin-ca-nhan', [ProfileController::class, 'index'])->name('index');
-    Route::put('/thong-tin-ca-nhan', [ProfileController::class, 'update'])->name('update');
-
-    Route::get('/thong-tin-ca-nhan/doi-mat-khau', [ProfileController::class, 'changePasswordForm'])->name('change.password.form');
-    Route::put('/thong-tin-ca-nhan/doi-mat-khau', [ProfileController::class, 'changePassword'])->name('change.password');
 });
