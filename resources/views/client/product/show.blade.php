@@ -78,6 +78,7 @@
                             '<i class="ti ti-shopping-cart me-2 fs-1"></i><span class="fs-3">Thêm vào giỏ hàng</span>'
                         );
                     }
+
                 });
             })
         })

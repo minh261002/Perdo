@@ -80,14 +80,10 @@
 
 @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.querySelector('form');
-            form.addEventListener('submit', function() {
-                const button = form.querySelector('button[type="submit"]');
-                button.innerHTML =
-                    '<div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div>';
-                button.disabled = true;
-            });
+        $('form').on('submit', function() {
+            $(this).find('button[type="submit"]').prop('disabled', true).html(
+                '<div class="spinner-border spinner-border-md" role="status "><span class="visually-hidden">Loading...</span>'
+            )
         });
         document.addEventListener('DOMContentLoaded', function() {
             const showPassword = document.getElementById('show_password');

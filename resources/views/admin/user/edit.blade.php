@@ -206,4 +206,30 @@
             theme: 'bootstrap-5'
         });
     </script>
+    <script>
+        const picker = new Litepicker({
+            element: document.getElementById('datepicker-icon'),
+            format: 'YYYY-MM-DD',
+            showDropdowns: true,
+            showWeekNumbers: false,
+            singleMode: true,
+            autoApply: true,
+            autoRefresh: true,
+            lang: 'vi-VN',
+            mobileFriendly: true,
+            resetButton: true,
+            autoRefresh: true,
+            dropdowns: {
+                minYear: null,
+                maxYear: null,
+                months: true,
+                years: true
+            },
+            setup: (picker) => {
+                picker.on('selected', (date1, date2) => {
+                    console.log(date1, date2);
+                });
+            }
+        });
+    </script>
 @endpush

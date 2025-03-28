@@ -3,15 +3,17 @@
 namespace App\Supports;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 
 trait UploadFile
 {
-    function uploadImage(Request $request, string $inputName, ?string $oldPath = null, string $path = 'uploads'): ?string
+    function uploadImage(Request|UploadedFile $input, string $path = 'uploads', ?string $oldPath = null): ?string
     {
-        if ($request->hasFile($inputName)) {
-            $image = $request->file($inputName);
+        // Kiểm tra kiểu dữ liệu
+        $image = $input instanceof Request ? $input->file('image') : $input;
 
+        if ($image instanceof UploadedFile) {
             $ext = $image->getClientOriginalExtension();
             $imageName = 'media_' . uniqid() . '.' . $ext;
 

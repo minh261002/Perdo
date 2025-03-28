@@ -48,7 +48,7 @@ class CheckoutController extends Controller
     {
         $order = $this->service->vnpayCallback($request);
         if ($order) {
-            return redirect()->route('checkout.review', $order->order_code);
+            return redirect()->route('checkout.review', $order->order_code)->with('success', 'Thanh toán thành công');
         }
     }
 
@@ -56,7 +56,7 @@ class CheckoutController extends Controller
     {
         $order = $this->service->momoCallback($request);
         if ($order) {
-            return redirect()->route('checkout.review', $order->order_code);
+            return redirect()->route('checkout.review', $order->order_code)->with('success', 'Thanh toán thành công');
         }
     }
 
@@ -64,7 +64,7 @@ class CheckoutController extends Controller
     {
         $order = $this->service->payosCallback($request);
         if ($order) {
-            return redirect()->route('checkout.review', $order->order_code);
+            return redirect()->route('checkout.review', $order->order_code)->with('success', 'Thanh toán thành công');
         }
     }
 }

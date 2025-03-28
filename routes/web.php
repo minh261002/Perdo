@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -31,6 +32,18 @@ Route::middleware('user.login')->group(function () {
 
 Route::middleware('user.auth')->group(function () {
     Route::post('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
+
+    Route:: as('profile.')->group(function () {
+        Route::get('/thong-tin-ca-nhan', [ProfileController::class, 'index'])->name('index');
+        Route::put('/thong-tin-ca-nhan', [ProfileController::class, 'update'])->name('update');
+
+        Route::get('/thong-tin-ca-nhan/doi-mat-khau', [ProfileController::class, 'changePasswordForm'])->name('change.password.form');
+        Route::put('/thong-tin-ca-nhan/doi-mat-khau', [ProfileController::class, 'changePassword'])->name('change.password');
+
+        Route::get('/thong-tin-ca-nhan/don-hang', [ProfileController::class, 'orders'])->name('orders');
+        Route::get('/thong-tin-ca-nhan/don-hang/{order_code}', [ProfileController::class, 'orderDetail'])->name('order.detail');
+        Route::get('/thong-tin-ca-nhan/don-hang/{order_code}/huy', [ProfileController::class, 'cancelOrder'])->name('order.cancel');
+    });
 });
 
 Route:: as('product.')->group(function () {
