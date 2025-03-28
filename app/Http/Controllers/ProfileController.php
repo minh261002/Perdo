@@ -67,6 +67,10 @@ class ProfileController extends Controller
             });
         }
 
+        if (request()->has('q')) {
+            $query = $query->where('order_code', 'like', '%' . request()->input('q') . '%');
+        }
+
 
         $orders = $query->orderBy('created_at', 'desc')->paginate(10);
 
