@@ -66,7 +66,7 @@
         </div>
     </div>
 
-    @include('admin.layouts.partials.pusher')
+    {{-- @include('admin.layouts.partials.pusher') --}}
 
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>

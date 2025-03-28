@@ -69,7 +69,7 @@ class OrderService implements OrderServiceInterface
                 ]);
             }
 
-            $order->status()->create([
+            $order->statuses()->create([
                 'order_id' => $order->id,
                 'status' => OrderStatus::Pending->value
             ]);
@@ -202,7 +202,7 @@ class OrderService implements OrderServiceInterface
                 $order->update([
                     'cancel_reason' => 'Khách hàng hủy thanh toán'
                 ]);
-                $order->status()->create([
+                $order->statuses()->create([
                     'order_id' => $order->id,
                     'status' => OrderStatus::Cancelled->value
                 ]);
@@ -265,7 +265,7 @@ class OrderService implements OrderServiceInterface
                 $order->update([
                     'cancel_reason' => 'Khách hàng hủy thanh toán'
                 ]);
-                $order->status()->create([
+                $order->statuses()->create([
                     'order_id' => $order->id,
                     'status' => OrderStatus::Cancelled->value
                 ]);
@@ -358,7 +358,7 @@ class OrderService implements OrderServiceInterface
                 $order->update([
                     'cancel_reason' => 'Khách hàng hủy thanh toán'
                 ]);
-                $order->status()->create([
+                $order->statuses()->create([
                     'order_id' => $order->id,
                     'status' => OrderStatus::Cancelled->value
                 ]);
