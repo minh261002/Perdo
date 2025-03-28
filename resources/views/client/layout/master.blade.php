@@ -62,7 +62,14 @@
 <body>
     <script src="{{ asset('/js/demo-theme.min.js?1692870487') }}"></script>
     <div id="fui-toast"></div>
-
+    @php
+        $categories = \App\Models\Category::where('show_menu', true)
+            ->whereNull('parent_id')
+            ->defaultOrder()
+            ->withDepth()
+            ->get()
+            ->toFlatTree();
+    @endphp
     <div class="page ">
         @include('client.layout.partials.header-top')
         @include('client.layout.partials.navbar')
@@ -93,13 +100,47 @@
                     <div class="navbar">
                         <div class="container-xl">
                             <div class="row flex-fill align-items-center justify-content-center">
-                                <ul class="navbar-nav align-items-center justify-content-center">
+                                <ul class="navbar-nav align-items-center justify-content-left">
                                     <li class="nav-item active">
                                         <a class="nav-link" href="./">
                                             <span class="nav-link-title"> Trang chủ </span>
                                         </a>
                                     </li>
-
+                                    @foreach ($categories as $category)
+                                        @if ($category->children->count() > 0)
+                                            <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" href=""
+                                                    data-bs-toggle="dropdown">{{ $category->name }}</a>
+                                                <ul class="dropdown-menu">
+                                                    @foreach ($category->children as $child)
+                                                        @if ($child->children->count() > 0)
+                                                            <li>
+                                                                <a class="dropdown-item dropdown-toggle"
+                                                                    href="">{{ $child->name }}</a>
+                                                                <ul class="dropdown-menu">
+                                                                    @foreach ($child->children as $subChild)
+                                                                        <li>
+                                                                            <a class="dropdown-item"
+                                                                                href="">{{ $subChild->name }}</a>
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </li>
+                                                        @else
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                    href="">{{ $child->name }}</a>
+                                                            </li>
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
+                                            </li>
+                                        @else
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="">{{ $category->name }}</a>
+                                            </li>
+                                        @endif
+                                    @endforeach
                                     <li class="nav-item">
                                         <a class="nav-link" href="./">
                                             <span class="nav-link-title"> Bài viết </span>
