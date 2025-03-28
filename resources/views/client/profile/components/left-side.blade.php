@@ -15,6 +15,21 @@
                 class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.orders']) }}">
                 Đơn hàng
             </a>
+
+            <a href="{{ route('profile.orders') }}"
+                class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.orders']) }}">
+                Thông báo
+            </a>
+
+            <a href="{{ route('profile.orders') }}"
+                class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.orders']) }}">
+                Mã giảm giá
+            </a>
+
+            <a href="{{ route('profile.orders') }}"
+                class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.orders']) }}">
+                Yêu thích
+            </a>
         </div>
     </div>
 </div>

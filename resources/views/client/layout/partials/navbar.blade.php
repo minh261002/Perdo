@@ -51,7 +51,8 @@
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
 
                         <a href="{{ route('profile.index') }}" class="dropdown-item">Thông tin cá nhân</a>
-                        {{-- <a href="{{ route('order.index') }}" class="dropdown-item">Đơn hàng</a> --}}
+                        <a href="{{ route('profile.change.password.form') }}" class="dropdown-item">Đổi mật khẩu</a>
+                        <a href="{{ route('profile.orders') }}" class="dropdown-item">Đơn hàng</a>
                         {{-- <a href="{{ route('wishlist.index') }}" class="dropdown-item">Yêu thích</a> --}}
 
                         <div class="dropdown-divider m-0"></div>

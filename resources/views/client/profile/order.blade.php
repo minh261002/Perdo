@@ -43,41 +43,31 @@
 
                                     </form>
                                 </div>
-                                <table class="table">
+                                <table class="table h-100">
                                     <thead>
                                         <tr>
                                             <th>
-                                                <button class="table-sort" data-sort="sort-name">
-                                                    Mã đơn hàng
-                                                </button>
+                                                Mã đơn hàng
                                             </th>
 
                                             <th>
-                                                <button class="table-sort" data-sort="sort-name">
-                                                    Tổng tiền
-                                                </button>
+                                                Tổng tiền
                                             </th>
 
                                             <th>
-                                                <button class="table-sort" data-sort="sort-name">
-                                                    Trạng thái
-                                                </button>
+                                                Trạng thái
                                             </th>
 
                                             <th>
-                                                <button class="table-sort" data-sort="sort-name">
-                                                    Ngày tạo
-                                                </button>
+                                                Ngày tạo
                                             </th>
 
                                             <th>
-                                                <button class="table-sort" data-sort="sort-name">
-                                                    Hành động
-                                                </button>
+                                                Hành động
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody class="table-tbody">
+                                    <tbody>
                                         @forelse ($orders as $order)
                                             <tr>
                                                 <td>{{ $order->order_code }}</td>
