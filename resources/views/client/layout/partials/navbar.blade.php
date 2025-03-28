@@ -25,7 +25,7 @@
         </form>
         <div class="navbar-nav flex-row order-md-last gap-3">
             <div class="nav-item">
-                <a href="{{ route('cart.index') }}" class="position-relative text-decoration-none">
+                <a href="{{ route('cart.index') }}" class="position-relative text-decoration-none" id="cart-icon">
                     <i class="ti ti-shopping-cart  d-block w-100 h-100" style="font-size: 30px"></i>
                     <span
                         class="badge bg-red text-red-fg position-absolute top-0 start-100 translate-middle badge-circle"
@@ -50,8 +50,11 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
 
+                        <a href="{{ route('profile.index') }}" class="dropdown-item">Thông tin cá nhân</a>
+                        {{-- <a href="{{ route('order.index') }}" class="dropdown-item">Đơn hàng</a> --}}
+                        {{-- <a href="{{ route('wishlist.index') }}" class="dropdown-item">Yêu thích</a> --}}
 
-                        <div class="dropdown-divider"></div>
+                        <div class="dropdown-divider m-0"></div>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="dropdown-item">Đăng xuất</button>

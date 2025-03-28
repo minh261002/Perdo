@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -53,4 +54,10 @@ Route:: as('checkout.')->group(function () {
     Route::get('/vnpay/callback', [CheckoutController::class, 'vnpayCallback'])->name('vnpay.callback');
     Route::get('/momo/callback', [CheckoutController::class, 'momoCallback'])->name('momo.callback');
     Route::get('/payos/callback', [CheckoutController::class, 'payosCallback'])->name('payos.callback');
+});
+
+Route:: as('profile.')->group(function () {
+    Route::get('/thong-tin-ca-nhan', [ProfileController::class, 'index'])->name('index');
+    Route::put('/thong-tin-ca-nhan', [ProfileController::class, 'update'])->name('update');
+    Route::put('/thong-tin-ca-nhan/doi-mat-khau', [ProfileController::class, 'changePassword'])->name('change.password');
 });

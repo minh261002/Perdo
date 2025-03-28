@@ -103,7 +103,10 @@ class OrderService implements OrderServiceInterface
 
     public function cod($order)
     {
-        echo "<script>window.location.href='" . route('checkout.review', $order->order_code) . "';</script>";
+        echo "
+        <script>
+            window.location.href='" . route('checkout.review', $order->order_code) . "';
+        </script>";
     }
 
 
