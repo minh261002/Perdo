@@ -36,7 +36,7 @@
                                     <button class="btn btn-primary" type="button" id="button-plus">+</button>
                                 </div>
                             </td>
-                            <td id="tbl-subtotal">
+                            <td class="tbl-subtotal-{{ $item['id'] }}">
                                 {{ format_price($item['price'] * $item['quantity']) }}
                             </td>
                             <td>
@@ -75,7 +75,7 @@
                     success: function(response) {
                         $('#total').html(format_price(response.totalPrice))
                         $('#subTotal').html(format_price(response.subTotal))
-                        $('#tbl-subtotal').html(format_price(response.subTotal))
+                        $('.tbl-subtotal-' + id).html(format_price(response.itemTotal));
                     },
                     error(err) {
                         console.log(err)
@@ -103,7 +103,7 @@
                     success: function(response) {
                         $('#total').html(format_price(response.totalPrice))
                         $('#subTotal').html(format_price(response.subTotal))
-                        $('#tbl-subtotal').html(format_price(response.subTotal))
+                        $('.tbl-subtotal-' + id).html(format_price(response.itemTotal));
                     }
                 });
             }
@@ -121,12 +121,12 @@
                     _token: "{{ csrf_token() }}",
                 },
                 beforeSend: function() {
-                    button.html('<div class="spinner-border spinner-border-sm" role="status"></div>');
+                    button.html(
+                        '<div class="spinner-border spinner-border-sm" role="status"></div>');
                 },
                 success: function(response) {
                     $('#total').html(format_price(response.totalPrice));
                     $('#subTotal').html(format_price(response.subTotal));
-                    $('#tbl-subtotal').html(format_price(response.subTotal));
                     $('tr[data-row-id="' + id + '"]').remove();
 
                     if (response.cartCount === 0) {

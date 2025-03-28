@@ -124,7 +124,8 @@ class CartController extends Controller
             }, $cart)),
             'totalPrice' => array_sum(array_map(function ($item) {
                 return $item['price'] * $item['quantity'];
-            }, $cart))
+            }, $cart)),
+            'itemTotal' => $cart[$id]['price'] * $cart[$id]['quantity'],
         ]);
     }
 
