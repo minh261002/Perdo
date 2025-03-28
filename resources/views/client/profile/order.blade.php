@@ -97,7 +97,8 @@
                                         <tr>
                                             <td colspan="6">
                                                 <div class="d-flex justify-content-end">
-                                                    {{ $orders->appends(request()->all())->links() }}
+                                                    {{ $orders->links('components.pagination') }}
+
                                                 </div>
                                             </td>
                                         </tr>

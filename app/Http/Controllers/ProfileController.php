@@ -58,11 +58,15 @@ class ProfileController extends Controller
 
         if (request()->has('status')) {
             $query = $query->whereHas('statuses', function ($q) {
-                $q->where('status', request('status'))
-                    ->orderBy('created_at', 'desc')
-                    ->limit(1);
+                $q->where('status', request()->input('status')) // Lấy đúng giá trị của status
+                    ->whereIn('id', function ($subQuery) {
+                        $subQuery->selectRaw('MAX(id)')
+                            ->from('order_statuses')
+                            ->whereColumn('order_id', 'orders.id');
+                    });
             });
         }
+
 
         $orders = $query->orderBy('created_at', 'desc')->paginate(10);
 
