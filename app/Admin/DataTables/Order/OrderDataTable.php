@@ -4,8 +4,6 @@ namespace App\Admin\DataTables\Order;
 
 use App\Admin\DataTables\BaseDataTable;
 use App\Enums\Order\OrderStatus;
-use App\Enums\Transaction\PaymentMethod;
-use App\Enums\Transaction\PaymentStatus;
 use App\Repositories\Order\OrderRepositoryInterface;
 
 class OrderDataTable extends BaseDataTable
