@@ -85,13 +85,13 @@ return [
         'show' => ['admin.transaction.*'],
         'title' => 'Giao dịch',
         'icon' => 'ti ti-credit-card fs-2',
-        'permission' => ['viewOrder', 'editOrder',],
+        'permission' => ['viewTransaction', 'editTransaction',],
         'children' => [
             [
                 'title' => 'Danh sách',
-                'route' => 'admin.order.index',
+                'route' => 'admin.transaction.index',
                 'icon' => 'ti ti-list fs-3 me-2',
-                'permission' => 'viewOrder'
+                'permission' => 'viewTransaction'
             ]
         ]
     ],

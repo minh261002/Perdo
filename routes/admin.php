@@ -1,5 +1,6 @@
 <?php
 
+use App\Admin\Http\Controllers\Transaction\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 use App\Admin\Http\Controllers\Auth\AuthController;
@@ -311,12 +312,12 @@ Route::prefix('admin')->as('admin.')->group(function () {
         // quản lý giao dịch
         Route::prefix('transaction')->as('transaction.')->group(function () {
             Route::middleware(['permission:viewTransaction'])->group(function () {
-                Route::get('/', [ProductController::class, 'index'])->name('index');
+                Route::get('/', [TransactionController::class, 'index'])->name('index');
             });
 
             Route::middleware(['permission:editTransaction'])->group(function () {
-                Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
-                Route::put('/update', [ProductController::class, 'update'])->name('update');
+                Route::get('/edit/{id}', [TransactionController::class, 'edit'])->name('edit');
+                Route::put('/update', [TransactionController::class, 'update'])->name('update');
             });
         });
 

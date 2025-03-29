@@ -78,6 +78,7 @@ class OrderService implements OrderServiceInterface
             $transactionData['order_id'] = $order->id;
             $transactionData['transaction_code'] = 'GD' . time();
             $transactionData['amount'] = $order->total;
+            $transactionData['user_id'] = Auth::guard('web')->id() ?? null;
 
             $this->transactionRepository->create($transactionData);
 
