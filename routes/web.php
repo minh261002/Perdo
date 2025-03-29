@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -71,4 +72,8 @@ Route:: as('checkout.')->group(function () {
 
 Route:: as('brand.')->group(function () {
     Route::get('/thuong-hieu/{slug}', [BrandController::class, 'index'])->name('index');
+});
+
+Route:: as('category.')->group(function () {
+    Route::get('/danh-muc/{slug}', [CategoryController::class, 'index'])->name('index');
 });
