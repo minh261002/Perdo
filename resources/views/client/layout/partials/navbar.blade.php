@@ -57,16 +57,30 @@
                 <img src="{{ asset('/images/logo.svg') }}" class="img-fluid" width="90px" />
             </a>
         </div>
-        <form class="navbar-search d-none d-md-flex ms-2 w-50">
+        <form class="navbar-search d-none d-md-flex ms-2 w-50 position-relative" action={{ route('product.search') }}>
             <div class="input-group input-group-merge search-bar">
-                <input type="text" class="form-control" placeholder="Tìm kiếm" aria-label="Search…"
-                    aria-describedby="topbar-addon">
-                <button class="input-group-text btn btn-primary" id="topbar-addon">
+                <input type="text" class="form-control" placeholder="Tìm kiếm" aria-label="Search…" id="search-input"
+                    name="q" value="{{ request('q') }}" autocomplete="off">
+                <button class="input-group-text btn btn-primary" type="submit">
                     <span class="ti ti-search"></span>
                 </button>
+
+                <div id="search-results" class="position-absolute w-100 top-100 start-0 d-none">
+                    <div class="card">
+                        <div class="card-header py-2">
+                            <div class="card-title">
+                                <h5 class="mb-0">Kết quả tìm kiếm</h5>
+                            </div>
+                        </div>
+
+                        <div class="card-body" id="search-results-body">
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
-        <div class="navbar-nav flex-row order-md-last gap-3">
+        <div class="navbar-nav
+                    flex-row order-md-last gap-3">
             <div class="nav-item">
                 <a href="{{ route('cart.index') }}" class="position-relative text-decoration-none" id="cart-icon">
                     <i class="ti ti-shopping-cart  d-block w-100 h-100" style="font-size: 30px"></i>
@@ -94,7 +108,8 @@
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
 
                         <a href="{{ route('profile.index') }}" class="dropdown-item">Thông tin cá nhân</a>
-                        <a href="{{ route('profile.change.password.form') }}" class="dropdown-item">Đổi mật khẩu</a>
+                        <a href="{{ route('profile.change.password.form') }}" class="dropdown-item">Đổi mật
+                            khẩu</a>
                         <a href="{{ route('profile.orders') }}" class="dropdown-item">Đơn hàng</a>
                         {{-- <a href="{{ route('wishlist.index') }}" class="dropdown-item">Yêu thích</a> --}}
 
@@ -163,8 +178,7 @@
                                             @else
                                                 <li>
                                                     <a class="dropdown-item"
-                                                        href="{{ route('category.index', $category->slug) }}"
-                                                        }}">{{ $child->name }}</a>
+                                                        href="{{ route('category.index', $category->slug) }}">{{ $child->name }}</a>
                                                 </li>
                                             @endif
                                         @endforeach
@@ -188,3 +202,82 @@
         </div>
     </div>
 </header>
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            let timeout;
+            $('#search-input').on('input', function() {
+                clearTimeout(timeout);
+                let query = $(this).val();
+
+                // Hiển thị loading
+                $('#search-results-body').html(
+                    '<div class="text-center"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></div>'
+                );
+                $('#search-results').removeClass('d-none');
+
+                timeout = setTimeout(function() {
+                    $.ajax({
+                        url: "{{ route('product.search.ajax') }}",
+                        type: "GET",
+                        data: {
+                            q: query
+                        },
+                        success: function(response) {
+                            $('#search-results').removeClass('d-none');
+                            const products = response.data.data;
+
+                            let html = '';
+                            if (products.length > 0) {
+                                html += '<div class="table-responsive">';
+                                html +=
+                                    '<table class="table table-vcenter text-nowrap">';
+                                html += '<tbody>';
+
+                                products.forEach(function(product) {
+                                    html += '<tr>';
+                                    html +=
+                                        '<td><a href="/san-pham/' + product
+                                        .slug +
+                                        '" class="text-decoration-none">' +
+                                        product.name + '</a></td>';
+
+                                    html += '<td>' +
+                                        format_price(product.price) +
+                                        '</td>';
+                                    html += '</tr>';
+                                });
+
+                                html += '</tbody>';
+                                html += '</table>';
+                                html += '</div>';
+                            } else {
+                                html =
+                                    '<div class="alert alert-primary" role="alert">Không tìm thấy sản phẩm nào</div>';
+                            }
+                            $('#search-results-body').html(html);
+                        },
+                        error: function() {
+                            $('#search-results-body').html(
+                                '<div class="alert alert-danger">Đã xảy ra lỗi, vui lòng thử lại sau!</div>'
+                            );
+                        }
+                    });
+                }, 1000);
+            });
+
+            $(document).on('click', function(event) {
+                if (!$(event.target).closest('#search-input, #search-results').length) {
+                    $('#search-results').addClass('d-none');
+                }
+            });
+
+            $('#search-input').on('focus', function() {
+                if ($('#search-results-body').html().trim() !== '') {
+                    $('#search-results').removeClass('d-none');
+                }
+            });
+        })
+    </script>
+@endpush

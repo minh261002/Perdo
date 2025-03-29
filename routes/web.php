@@ -52,6 +52,8 @@ Route::middleware('user.auth')->group(function () {
 
 Route:: as('product.')->group(function () {
     Route::get('/san-pham/{slug}', [ProductController::class, 'show'])->name('show');
+    Route::get('/tim-kiem', [ProductController::class, 'search'])->name('search');
+    Route::get('/tim-kiem/ajax', [ProductController::class, 'searchAjax'])->name('search.ajax');
 });
 
 Route:: as('cart.')->group(function () {
