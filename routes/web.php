@@ -48,6 +48,9 @@ Route::middleware('user.auth')->group(function () {
 
         Route::get('/ma-giam-gia', [ProfileController::class, 'discounts'])->name('discounts');
     });
+
+    Route:: as('wishlist.')->group(function () {
+    });
 });
 
 Route:: as('product.')->group(function () {
