@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Transaction\PaymentStatus;
 use App\Http\Request\Order\OrderStoreRequest;
 use App\Repositories\Order\OrderRepositoryInterface;
 use App\Services\Order\OrderServiceInterface;
@@ -48,7 +49,10 @@ class CheckoutController extends Controller
     {
         $order = $this->service->vnpayCallback($request);
         if ($order) {
-            return redirect()->route('checkout.review', $order->order_code)->with('success', 'Thanh toán thành công');
+            return redirect()->route('checkout.review', $order->order_code)->with(
+                $order->transaction->payment_status == PaymentStatus::Completed->value ? 'success' : 'error',
+                $order->transaction->payment_status == PaymentStatus::Completed->value ? 'Thanh toán thành công' : 'Thanh toán thất bại'
+            );
         }
     }
 
@@ -56,7 +60,10 @@ class CheckoutController extends Controller
     {
         $order = $this->service->momoCallback($request);
         if ($order) {
-            return redirect()->route('checkout.review', $order->order_code)->with('success', 'Thanh toán thành công');
+            return redirect()->route('checkout.review', $order->order_code)->with(
+                $order->transaction->payment_status == PaymentStatus::Completed->value ? 'success' : 'error',
+                $order->transaction->payment_status == PaymentStatus::Completed->value ? 'Thanh toán thành công' : 'Thanh toán thất bại'
+            );
         }
     }
 
@@ -64,7 +71,10 @@ class CheckoutController extends Controller
     {
         $order = $this->service->payosCallback($request);
         if ($order) {
-            return redirect()->route('checkout.review', $order->order_code)->with('success', 'Thanh toán thành công');
+            return redirect()->route('checkout.review', $order->order_code)->with(
+                $order->transaction->payment_status == PaymentStatus::Completed->value ? 'success' : 'error',
+                $order->transaction->payment_status == PaymentStatus::Completed->value ? 'Thanh toán thành công' : 'Thanh toán thất bại'
+            );
         }
     }
 }

@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
@@ -33,16 +35,18 @@ Route::middleware('user.login')->group(function () {
 Route::middleware('user.auth')->group(function () {
     Route::post('/dang-xuat', [AuthController::class, 'logout'])->name('logout');
 
-    Route:: as('profile.')->group(function () {
-        Route::get('/thong-tin-ca-nhan', [ProfileController::class, 'index'])->name('index');
-        Route::put('/thong-tin-ca-nhan', [ProfileController::class, 'update'])->name('update');
+    Route::prefix('thong-tin-ca-nhan')->as('profile.')->group(function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('index');
+        Route::put('/', [ProfileController::class, 'update'])->name('update');
 
-        Route::get('/thong-tin-ca-nhan/doi-mat-khau', [ProfileController::class, 'changePasswordForm'])->name('change.password.form');
-        Route::put('/thong-tin-ca-nhan/doi-mat-khau', [ProfileController::class, 'changePassword'])->name('change.password');
+        Route::get('/doi-mat-khau', [ProfileController::class, 'changePasswordForm'])->name('change.password.form');
+        Route::put('/doi-mat-khau', [ProfileController::class, 'changePassword'])->name('change.password');
 
-        Route::get('/thong-tin-ca-nhan/don-hang', [ProfileController::class, 'orders'])->name('orders');
-        Route::get('/thong-tin-ca-nhan/don-hang/{order_code}', [ProfileController::class, 'orderDetail'])->name('order.detail');
-        Route::get('/thong-tin-ca-nhan/don-hang/{order_code}/huy', [ProfileController::class, 'cancelOrder'])->name('order.cancel');
+        Route::get('/don-hang', [ProfileController::class, 'orders'])->name('orders');
+        Route::get('/don-hang/{order_code}', [ProfileController::class, 'orderDetail'])->name('order.detail');
+        Route::get('/don-hang/{order_code}/huy', [ProfileController::class, 'cancelOrder'])->name('order.cancel');
+
+        Route::get('/ma-giam-gia', [ProfileController::class, 'discounts'])->name('discounts');
     });
 });
 
@@ -66,4 +70,12 @@ Route:: as('checkout.')->group(function () {
     Route::get('/vnpay/callback', [CheckoutController::class, 'vnpayCallback'])->name('vnpay.callback');
     Route::get('/momo/callback', [CheckoutController::class, 'momoCallback'])->name('momo.callback');
     Route::get('/payos/callback', [CheckoutController::class, 'payosCallback'])->name('payos.callback');
+});
+
+Route:: as('brand.')->group(function () {
+    Route::get('/thuong-hieu/{slug}', [BrandController::class, 'index'])->name('index');
+});
+
+Route:: as('category.')->group(function () {
+    Route::get('/danh-muc/{slug}', [CategoryController::class, 'index'])->name('index');
 });

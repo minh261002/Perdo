@@ -16,6 +16,7 @@ use App\Admin\Http\Controllers\Brand\BrandController;
 use App\Admin\Http\Controllers\Category\CategoryController;
 use App\Admin\Http\Controllers\Product\ProductController;
 use App\Admin\Http\Controllers\Discount\DiscountController;
+use App\Admin\Http\Controllers\Order\OrderController;
 
 Route::prefix('admin')->as('admin.')->group(function () {
 
@@ -295,12 +296,12 @@ Route::prefix('admin')->as('admin.')->group(function () {
         // quản lý đơn hàng
         Route::prefix('order')->as('order.')->group(function () {
             Route::middleware(['permission:viewOrder'])->group(function () {
-                Route::get('/', [ProductController::class, 'index'])->name('index');
+                Route::get('/', [OrderController::class, 'index'])->name('index');
             });
 
             Route::middleware(['permission:editOrder'])->group(function () {
-                Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
-                Route::put('/update', [ProductController::class, 'update'])->name('update');
+                Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('edit');
+                Route::put('/update', [OrderController::class, 'update'])->name('update');
             });
         });
 

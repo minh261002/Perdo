@@ -64,17 +64,28 @@
         @endif
     </div>
 
-    <div>
-        <label for="stock" class="form-label">Số lượng</label>
-        <div class="input-group w-50 w-md-25">
-            <button class="btn btn-primary" type="button" id="button-minus">-</button>
-            <input type="text" class="form-control text-center" value="1"
-                aria-label="Example text with button addon" aria-describedby="button-addon1" name="stock"
-                data-stock="{{ $product->stock }}">
-            <button class="btn btn-primary" type="button" id="button-plus">+</button>
-        </div>
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3">
         <div>
-            <span class="text-danger" id="stock-error"></span>
+            <label for="stock" class="form-label">Số lượng</label>
+            <div class="input-group" style="max-width: 200px;">
+                <button class="btn btn-primary" type="button" id="button-minus">-</button>
+                <input type="text" class="form-control text-center" value="1"
+                    aria-label="Example text with button addon" aria-describedby="button-addon1" name="stock"
+                    data-stock="{{ $product->stock }}">
+                <button class="btn btn-primary" type="button" id="button-plus">+</button>
+            </div>
+            <div>
+                <span class="text-danger" id="stock-error"></span>
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-between gap-2">
+            <span class="d-flex align-items-center justify-content-between gap-2 fs-3 text-primary">
+                <i class="ti ti-building-warehouse "></i>
+                Kho hàng:
+            </span>
+
+            Còn <strong>{{ $product->stock }}</strong> sản phẩm
         </div>
     </div>
 
@@ -93,15 +104,8 @@
             </button>
         </div>
     </div>
-    <div class="position-relative w-100">
-        <div class="hidden-content w-100" id="content">
-            {!! $product->desc ?? 'Sản phẩm này không có mô tả' !!}
-        </div>
 
-        @if ($product->desc)
-            <button id="toggleBtn" class="">Xem thêm</button>
-        @endif
-    </div>
+    @include('client.product.components.brand')
 </div>
 
 @push('scripts')

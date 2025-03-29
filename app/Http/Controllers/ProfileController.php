@@ -58,15 +58,29 @@ class ProfileController extends Controller
 
         if (request()->has('status')) {
             $query = $query->whereHas('statuses', function ($q) {
-                $q->where('status', request('status'))
-                    ->orderBy('created_at', 'desc')
-                    ->limit(1);
+                $q->where('status', request()->input('status')) // Lấy đúng giá trị của status
+                    ->whereIn('id', function ($subQuery) {
+                        $subQuery->selectRaw('MAX(id)')
+                            ->from('order_statuses')
+                            ->whereColumn('order_id', 'orders.id');
+                    });
             });
         }
+
+        if (request()->has('q')) {
+            $query = $query->where('order_code', 'like', '%' . request()->input('q') . '%');
+        }
+
 
         $orders = $query->orderBy('created_at', 'desc')->paginate(10);
 
         return view('client.profile.order', compact('orders'));
     }
 
+    public function discounts()
+    {
+        $user = Auth::guard('web')->user();
+        $discounts = $user->discounts()->paginate(6);
+        return view('client.profile.discount', compact('discounts'));
+    }
 }

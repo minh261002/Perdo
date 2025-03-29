@@ -13,8 +13,8 @@
                         <div class="card-body">
                             <h2 class="mb-4">Danh sách đơn hàng</h2>
                             <div id="table-default" class="table-responsive">
-                                <div class="mb-3">
-                                    <div class="btn-group w-25 mb-3">
+                                <div class="d-flex align-items-center justify-content-between mb-3">
+                                    <div class="btn-group mb-3">
                                         <button type="button" class="btn btn-3 dropdown-toggle" data-bs-toggle="dropdown"
                                             aria-expanded="false">
                                             {{ request()->get('status') ? \App\Enums\Order\OrderStatus::getDescription(request()->get('status')) : 'Tất cả' }}
@@ -30,42 +30,44 @@
                                             @endforeach
                                         </ul>
                                     </div>
+
+
+                                    <form action="{{ route('profile.orders') }}" method="GET">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" placeholder="Nhập mã đơn hàng"
+                                                name="q" value="{{ request()->get('q') }}">
+                                            <button class="btn btn-3" type="submit" id="button-addon2">
+                                                <i class="ti ti-search"></i>
+                                            </button>
+                                        </div>
+
+                                    </form>
                                 </div>
-                                <table class="table">
+                                <table class="table h-100">
                                     <thead>
                                         <tr>
                                             <th>
-                                                <button class="table-sort" data-sort="sort-name">
-                                                    Mã đơn hàng
-                                                </button>
+                                                Mã đơn hàng
                                             </th>
 
                                             <th>
-                                                <button class="table-sort" data-sort="sort-name">
-                                                    Tổng tiền
-                                                </button>
+                                                Tổng tiền
                                             </th>
 
                                             <th>
-                                                <button class="table-sort" data-sort="sort-name">
-                                                    Trạng thái
-                                                </button>
+                                                Trạng thái
                                             </th>
 
                                             <th>
-                                                <button class="table-sort" data-sort="sort-name">
-                                                    Ngày tạo
-                                                </button>
+                                                Ngày tạo
                                             </th>
 
                                             <th>
-                                                <button class="table-sort" data-sort="sort-name">
-                                                    Hành động
-                                                </button>
+                                                Hành động
                                             </th>
                                         </tr>
                                     </thead>
-                                    <tbody class="table-tbody">
+                                    <tbody>
                                         @forelse ($orders as $order)
                                             <tr>
                                                 <td>{{ $order->order_code }}</td>
@@ -97,7 +99,8 @@
                                         <tr>
                                             <td colspan="6">
                                                 <div class="d-flex justify-content-end">
-                                                    {{ $orders->appends(request()->all())->links() }}
+                                                    {{ $orders->withQueryString()->links('components.pagination') }}
+
                                                 </div>
                                             </td>
                                         </tr>

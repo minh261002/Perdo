@@ -34,7 +34,7 @@
         @import url('https://rsms.me/inter/inter.css');
 
         :root {
-            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+            --tblr-font-sans-serif: -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
         }
 
         body {
@@ -66,7 +66,7 @@
         </div>
     </div>
 
-    @include('admin.layouts.partials.pusher')
+    {{-- @include('admin.layouts.partials.pusher') --}}
 
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>

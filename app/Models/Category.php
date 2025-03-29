@@ -38,4 +38,25 @@ class Category extends Model
         return $this->belongsTo(Category::class, 'parent_id');
     }
 
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_categories', 'category_id', 'product_id');
+    }
+
+    public function brands()
+    {
+        return $this->belongsToMany(Brand::class, 'brand_categories', 'category_id', 'brand_id');
+    }
+
+    public function getDescendantsAndSelf()
+    {
+        $categories = collect([$this]);
+
+        $children = $this->children;
+        foreach ($children as $child) {
+            $categories = $categories->merge($child->getDescendantsAndSelf());
+        }
+
+        return $categories;
+    }
 }

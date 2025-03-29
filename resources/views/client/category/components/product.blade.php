@@ -1,20 +1,14 @@
-<div class="container mb-30px">
+<div class=" mb-30px">
     <div class="card border-0">
-        <div class="card-body">
-            <div class="d-flex justify-content-center align-items-center gap-2 mb-5">
-                <img src="{{ asset('images/icon-title.svg') }}" alt="">
-                <h1 class="d-inline-block mb-0 text-primary fs-1">Sản phẩm liên quan</h1>
-                <img src="{{ asset('images/icon-title.svg') }}" alt="">
-            </div>
-
+        <div class="card-body p-0">
             <div class="row">
-                @forelse ($relatedProducts as $product)
+                @forelse ($products as $product)
                     <div class="col-6 col-md-3 pb-2 pb-md-3">
                         <div class="card rounded-2">
                             <div class="card-body">
                                 <a href="{{ route('product.show', $product->slug) }}">
-                                    <img src="{{ asset($product->image) }}" alt=""
-                                        class="w-100 h-100 rounded-xl" style="max-height: 250px;">
+                                    <img src="{{ asset($product->image) }}" alt="" class="w-100 h-100 rounded-xl"
+                                        style="max-height: 250px;">
                                 </a>
                                 <p class="text-left fw-bold text-primary fs-3 mt-2">
                                     {{ $product->brand->name }}
@@ -45,6 +39,11 @@
                         <p class="text-center fs-3">Không có sản phẩm liên quan</p>
                     </div>
                 @endforelse
+            </div>
+
+            <div class="d-flex justify-content-end">
+                {{ $products->withQueryString()->links('components.pagination') }}
+
             </div>
         </div>
     </div>

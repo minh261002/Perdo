@@ -3,6 +3,49 @@
     $cart_count = session()->has('cart') ? count(session('cart')) : 0;
 @endphp
 
+
+
+
+
+@push('styles')
+    <style>
+        @media all and (min-width: 992px) {
+            .dropdown-menu li {
+                position: relative;
+            }
+
+            .nav-item .submenu {
+                display: none;
+                position: absolute;
+                left: 100%;
+                top: -7px;
+            }
+
+            .nav-item .submenu-left {
+                right: 100%;
+                left: auto;
+            }
+
+            .dropdown-menu>li:hover {
+                background-color: blue;
+            }
+
+            .dropdown-menu>li:hover>.submenu {
+                display: block;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .dropdown-menu .dropdown-menu {
+                margin-left: 0.7rem;
+                margin-right: 0.7rem;
+                margin-bottom: .5rem;
+            }
+        }
+    </style>
+@endpush
+
+
 <div class="navbar navbar-expand-md d-print-none position-sticky top-0" style="z-index: 1020;">
     <div class="container-xl">
         <p data-bs-toggle="offcanvas" href="#offcanvasStart" role="button" aria-controls="offcanvasStart"
@@ -51,7 +94,8 @@
                     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
 
                         <a href="{{ route('profile.index') }}" class="dropdown-item">Thông tin cá nhân</a>
-                        {{-- <a href="{{ route('order.index') }}" class="dropdown-item">Đơn hàng</a> --}}
+                        <a href="{{ route('profile.change.password.form') }}" class="dropdown-item">Đổi mật khẩu</a>
+                        <a href="{{ route('profile.orders') }}" class="dropdown-item">Đơn hàng</a>
                         {{-- <a href="{{ route('wishlist.index') }}" class="dropdown-item">Yêu thích</a> --}}
 
                         <div class="dropdown-divider m-0"></div>
@@ -95,7 +139,44 @@
                                 <span class="nav-link-title"> Trang chủ </span>
                             </a>
                         </li>
-
+                        @foreach ($categories as $category)
+                            @if ($category->children->count() > 0)
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle"
+                                        href="{{ route('category.index', $category->slug) }}"
+                                        data-bs-toggle="dropdown">{{ $category->name }}</a>
+                                    <ul class="dropdown-menu">
+                                        @foreach ($category->children as $child)
+                                            @if ($child->children->count() > 0)
+                                                <li>
+                                                    <a class="dropdown-item dropdown-toggle"
+                                                        href="{{ route('category.index', $category->slug) }}">{{ $child->name }}</a>
+                                                    <ul class="dropdown-menu">
+                                                        @foreach ($child->children as $subChild)
+                                                            <li>
+                                                                <a class="dropdown-item"
+                                                                    href="{{ route('category.index', $category->slug) }}">{{ $subChild->name }}</a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </li>
+                                            @else
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('category.index', $category->slug) }}"
+                                                        }}">{{ $child->name }}</a>
+                                                </li>
+                                            @endif
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @else
+                                <li class="nav-item">
+                                    <a class="nav-link"
+                                        href="{{ route('category.index', $category->slug) }}">{{ $category->name }}</a>
+                                </li>
+                            @endif
+                        @endforeach
                         <li class="nav-item">
                             <a class="nav-link" href="./">
                                 <span class="nav-link-title"> Bài viết </span>
