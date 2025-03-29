@@ -215,9 +215,9 @@ class OrderService implements OrderServiceInterface
 
     public function paymentQrCode($order)
     {
-        $payOSClientId = '4ba91acb-2493-44c3-8bcd-72bab955f3ef';
-        $payOSApiKey = '7e8266eb-ec81-4265-b304-c7b1eb21a470';
-        $payOSChecksumKey = '34fda33ae365caed70340a634a2cee273ed468bfbcf5eb4513300199623d410f';
+        $payOSClientId = '542f8636-9b0d-4261-8bdc-3d62626983e8';
+        $payOSApiKey = 'dde332ee-e1d4-4bb2-83cf-ac3eeb8de945';
+        $payOSChecksumKey = '9468f4553a5a59c93d56f7396148936f3ef84ac436f2cd8d60171d87b9ac2540';
         $payosPartnerCode = 'MINH';
 
         $payOS = new PayOS($payOSClientId, $payOSApiKey, $payOSChecksumKey, $payosPartnerCode);
