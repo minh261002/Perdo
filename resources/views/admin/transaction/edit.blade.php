@@ -117,20 +117,11 @@
                                         Trạng thái thanh toán
                                     </label>
                                     <select class="form-select" id="payment_status" name="payment_status">
-                                        {{-- @foreach ($paymentStatuses as $key => $value)
+                                        @foreach ($paymentStatuses as $key => $value)
                                             <option value="{{ $key }}"
                                                 {{ $transaction->payment_status->value == $key ? 'selected' : '' }}>
                                                 {{ $value }}
                                             </option>
-                                        @endforeach --}}
-
-                                        @foreach ($paymentStatuses as $key => $value)
-                                            @if ($transaction->payment_status->value == $key)
-                                                <option value="{{ $key }}"
-                                                    {{ $transaction->payment_status->value == $key ? 'selected' : '' }}>
-                                                    {{ $value }}
-                                                </option>
-                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
