@@ -93,15 +93,8 @@
             </button>
         </div>
     </div>
-    <div class="position-relative w-100">
-        <div class="hidden-content w-100" id="content">
-            {!! $product->desc ?? 'Sản phẩm này không có mô tả' !!}
-        </div>
 
-        @if ($product->desc)
-            <button id="toggleBtn" class="">Xem thêm</button>
-        @endif
-    </div>
+    @include('client.product.components.brand')
 </div>
 
 @push('scripts')

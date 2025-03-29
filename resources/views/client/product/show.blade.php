@@ -1,7 +1,13 @@
 @extends('client.layout.master')
 
 @section('title', $product->meta_title ?? $product->name)
-
+@push('styles')
+    <style>
+        .product-description {
+            width: 100% !important;
+        }
+    </style>
+@endpush
 @section('content')
     <div class="container my-30px d-flex flex-column gap-5">
         <div class="card border-0">
@@ -14,6 +20,12 @@
                         @include('client.product.components.info')
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="card border-0">
+            <div class="card-body">
+                @include('client.product.components.tab')
             </div>
         </div>
 
