@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Discount::class, 'discount_applications', 'user_id', 'discount_id');
     }
+
+    public function wishlists()
+    {
+        return $this->belongsToMany(Product::class, 'wishlists', 'user_id', 'product_id');
+    }
 }

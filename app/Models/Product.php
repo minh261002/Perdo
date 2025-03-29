@@ -28,4 +28,9 @@ class Product extends Model
     {
         return $this->belongsTo(Brand::class, 'brand_id');
     }
+
+    public function wishlists()
+    {
+        return $this->belongsToMany(User::class, 'wishlists', 'product_id', 'user_id');
+    }
 }
