@@ -96,14 +96,13 @@
                                 <h3 class="card-title">
                                     Thông tin giỏ hàng
                                 </h3>
-
-                                {{-- @if (!$order->delivery && $order->status->value != \App\Enums\Order\OrderStatus::Cancelled->value)
+                                @if ($order->statuses && $order->statuses->last()->status->value != \App\Enums\Order\OrderStatus::Cancelled->value)
                                     <a href="#" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#modal-delivery">
                                         <i class="ti ti-truck-delivery fs-2 me-2"></i>
                                         Vận chuyển
                                     </a>
-                                @endif --}}
+                                @endif
                             </div>
 
                             <div class="card-body">
@@ -247,12 +246,12 @@
                                     </select>
                                 </div>
 
-                                {{-- <a href="{{ route('transaction.edit', $order->transaction->id) }}">
+                                <a href="{{ route('admin.transaction.edit', $order->transaction->id) }}">
                                     Xem thông tin chi tiết giao dịch
-                                </a> --}}
+                                </a>
                             </div>
                         </div>
-                        {{--
+
                         <div class="card mt-4">
                             <div class="card-header">
                                 <h3 class="card-title">
@@ -293,10 +292,9 @@
                                     <div class="alert alert-info">
                                         Đơn hàng chưa được bàn giao vận chuyển
                                     </div>
-
                                 @endif
                             </div>
-                        </div> --}}
+                        </div>
 
                         <div class="card mt-4">
                             <div class="card-header">
@@ -321,7 +319,7 @@
         </div>
     </div>
 
-    {{-- <div class="modal modal-blur fade" id="modal-delivery" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal modal-blur fade" id="modal-delivery" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -339,22 +337,13 @@
                             @endforeach
                         </select>
                     </div>
-
-                    <div class="col-12 mb-3">
-                        <label for="delivery_method" class="form-label">Kho xuất hàng</label>
-                        <select name="warehouse_id" id="warehouse_id" class="form-select">
-                            @foreach ($warehouses as $warehouse)
-                                <option value="{{ $warehouse->id }}">{{ $warehouse->address }}</option>
-                            @endforeach
-                        </select>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="create-delivery">Vận chuyển</button>
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
 @endsection
 
 @push('scripts')

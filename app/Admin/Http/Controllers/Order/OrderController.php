@@ -6,6 +6,8 @@ use App\Admin\DataTables\Order\OrderDataTable;
 use App\Enums\Order\OrderStatus;
 use App\Enums\Transaction\PaymentMethod;
 use App\Enums\Transaction\PaymentStatus;
+use App\Enums\Transport\TransportMethod;
+use App\Enums\Transport\TransportStatus;
 use App\Repositories\Order\OrderRepositoryInterface;
 use Illuminate\Http\Request;
 use Dompdf\Dompdf;
@@ -33,8 +35,11 @@ class OrderController
         $orderStatus = OrderStatus::asSelectArray();
         $paymentMethods = PaymentMethod::asSelectArray();
         $paymentStatus = PaymentStatus::asSelectArray();
+        $deliveryMethod = TransportMethod::asSelectArray();
+        $deliveryStatus = TransportStatus::asSelectArray();
 
-        return view('admin.order.edit', compact('order', 'orderStatus', 'paymentMethods', 'paymentStatus'));
+
+        return view('admin.order.edit', compact('order', 'orderStatus', 'paymentMethods', 'paymentStatus', 'deliveryMethod', 'deliveryStatus'));
     }
 
     public function update(Request $request)
