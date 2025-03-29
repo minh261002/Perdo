@@ -301,6 +301,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
 
             Route::middleware(['permission:editOrder'])->group(function () {
                 Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('edit');
+                Route::get('/invoice/{id}', [OrderController::class, 'invoice'])->name('invoice');
                 Route::put('/update', [OrderController::class, 'update'])->name('update');
             });
         });
