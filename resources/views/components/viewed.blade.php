@@ -1,7 +1,5 @@
 @php
-    //lấy danh sách id sản phẩm đã xem từ session
     $viewedProducts = session('viewed_products', []);
-    //lấy danh sách sản phẩm từ database
     $newProducts = \App\Models\Product::whereIn('id', $viewedProducts)
         ->with('brand')
         ->orderBy('created_at', 'desc')
