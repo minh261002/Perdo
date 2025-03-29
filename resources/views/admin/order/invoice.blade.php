@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('admin.layouts.master')
 @section('title', 'Đơn hàng ' . $order->order_code)
 
 @push('styles')
@@ -16,13 +16,13 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="{{ route('dashboard') }}">
+                                <a href="{{ route('admin.dashboard') }}">
                                     <i class="bi bi-house"></i>
                                     Dashboard
                                 </a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="{{ route('order.index') }}">
+                                <a href="{{ route('admin.order.index') }}">
                                     Quản lý đơn hàng
                                 </a>
                             </li>
@@ -43,12 +43,14 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-6">
-                                <p class="h3">Công ty</p>
+                                <p class="h3">Đơn vị cung cấp</p>
                                 <address>
-                                    Công ty cổ phần Litte Kids - CCI Group <br />
-                                    Số 5B Cộng hoà, Phường 2, Quận Tân Bình, Hồ Chí Minh, Việt Nam <br />
+                                    Công ty TNHH giải pháp phần mềm Việt Nam Tiên Phong
+                                    <br />
+                                    Tầng 12, toà nhà Etown5, số 364 Cộng Hoà, Phường 13, Quận Tân Bình, TP. Hồ Chí Minh
+                                    <br />
                                     Điện thoại: 0987654321 <br />
-                                    Email: cskh@littekids.vn
+                                    Email: contact@nextarea.vn
                                 </address>
                             </div>
                             <div class="col-6 text-end">
@@ -124,8 +126,8 @@
                         </table>
 
                         <div class="w-100 text-end">
-                            <a href="{{ route('order.invoice.print', $order->id) }}" class="btn btn-primary d-print-none"
-                                id="printBtn">
+                            <a href="{{ route('admin.order.invoice.print', $order->id) }}"
+                                class="btn btn-primary d-print-none" id="printBtn">
                                 <i class="ti ti-file-type-pdf fs-1 me-2"></i>
                                 In hoá đơn
                             </a>

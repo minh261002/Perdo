@@ -90,11 +90,12 @@
     <div class="page-body">
         <!-- Thông tin công ty -->
         <div class="company-info">
-            <h3>Công ty cổ phần Little Kids <br /> CCI Group</h3>
+            <h3> Công ty TNHH giải pháp phần mềm Việt Nam Tiên Phong </h3>
             <address>
-                Số 5B Cộng hòa, Phường 2, Quận Tân Bình, TP. Hồ Chí Minh, Việt Nam <br>
-                Điện thoại: 0987654321 <br>
-                Email: cskh@littekids.vn
+                Tầng 12, toà nhà Etown5, số 364 Cộng Hoà, Phường 13, Quận Tân Bình, TP. Hồ Chí Minh
+                <br />
+                Điện thoại: 0987654321 <br />
+                Email: contact@nextarea.vn
             </address>
         </div>
 
@@ -156,9 +157,9 @@
 
         <!-- Lời cảm ơn -->
         <div class="footer-text">
-            <p>Cảm ơn quý khách đã mua hàng tại Little Kids.</p>
+            <p>Cảm ơn quý khách đã mua hàng.</p>
             <p>Nếu có thắc mắc, vui lòng liên hệ qua số điện thoại hoặc email trên.</p>
-            <p>Website: <a href="https://littekids.vn">https://littekids.vn</a></p>
+            <p>Website: <a href="https://nextarea.vn">https://nextarea.vn</a></p>
         </div>
     </div>
 </body>

@@ -8,6 +8,8 @@ use App\Enums\Transaction\PaymentMethod;
 use App\Enums\Transaction\PaymentStatus;
 use App\Repositories\Order\OrderRepositoryInterface;
 use Illuminate\Http\Request;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class OrderController
 {
@@ -53,5 +55,38 @@ class OrderController
         ]);
 
         return redirect()->back()->with('success', 'Cập nhật trạng thái đơn hàng thành công');
+    }
+
+    public function invoice($id)
+    {
+        $order = $this->repository->findOrFail($id);
+        return view('admin.order.invoice', compact('order'));
+    }
+
+    public function printInvoice($id)
+    {
+        $order = $this->repository->findOrFail($id);
+
+        $options = new Options();
+        $options->set('defaultFont', 'DejaVu Sans');
+        $options->set('isHtml5ParserEnabled', true);
+
+        $dompdf = new Dompdf($options);
+        $data = [
+            'order' => $order,
+        ];
+        $html = view('admin.order.invoice_template', $data)->render();
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait'); // 80mm ~ 226.77 điểm
+        $dompdf->render();
+        $file = $dompdf->output();
+        $fileName = 'invoice_' . $order->order_code . '.pdf';
+
+        return response()->streamDownload(
+            fn() => print ($file),
+            $fileName,
+            ['Content-Type' => 'application/pdf']
+        )->send();
     }
 }

@@ -297,11 +297,13 @@ Route::prefix('admin')->as('admin.')->group(function () {
         Route::prefix('order')->as('order.')->group(function () {
             Route::middleware(['permission:viewOrder'])->group(function () {
                 Route::get('/', [OrderController::class, 'index'])->name('index');
+
+                Route::get('/invoice/{id}', [OrderController::class, 'invoice'])->name('invoice');
+                Route::get('/invoice/{id}/print', [OrderController::class, 'printInvoice'])->name('invoice.print');
             });
 
             Route::middleware(['permission:editOrder'])->group(function () {
                 Route::get('/edit/{id}', [OrderController::class, 'edit'])->name('edit');
-                Route::get('/invoice/{id}', [OrderController::class, 'invoice'])->name('invoice');
                 Route::put('/update', [OrderController::class, 'update'])->name('update');
             });
         });
