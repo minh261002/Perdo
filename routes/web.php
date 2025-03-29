@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
@@ -66,4 +67,8 @@ Route:: as('checkout.')->group(function () {
     Route::get('/vnpay/callback', [CheckoutController::class, 'vnpayCallback'])->name('vnpay.callback');
     Route::get('/momo/callback', [CheckoutController::class, 'momoCallback'])->name('momo.callback');
     Route::get('/payos/callback', [CheckoutController::class, 'payosCallback'])->name('payos.callback');
+});
+
+Route:: as('brand.')->group(function () {
+    Route::get('/thuong-hieu/{slug}', [BrandController::class, 'index'])->name('index');
 });

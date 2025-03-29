@@ -24,8 +24,8 @@
                                     {{ limit_text($product->name, 70) }} </a>
 
                                 @if ($product->sale_price && $product->sale_price > 0)
-                                    <div class="d-flex align-items-center gap-2">
-                                        <p class="text-left fs-2 fw-bold text-danger">
+                                    <div class="d-flex flex-wrap align-items-center gap-0 gap-md-3">
+                                        <p class="text-left fs-sm-3 fw-bold text-danger">
                                             {{ format_price($product->sale_price) }}
                                         </p>
                                         <p class="text-left fs-4 text-secondary">

@@ -1,8 +1,11 @@
 <div class="shop-banner shadow">
-    <img src="{{ $product->brand->logo }}" alt="Logo" class="rounded-circle bg-light logo-brand">
+    <a href="{{ route('brand.index', $product->brand->slug) }}"> <img src="{{ $product->brand->logo }}" alt="Logo"
+            class="rounded-circle bg-light logo-brand">
+    </a>
     <div class="shop-info">
         <h4>
-            <a href="" class="text-decoration-none text-primary fs-1">{{ $product->brand->name }}</a>
+            <a href="{{ route('brand.index', $product->brand->slug) }}"
+                class="text-decoration-none text-primary fs-1">{{ $product->brand->name }}</a>
         </h4>
         <span class="badge badge-custom">Chính Hãng</span>
     </div>
