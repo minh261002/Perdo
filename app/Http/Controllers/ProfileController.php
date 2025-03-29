@@ -77,4 +77,10 @@ class ProfileController extends Controller
         return view('client.profile.order', compact('orders'));
     }
 
+    public function discounts()
+    {
+        $user = Auth::guard('web')->user();
+        $discounts = $user->discounts()->paginate(6);
+        return view('client.profile.discount', compact('discounts'));
+    }
 }

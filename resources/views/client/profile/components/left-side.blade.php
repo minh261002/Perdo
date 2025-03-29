@@ -21,8 +21,8 @@
                 Thông báo
             </a>
 
-            <a href="{{ route('profile.orders') }}"
-                class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.orders']) }}">
+            <a href="{{ route('profile.discounts') }}"
+                class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.discounts']) }}">
                 Mã giảm giá
             </a>
 

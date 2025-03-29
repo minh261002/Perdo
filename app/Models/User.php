@@ -47,4 +47,9 @@ class User extends Authenticatable
             'role' => UserRole::class,
         ];
     }
+
+    public function discounts()
+    {
+        return $this->belongsToMany(Discount::class, 'discount_applications', 'user_id', 'discount_id');
+    }
 }
