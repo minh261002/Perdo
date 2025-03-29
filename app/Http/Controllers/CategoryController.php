@@ -21,70 +21,64 @@ class CategoryController extends Controller
         $category = $this->repository->getByQueryBuilder([
             'slug' => $slug,
         ], [
-            'products',
-            'brands',
+            'products' => function ($query) {
+                $query->where('status', ActiveStatus::Active->value);
+            },
+            'brands' => function ($query) {
+                $query->where('status', ActiveStatus::Active->value);
+            },
         ])->first();
 
-        $products = $category->products()->where('status', ActiveStatus::Active->value);
+        $products = $category->products()
+            ->when(request('q'), fn($query, $q) => $query->where('name', 'like', "%{$q}%"))
+            ->when(request('brand_id'), fn($query, $brandId) => $query->where('brand_id', $brandId))
+            ->when(request('min_price') && request('max_price'), function ($query) {
+                $query->where(function ($subQuery) {
+                    $subQuery->whereBetween('sale_price', [request('min_price'), request('max_price')])
+                        ->orWhere(function ($q) {
+                            $q->where('sale_price', 0)
+                                ->whereBetween('price', [request('min_price'), request('max_price')]);
+                        });
+                });
+            })
+            ->when(request('min_price') && !request('max_price'), function ($query) {
+                $query->where(function ($subQuery) {
+                    $subQuery->where('sale_price', '>=', request('min_price'))
+                        ->orWhere(function ($q) {
+                            $q->where('sale_price', 0)
+                                ->where('price', '>=', request('min_price'));
+                        });
+                });
+            })
+            ->when(request('max_price') && !request('min_price'), function ($query) {
+                $query->where(function ($subQuery) {
+                    $subQuery->where('sale_price', '<=', request('max_price'))
+                        ->orWhere(function ($q) {
+                            $q->where('sale_price', 0)
+                                ->where('price', '<=', request('max_price'));
+                        });
+                });
+            })
+            ->when(request('sort'), function ($query, $sort) {
+                switch ($sort) {
+                    case 'price_asc':
+                        $query->orderBy('sale_price', 'asc');
+                        break;
+                    case 'price_desc':
+                        $query->orderBy('sale_price', 'desc');
+                        break;
+                    case 'name_asc':
+                        $query->orderBy('name', 'asc');
+                        break;
+                    case 'name_desc':
+                        $query->orderBy('name', 'desc');
+                        break;
+                }
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(12);
 
-        $brands = $category->brands()->where('status', ActiveStatus::Active->value)->get();
-
-        if (request()->has('q')) {
-            $products->where('name', 'like', '%' . request()->get('q') . '%');
-        }
-
-        if (request()->has('min_price') && request()->has('max_price')) {
-            $products->where(function ($query) {
-                $query->whereBetween('sale_price', [request()->get('min_price'), request()->get('max_price')])
-                    ->orWhere(function ($query) {
-                        $query->where('sale_price', 0)
-                            ->whereBetween('price', [request()->get('min_price'), request()->get('max_price')]);
-                    });
-            });
-        } elseif (request()->has('min_price')) {
-            $products->where(function ($query) {
-                $query->where('sale_price', '>=', request()->get('min_price'))
-                    ->orWhere(function ($query) {
-                        $query->where('sale_price', 0)
-                            ->where('price', '>=', request()->get('min_price'));
-                    });
-            });
-        } elseif (request()->has('max_price')) {
-            $products->where(function ($query) {
-                $query->where('sale_price', '<=', request()->get('max_price'))
-                    ->orWhere(function ($query) {
-                        $query->where('sale_price', 0)
-                            ->where('price', '<=', request()->get('max_price'));
-                    });
-            });
-        }
-
-        if (request()->has('brand_id')) {
-            $products->whereHas('brand', function ($query) {
-                $query->where('brand_id', request()->get('brand_id'));
-            });
-        }
-
-        if (request()->has('sort')) {
-            switch (request()->get('sort')) {
-                case 'price_asc':
-                    $products->orderBy('sale_price', 'asc');
-                    break;
-                case 'price_desc':
-                    $products->orderBy('sale_price', 'desc');
-                    break;
-                case 'name_asc':
-                    $products->orderBy('name', 'asc');
-                    break;
-                case 'name_desc':
-                    $products->orderBy('name', 'desc');
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        $products = $products->paginate(12);
+        $brands = $category->brands;
 
         return view('client.category.index', [
             'category' => $category,
@@ -92,4 +86,5 @@ class CategoryController extends Controller
             'products' => $products,
         ]);
     }
+
 }
