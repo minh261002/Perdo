@@ -226,7 +226,7 @@
                         },
                         success: function(response) {
                             $('#search-results').removeClass('d-none');
-                            const products = response.data.data;
+                            const products = response.data;
 
                             let html = '';
                             if (products.length > 0) {
@@ -238,14 +238,15 @@
                                 products.forEach(function(product) {
                                     html += '<tr>';
                                     html +=
+                                        '<td class="text-center"><img src="' +
+                                        product.image +
+                                        '" alt="' + product.name +
+                                        '" class="img-fluid" width="50px"></td>';
+                                    html +=
                                         '<td><a href="/san-pham/' + product
                                         .slug +
                                         '" class="text-decoration-none">' +
                                         product.name + '</a></td>';
-
-                                    html += '<td>' +
-                                        format_price(product.price) +
-                                        '</td>';
                                     html += '</tr>';
                                 });
 

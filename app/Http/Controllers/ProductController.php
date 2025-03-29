@@ -42,15 +42,12 @@ class ProductController extends Controller
     {
         $query = $this->repository->getByQueryBuilder([
             'status' => ActiveStatus::Active->value,
-        ], [
-            'categories',
-            'brand'
         ]);
         $query = $query->when($request->has('q'), function ($query) use ($request) {
             $query->where('name', 'like', "%{$request->q}%");
         });
 
-        $products = $query->orderBy('created_at', 'desc')->paginate(12);
+        $products = $query->orderBy('created_at', 'desc')->get(['image', 'name', 'slug']);
 
         return response()->json([
             'status' => 'success',
