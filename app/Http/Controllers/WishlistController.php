@@ -8,4 +8,5 @@ use App\Models\Wishlist;
 
 class WishlistController extends Controller
 {
+
 }

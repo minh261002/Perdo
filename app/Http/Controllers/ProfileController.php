@@ -83,4 +83,17 @@ class ProfileController extends Controller
         $discounts = $user->discounts()->paginate(6);
         return view('client.profile.discount', compact('discounts'));
     }
+
+    public function orderDetail($order_code)
+    {
+        $order = $this->orderRepository->getByQueryBuilder([
+            'order_code' => $order_code,
+        ], [
+            'items',
+            'transaction',
+            'statuses'
+        ])->first();
+
+        return view('client.profile.order-detail', compact('order'));
+    }
 }

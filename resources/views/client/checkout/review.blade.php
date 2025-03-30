@@ -77,7 +77,8 @@
 
                 <div class="d-flex justify-content-end mt-4">
                     <a href="{{ route('home') }}" class="btn btn-primary">Trang chủ</a>
-                    <a href="" class="btn btn-success ms-2">Xem chi tiết đơn hàng</a>
+                    <a href="{{ route('profile.order.detail', $order->order_code) }}" class="btn btn-success ms-2">Xem chi
+                        tiết đơn hàng</a>
                 </div>
             </div>
         </div>
