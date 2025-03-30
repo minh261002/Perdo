@@ -60,7 +60,7 @@ return [
     ],
 
     TransportStatus::class => [
-        TransportStatus::Pending->value => 'Chưa lên đơn',
+        TransportStatus::Pending->value => 'Đã bàn giao vận chuyển, chờ xử lý',
         TransportStatus::Processing->value => 'Đã lên đơn',
         TransportStatus::DriverReceived->value => 'Tài xế đã nhận hàng',
         TransportStatus::Delivering->value => 'Tài xế đang giao hàng',

@@ -29,6 +29,6 @@ class TransportService implements TransportServiceInterface
             'status' => TransportStatus::Pending->value,
         ]);
 
-        return $transport;
+        return true;
     }
 }

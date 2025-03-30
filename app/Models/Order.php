@@ -34,5 +34,9 @@ class Order extends Model
         return $this->hasMany(OrderStatus::class, 'order_id'); // Quan hệ 1-n
     }
 
+    public function transport()
+    {
+        return $this->hasOne(Transport::class, 'order_id', 'id');
+    }
 
 }

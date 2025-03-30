@@ -29,8 +29,8 @@ class TransportController
 
     public function store(TransportRequest $request)
     {
-        $response = $this->service->store($request);
-        return redirect()->route('admin.transport.edit', $response->id)
+        $this->service->store($request);
+        return redirect()->back()
             ->with('success', 'Tạo đơn vận chuyển thành công');
     }
 
@@ -46,11 +46,17 @@ class TransportController
     {
         $data = $request->only([
             'id',
-            'payment_status'
+            'status'
         ]);
 
-        $transaction = $this->repository->findOrFail($data['id']);
-        $transaction->update($data);
+        $transport = $this->repository->findOrFail($data['id']);
+
+        $transport->statuses()->create([
+            'transport_id' => $data['id'],
+            'status' => $data['status'],
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
         return redirect()->back()->with('success', 'Cập nhật trạng thái vận chuyển thành công');
     }

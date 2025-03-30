@@ -97,11 +97,13 @@
                                     Thông tin giỏ hàng
                                 </h3>
                                 @if ($order->statuses && $order->statuses->last()->status->value != \App\Enums\Order\OrderStatus::Cancelled->value)
-                                    <a href="#" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#modal-delivery">
-                                        <i class="ti ti-truck-delivery fs-2 me-2"></i>
-                                        vận chuyển
-                                    </a>
+                                    @if (!$order->transport)
+                                        <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#modal-delivery">
+                                            <i class="ti ti-truck-delivery fs-2 me-2"></i>
+                                            vận chuyển
+                                        </a>
+                                    @endif
                                 @endif
                             </div>
 
@@ -260,14 +262,14 @@
                             </div>
 
                             <div class="card-body">
-                                @if ($order->delivery)
+                                @if ($order->transport)
 
                                     <div class="form-group mb-3">
                                         <label for="payment_method" class="form-label">Đơn vị vận chuyển</label>
                                         <select class="form-select" name="payment_method" id="payment_method" disabled>
                                             @foreach ($deliveryMethod as $key => $value)
                                                 <option value="{{ $key }}"
-                                                    {{ $key == $order->delivery->method ? 'selected' : '' }}>
+                                                    {{ $key == $order->transport->method ? 'selected' : '' }}>
                                                     {{ $value }}
                                                 </option>
                                             @endforeach
@@ -285,7 +287,7 @@
                                         </select>
                                     </div>
 
-                                    <a href="{{ route('delivery.edit', $order->transaction->id) }}">
+                                    <a href="{{ route('admin.transport.edit', $order->transport->id) }}">
                                         Xem thông tin chi tiết vận chuyển
                                     </a>
                                 @else

@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h3 class="card-title">
-                        Quản lý giao dịch
+                        Quản lý vận chuyển
                     </h3>
 
                     <nav aria-label="breadcrumb">
@@ -21,8 +21,8 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="{{ route('admin.transaction.index') }}">
-                                    Quản lý giao dịch
+                                <a href="{{ route('admin.transport.index') }}">
+                                    Quản lý vận chuyển
                                 </a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">
@@ -36,54 +36,61 @@
 
         <!-- Page body -->
         <div class="page-body">
-            <form action="{{ route('admin.transaction.update') }}" method="POST">
+            <form action="{{ route('admin.transport.update') }}" method="POST">
                 @csrf
                 @method('PUT')
 
-                <input type="hidden" name="id" value="{{ $transaction->id }}">
+                <input type="hidden" name="id" value="{{ $transport->id }}">
 
                 <div class="row">
                     <div class="col-md-9">
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    Thông tin giao dịch
+                                    Thông tin vận chuyển
                                 </h3>
                             </div>
 
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label for="transaction_code" class="form-label">
-                                            Mã giao dịch
+                                        <label for="transport_code" class="form-label">
+                                            Mã vận chuyển
                                         </label>
-                                        <input type="text" class="form-control" id="transaction_code"
-                                            name="transaction_code" value="{{ $transaction->transaction_code }}" readonly>
-                                    </div>
-
-                                    <div class="col-md-6 mb-3">
-                                        <label for="transaction_code" class="form-label">
-                                            Số tiền giao dịch
-                                        </label>
-                                        <input type="text" class="form-control" id="amount" name="amount"
-                                            value="{{ format_price($transaction->amount) }}" readonly>
-                                    </div>
-
-                                    <div class="col-md-6 mb-3">
-                                        <label for="user_id" class="form-label">
-                                            Người thanh toán
-                                        </label>
-                                        <input type="text" class="form-control" id="user_id" name="user_id"
-                                            value="{{ $transaction->user_id ? $transaction->user->name : $transaction->order->name }}"
-                                            readonly>
+                                        <input type="text" class="form-control" id="transport_code" name="transport_code"
+                                            value="{{ $transport->transport_code }}" readonly>
                                     </div>
 
                                     <div class="col-md-6 mb-3">
                                         <label for="order_id" class="form-label">
-                                            Thanh toán đơn hàng
+                                            Vận chuyển đơn hàng
                                         </label>
                                         <input type="text" class="form-control" id="order_id" name="order_id"
-                                            value="{{ $transaction->order->order_code }}" readonly>
+                                            value="{{ $transport->order->order_code }}" readonly>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="user" class="form-label">
+                                            Người nhận hàng
+                                        </label>
+                                        <input type="text" class="form-control" id="user" name="user"
+                                            value="{{ $transport->order->name }}" readonly>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label for="phone" class="form-label">
+                                            Số điện thoại
+                                        </label>
+                                        <input type="text" class="form-control" id="phone" name="phone"
+                                            value="{{ $transport->order->phone }}" readonly>
+                                    </div>
+
+                                    <div class="col-12 mb-3">
+                                        <label for="address" class="form-label">
+                                            Địa chỉ
+                                        </label>
+                                        <input type="text" class="form-control" id="address" name="address"
+                                            value="{{ $transport->order->address }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -101,12 +108,12 @@
                             <div class="card-body">
                                 <div class="form-group mb-3">
                                     <label for="payment_method" class="form-label">
-                                        Phương thức thanh toán
+                                        Đơn vị vận chuyển
                                     </label>
                                     <select class="form-select" id="payment_method" name="payment_method" disabled>
-                                        @foreach ($paymentMethods as $key => $value)
+                                        @foreach ($transportMethod as $key => $value)
                                             <option value="{{ $key }}"
-                                                {{ $transaction->payment_method->value == $key ? 'selected' : '' }}>
+                                                {{ $transport->method->value == $key ? 'selected' : '' }}>
                                                 {{ $value }}
                                             </option>
                                         @endforeach
@@ -114,14 +121,17 @@
                                 </div>
                                 <div class="form-group mb-3">
                                     <label for="payment_status" class="form-label">
-                                        Trạng thái thanh toán
+                                        Trạng thái vận chuyển
                                     </label>
-                                    <select class="form-select" id="payment_status" name="payment_status">
-                                        @foreach ($paymentStatuses as $key => $value)
-                                            <option value="{{ $key }}"
-                                                {{ $transaction->payment_status->value == $key ? 'selected' : '' }}>
-                                                {{ $value }}
-                                            </option>
+                                    <select name="status" class="form-select mb-3" id="order_status">
+                                        @foreach ($transportStatus as $key => $value)
+                                            @if (array_search($transport->statuses->last()->status->value, array_keys($transportStatus)) <=
+                                                    array_search($key, array_keys($transportStatus)))
+                                                <option value="{{ $key }}"
+                                                    {{ $transport->statuses->last()->status->value == $key ? 'selected' : '' }}>
+                                                    {{ $value }}
+                                                </option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -135,7 +145,7 @@
                             </div>
 
                             <div class="card-body d-flex align-items-center justify-content-between gap-4">
-                                <a href="{{ route('admin.transaction.index') }}" class="btn btn-secondary w-100">
+                                <a href="{{ route('admin.transport.index') }}" class="btn btn-secondary w-100">
                                     Quay lại
                                 </a>
 
