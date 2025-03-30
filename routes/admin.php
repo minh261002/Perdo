@@ -1,5 +1,8 @@
 <?php
 
+use App\Admin\Http\Controllers\Notification\NotificationController;
+use App\Admin\Http\Controllers\Transaction\TransactionController;
+use App\Admin\Http\Controllers\Transport\TransportController;
 use Illuminate\Support\Facades\Route;
 
 use App\Admin\Http\Controllers\Auth\AuthController;
@@ -297,6 +300,9 @@ Route::prefix('admin')->as('admin.')->group(function () {
         Route::prefix('order')->as('order.')->group(function () {
             Route::middleware(['permission:viewOrder'])->group(function () {
                 Route::get('/', [OrderController::class, 'index'])->name('index');
+
+                Route::get('/invoice/{id}', [OrderController::class, 'invoice'])->name('invoice');
+                Route::get('/invoice/{id}/print', [OrderController::class, 'printInvoice'])->name('invoice.print');
             });
 
             Route::middleware(['permission:editOrder'])->group(function () {
@@ -308,24 +314,28 @@ Route::prefix('admin')->as('admin.')->group(function () {
         // quản lý giao dịch
         Route::prefix('transaction')->as('transaction.')->group(function () {
             Route::middleware(['permission:viewTransaction'])->group(function () {
-                Route::get('/', [ProductController::class, 'index'])->name('index');
+                Route::get('/', [TransactionController::class, 'index'])->name('index');
             });
 
             Route::middleware(['permission:editTransaction'])->group(function () {
-                Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
-                Route::put('/update', [ProductController::class, 'update'])->name('update');
+                Route::get('/edit/{id}', [TransactionController::class, 'edit'])->name('edit');
+                Route::put('/update', [TransactionController::class, 'update'])->name('update');
             });
         });
 
         // quản lý vận chuyển
         Route::prefix('transport')->as('transport.')->group(function () {
             Route::middleware(['permission:viewTransport'])->group(function () {
-                Route::get('/', [ProductController::class, 'index'])->name('index');
+                Route::get('/', [TransportController::class, 'index'])->name('index');
+            });
+
+            Route::middleware(['permission:createTransport'])->group(function () {
+                Route::post('/store', [TransportController::class, 'store'])->name('store');
             });
 
             Route::middleware(['permission:editTransport'])->group(function () {
-                Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
-                Route::put('/update', [ProductController::class, 'update'])->name('update');
+                Route::get('/edit/{id}', [TransportController::class, 'edit'])->name('edit');
+                Route::put('/update', [TransportController::class, 'update'])->name('update');
             });
         });
 
@@ -348,6 +358,24 @@ Route::prefix('admin')->as('admin.')->group(function () {
 
             Route::middleware(['permission:deleteDiscount'])->group(function () {
                 Route::delete('/delete/{id}', [DiscountController::class, 'delete'])->name('delete');
+            });
+        });
+
+        Route::prefix('notification')->as('notification.')->group(function () {
+            Route::middleware(['permission:viewNotification'])->group(function () {
+                Route::get('/', [NotificationController::class, 'index'])->name('index');
+                Route::get('/get', [NotificationController::class, 'get'])->name('get');
+            });
+
+            Route::middleware(['permission:createNotification'])->group(function () {
+                Route::middleware(['permission:createNotification'])->group(function () {
+                    Route::get('/create', [NotificationController::class, 'create'])->name('create');
+                    Route::post('/store', [NotificationController::class, 'store'])->name('store');
+                });
+            });
+
+            Route::middleware(['permission:deleteNotification'])->group(function () {
+                Route::delete('/delete/{id}', [NotificationController::class, 'delete'])->name('delete');
             });
         });
 

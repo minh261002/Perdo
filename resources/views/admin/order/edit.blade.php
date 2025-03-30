@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Chỉnh sửa thông tin')
+@section('title', 'Đơn hàng ' . $order->order_code)
 
 @push('styles')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h3 class="card-title">
-                        Quản lý thương hiệu
+                        Quản lý đơn hàng
                     </h3>
 
                     <nav aria-label="breadcrumb">
@@ -22,8 +22,8 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item">
-                                <a href="{{ route('admin.brand.index') }}">
-                                    Quản lý thương hiệu
+                                <a href="{{ route('admin.order.index') }}">
+                                    Quản lý đơn hàng
                                 </a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">
@@ -37,41 +37,154 @@
 
         <!-- Page body -->
         <div class="page-body">
-            <form action="{{ route('admin.brand.update') }}" method="POST">
+            <form action="{{ route('admin.order.update') }}" method="POST">
                 @csrf
                 @method('PUT')
 
-                <input type="hidden" name="id" value="{{ $brand->id }}">
+                <input type="hidden" name="id" value="{{ $order->id }}">
 
                 <div class="row">
                     <div class="col-md-9">
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    Thông tin thương hiệu
+                                    Thông tin đơn hàng
                                 </h3>
                             </div>
 
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="form-group mb-3">
-                                        <label for="name" class="form-label">
-                                            Tên thương hiệu
-                                        </label>
-
-                                        <input type="text" class="form-control" name="name" id="name"
-                                            value="{{ $brand->name }}">
+                                    <div class="col-md-6 form-group mb-3">
+                                        <label for="order_code" class="form-label">Mã đơn hàng</label>
+                                        <input type="text" name="order_code" id="order_code" class="form-control"
+                                            value="{{ $order->order_code }}" readonly>
+                                    </div>
+                                    <div class="col-md-6 form-group mb-3">
+                                        <label for="name" class="form-label">Tên khách hàng</label>
+                                        <input type="text" name="name" id="name" class="form-control"
+                                            value="{{ $order->name }}" readonly>
                                     </div>
 
+                                    <div class="col-md-6 form-group mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="text" name="email" id="email" class="form-control"
+                                            value="{{ $order->email }}" readonly>
+                                    </div>
 
-                                    <div class="form-group">
-                                        <label for="description" class="form-label">
-                                            Mô tả
-                                        </label>
+                                    <div class="col-md-6 form-group mb-3">
+                                        <label for="phone" class="form-label">Số điện thoại</label>
+                                        <input type="text" name="phone" id="phone" class="form-control"
+                                            value="{{ $order->phone }}" readonly>
+                                    </div>
 
-                                        <textarea class="ck-editor" name="description" id="description">{{ $brand->description }}</textarea>
+                                    <div class="col-md-12 form-group mb-3">
+                                        <label for="address" class="form-label">Địa chỉ</label>
+                                        <input type="text" name="address" id="address" class="form-control"
+                                            value="{{ $order->address }}" readonly>
+                                    </div>
+
+                                    <div class="col-md-12 form-group mb-3">
+                                        <label for="note" class="form-label">Ghi chú</label>
+                                        <textarea name="note" id="note" class="form-control" rows="3" readonly>{{ $order->note }}</textarea>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div class="card mt-3">
+                            <div class="card-header d-flex align-items-center justify-content-between">
+                                <h3 class="card-title">
+                                    Thông tin giỏ hàng
+                                </h3>
+                                @if ($order->statuses && $order->statuses->last()->status->value != \App\Enums\Order\OrderStatus::Cancelled->value)
+                                    @if (!$order->transport)
+                                        <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#modal-delivery">
+                                            <i class="ti ti-truck-delivery fs-2 me-2"></i>
+                                            vận chuyển
+                                        </a>
+                                    @endif
+                                @endif
+                            </div>
+
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Sản phẩm</th>
+                                            <th class="text-center">Số lượng</th>
+                                            <th class="text-end">Giá</th>
+                                            <th class="text-end">Tạm tính</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($order->items as $item)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>
+                                                    <p class="strong mb-1">
+                                                        {{ $item->product->name }}
+                                                    </p>
+                                                    <div class="text-secondary">
+                                                        {{-- {{ $item->s }} --}}
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ $item->quantity }}
+                                                </td>
+                                                <td class="text-end">
+                                                    {{ format_price($item->price) }}
+                                                </td>
+                                                <td class="text-end">
+                                                    {{ format_price($item->quantity * $item->price) }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Mã giảm giá
+                                </h3>
+                            </div>
+
+                            <div class="card-body">
+                                @if ($order->discounts && $order->discounts->count() > 0)
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Mã giảm giá</th>
+                                                <th>Giảm giá</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @foreach ($order->discounts as $discount)
+                                                <tr>
+                                                    <td>{{ $discount->code }}
+                                                        {{ $discount->description ? ' - ' . $discount->description : '' }}
+                                                    </td>
+                                                    <td>
+                                                        @if ($discount->type->value == \App\Enums\Discount\DiscountType::Percentage->value)
+                                                            {{ $discount->percent_value }}%
+                                                        @else
+                                                            {{ format_price($discount->discount_value) }}
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                @else
+                                    <div class="alert alert-info">
+                                        Đơn hàng này không áp dụng mã giảm giá
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -85,91 +198,107 @@
                             </div>
 
                             <div class="card-body">
-                                <div class="form-group">
-                                    <select class="form-select" name="status" id="status">
-                                        @foreach ($status as $key => $value)
+                                <select name="status" class="form-select mb-3" id="order_status">
+                                    @foreach ($orderStatus as $key => $value)
+                                        @if (array_search($order->statuses->last()->status->value, array_keys($orderStatus)) <=
+                                                array_search($key, array_keys($orderStatus)))
                                             <option value="{{ $key }}"
-                                                {{ $brand->status == $key ? 'selected' : '' }}>
+                                                {{ $order->statuses->last()->status->value == $key ? 'selected' : '' }}>
+                                                {{ $value }}
+                                            </option>
+                                        @endif
+                                    @endforeach
+                                </select>
+
+                                <div class="form-group" id="cancel_reason" hidden>
+                                    <label class="form-label">Lý do huỷ đơn hàng</label>
+                                    <textarea class="form-control" name="cancel_reason" rows="3">{{ $order->cancel_reason }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    Thông tin thanh toán
+                                </h3>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="form-group mb-3">
+                                    <label for="payment_method" class="form-label">Phương thức thanh toán</label>
+                                    <select class="form-select" name="payment_method" id="payment_method" disabled>
+                                        @foreach ($paymentMethods as $key => $value)
+                                            <option value="{{ $key }}"
+                                                {{ $key == $order->transaction->payment_method->value ? 'selected' : '' }}>
                                                 {{ $value }}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
+                                <div class="form-group mb-3">
+                                    <label for="payment_method" class="form-label">Trạng thái thanh toán</label>
+                                    <select class="form-select" name="payment_method" id="payment_method" disabled>
+                                        @foreach ($paymentStatus as $key => $value)
+                                            <option value="{{ $key }}"
+                                                {{ $key == $order->transaction->payment_status->value ? 'selected' : '' }}>
+                                                {{ $value }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <a href="{{ route('admin.transaction.edit', $order->transaction->id) }}">
+                                    Xem thông tin chi tiết giao dịch
+                                </a>
                             </div>
                         </div>
 
-                        <div class="card mt-5">
-                            <div class="card-header d-flex flex-column align-items-start justify-content-between gap-4">
-                                <h2 class="card-title">Danh mục sản phẩm</h2>
-
-                                <input type="text" class="form-control" id="search_category"
-                                    placeholder="Tìm kiếm danh mục">
-                            </div>
-                            <div class="card-body">
-                                <div class="form-group" id="categories_result">
-                                </div>
-
-                                <div class="text-center mt-3">
-                                    <p id="loadMoreCategory" style="cursor:pointer">Xem thêm</p>
-                                    <p id="hideCategory" class="hidden" style="cursor:pointer">Ẩn bớt</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card mt-3">
+                        <div class="card mt-4">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    Tuỳ chọn
+                                    Thông tin vận chuyển
                                 </h3>
                             </div>
 
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="show_home" value="1"
-                                            {{ $brand->show_home ? 'checked' : '' }}>
-                                        <span class="form-check-label">Hiển thị trang chủ</span>
-                                    </label>
-                                </div>
+                                @if ($order->transport)
+
+                                    <div class="form-group mb-3">
+                                        <label for="payment_method" class="form-label">Đơn vị vận chuyển</label>
+                                        <select class="form-select" name="payment_method" id="payment_method" disabled>
+                                            @foreach ($deliveryMethod as $key => $value)
+                                                <option value="{{ $key }}"
+                                                    {{ $key == $order->transport->method ? 'selected' : '' }}>
+                                                    {{ $value }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="payment_method" class="form-label">Trạng thái vận chuyển</label>
+                                        <select class="form-select" name="payment_method" id="payment_method" disabled>
+                                            @foreach ($deliveryStatus as $key => $value)
+                                                <option value="{{ $key }}"
+                                                    {{ $key == $order->transaction->status ? 'selected' : '' }}>
+                                                    {{ $value }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <a href="{{ route('admin.transport.edit', $order->transport->id) }}">
+                                        Xem thông tin chi tiết vận chuyển
+                                    </a>
+                                @else
+                                    <div class="alert alert-info">
+                                        Đơn hàng chưa được bàn giao vận chuyển
+                                    </div>
+                                @endif
                             </div>
                         </div>
 
-                        <div class="row mt-3">
-                            <div class="col-md-6">
-                                <div class="card">
-                                    <div class="card-header d-flex align-items-center justify-content-between">
-                                        <h2 class="card-title">Logo</h2>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <span class="image img-cover image-target"><img class="w-100"
-                                                    src="{{ old('logo', $brand->logo) ? old('logo', $brand->logo) : asset('images/not-found.jpg') }}"
-                                                    alt=""></span>
-                                            <input type="hidden" name="logo" value="{{ old('logo', $brand->logo) }}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="card">
-                                    <div class="card-header d-flex align-items-center justify-content-between">
-                                        <h2 class="card-title">Banner</h2>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-group">
-                                            <span class="image img-cover image-target"><img class="w-100"
-                                                    src="{{ old('banner', $brand->banner) ? old('banner', $brand->banner) : asset('images/not-found.jpg') }}"
-                                                    alt=""></span>
-                                            <input type="hidden" name="banner"
-                                                value="{{ old('banner', $brand->banner) }}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card mt-3">
+                        <div class="card mt-4">
                             <div class="card-header">
                                 <h3 class="card-title">
                                     Thao tác
@@ -177,7 +306,7 @@
                             </div>
 
                             <div class="card-body d-flex align-items-center justify-content-between gap-4">
-                                <a href="{{ route('admin.brand.index') }}" class="btn btn-secondary w-100">
+                                <a href="{{ route('admin.order.index') }}" class="btn btn-secondary w-100">
                                     Quay lại
                                 </a>
 
@@ -191,134 +320,58 @@
             </form>
         </div>
     </div>
+
+    <form class="modal modal-blur fade" id="modal-delivery" tabindex="-1" role="dialog" aria-hidden="true"
+        method="POST" action="{{ route('admin.transport.store') }}">
+        @csrf
+
+        <input type="hidden" name="order_id" value="{{ $order->id }}">
+
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Vận chuyển đơn hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-12 mb-3">
+                        <label for="method" class="form-label">Chọn đơn vị vận chuyển</label>
+                        <select name="method" id="method" class="form-select">
+                            @foreach ($deliveryMethod as $key => $value)
+                                <option value="{{ $key }}">{{ $value }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" id="create-delivery">Bàn giao vận chuyển</button>
+                </div>
+            </div>
+        </div>
+    </form>
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('js/finder.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $('.select2').select2({
             theme: 'bootstrap-5'
         });
-    </script>
-    <script>
-        $(document).ready(function() {
-            let offset = 0;
-            let totalCategories = 0;
-            const limit = 10;
-            let keyword = '';
 
-            let list_categories = {{ json_encode($brand->categories->pluck('id')) }};
+        let cancelStatus = {{ $order->statuses->last()->status->value == 'cancelled' ? 'true' : 'false' }};
 
-            function getCategories(hidePrevious = false) {
-                let url = "{{ route('admin.category.get') }}";
-                $.ajax({
-                    url: url,
-                    type: 'GET',
-                    data: {
-                        offset: offset,
-                        search: keyword
-                    },
-                    beforeSend: function() {
-                        $('#categories_result').append(
-                            '<div class="d-flex align-items-center justify-content-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>'
-                        );
-                    },
-                    success: function(response) {
-                        let categories = response.categories;
-                        totalCategories = response.total;
-                        let html = '';
+        if (cancelStatus) {
+            $('#cancel_reason').removeAttr('hidden');
+        }
 
-                        categories.forEach(category => {
-                            html += `
-                                <div class="form-check" style="margin-left: ${category.depth * 20}px;">
-                                    <input class="form-check-input"
-                                        type="checkbox" value="${category.id}"
-                                        name="category_id[]"
-                                        data-lft="${category._lft}"
-                                        data-rgt="${category._rgt}"
-                                        id="category_id-${category.id}"
-                                        ${list_categories.includes(category.id) ? 'checked' : ''}
-                                        >
-                                    <label class="form-check-label" for="category_id-${category.id}">
-                                        ${category.name}
-                                    </label>
-                                </div>
-                            `;
+        $('#order_status').change(function() {
+            let status = $(this).val();
 
-                        });
-
-                        if (hidePrevious) {
-                            $('#categories_result').html(html);
-                        } else {
-                            $('#categories_result').append(html);
-                        }
-
-                        if (offset + categories.length >= totalCategories) {
-                            $('#loadMoreCategory').hide();
-                        } else {
-                            $('#loadMoreCategory').show();
-                        }
-
-                        if (offset > 0) {
-                            $('#hideCategory').show();
-                        } else {
-                            $('#hideCategory').hide();
-                        }
-                    },
-                    complete: function() {
-                        $('#categories_result').find('.spinner-border').remove();
-                    }
-                });
-            }
-
-            $('#loadMoreCategory').click(function() {
-                offset += limit;
-                getCategories();
-            });
-
-            $('#hideCategory').click(function() {
-                offset = 0;
-                getCategories(true);
-            });
-
-            $('#search_category').on('input', function() {
-                clearTimeout($.data(this, 'timer'));
-                let search = $(this).val();
-                $(this).data('timer', setTimeout(function() {
-                    keyword = search;
-                    offset = 0;
-                    getCategories(true);
-                }, 500));
-            });
-
-            getCategories();
-        })
-
-        $(document).on('change', 'input[type="checkbox"]', function() {
-            let lft = $(this).data('lft');
-            let rgt = $(this).data('rgt');
-            let checked = $(this).prop('checked');
-
-            if (checked) {
-                $('input[type="checkbox"]').each(function() {
-                    let parentLft = $(this).data('lft');
-                    let parentRgt = $(this).data('rgt');
-
-                    if (parentLft < lft && parentRgt > rgt) {
-                        $(this).prop('checked', true);
-                    }
-                });
+            if (status == 'cancelled') {
+                $('#cancel_reason').removeAttr('hidden');
             } else {
-                $('input[type="checkbox"]').each(function() {
-                    let parentLft = $(this).data('lft');
-                    let parentRgt = $(this).data('rgt');
-
-                    if (parentLft < lft && parentRgt > rgt) {
-                        $(this).prop('checked', false);
-                    }
-                });
+                $('#cancel_reason').attr('hidden', true);
             }
-        });
+        })
     </script>
 @endpush

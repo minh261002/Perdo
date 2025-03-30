@@ -19,4 +19,14 @@ class Transaction extends Model
         'payment_method' => PaymentMethod::class,
         'payment_status' => PaymentStatus::class
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

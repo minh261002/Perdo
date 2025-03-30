@@ -1,7 +1,27 @@
 <?php
 
 return [
-
+    [
+        'active' => ['admin.notification.*'],
+        'show' => ['admin.notification.*'],
+        'title' => 'Thông báo',
+        'icon' => 'ti ti-bell fs-2',
+        'permission' => ['viewNotification', 'createNotification', 'deleteNotification'],
+        'children' => [
+            [
+                'title' => 'Gửi thông báo',
+                'route' => 'admin.notification.create',
+                'icon' => 'ti ti-plus fs-3 me-2',
+                'permission' => 'createNotification'
+            ],
+            [
+                'title' => 'Danh sách',
+                'route' => 'admin.notification.index',
+                'icon' => 'ti ti-list fs-3 me-2',
+                'permission' => 'viewNotification'
+            ]
+        ]
+    ],
     [
         'active' => ['admin.category.*'],
         'show' => ['admin.category.*'],
@@ -85,13 +105,13 @@ return [
         'show' => ['admin.transaction.*'],
         'title' => 'Giao dịch',
         'icon' => 'ti ti-credit-card fs-2',
-        'permission' => ['viewOrder', 'editOrder',],
+        'permission' => ['viewTransaction', 'editTransaction',],
         'children' => [
             [
                 'title' => 'Danh sách',
-                'route' => 'admin.order.index',
+                'route' => 'admin.transaction.index',
                 'icon' => 'ti ti-list fs-3 me-2',
-                'permission' => 'viewOrder'
+                'permission' => 'viewTransaction'
             ]
         ]
     ],

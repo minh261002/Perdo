@@ -91,10 +91,20 @@
 
     <div class="row mt-2">
         <div class="col-md-6 mb-3">
-            <button class="btn btn-danger w-100">
-                <i class="ti ti-heart me-2 fs-1"></i>
-                <span class="fs-3">Yêu thích</span>
-            </button>
+
+            @if (auth()->guard('web')->user() && auth()->guard('web')->user()->wishlists->contains($product->id))
+                <button class="btn btn-danger w-100" id="removeWishlist">
+                    <i class="ti ti-heart me-2 fs-1"></i>
+                    <span class="fs-3">Đã thích</span>
+                </button>
+            @else
+                <button class="btn btn-outline-danger w-100" id="addWishlist">
+                    <i class="ti ti-heart me-2 fs-1"></i>
+                    <span class="fs-3">
+                        Thêm vào danh sách yêu thích
+                    </span>
+                </button>
+            @endif
         </div>
 
         <div class="col-md-6 mb-3">
@@ -139,6 +149,8 @@
                     $('#toggleBtn').text('Thu gọn');
                 }
             });
+
+
         });
     </script>
 @endpush
