@@ -129,9 +129,6 @@ class NotificationService implements NotificationServiceInterface
             $isAdmin ? 'admin' : 'user',
         );
 
-        //ghi log body
-        \Log::info(json_encode($body));
-
         Event::dispatch($event);
     }
 

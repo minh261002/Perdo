@@ -1,5 +1,5 @@
 @extends('admin.layouts.master')
-@section('title', 'Quản trị viên')
+@section('title', 'Quản lý thông báo')
 
 @push('styles')
 @endpush
@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between">
                     <h3 class="card-title">
-                        Quản trị viên
+                        Quản lý thông báo
                     </h3>
 
                     <nav aria-label="breadcrumb">
@@ -22,7 +22,7 @@
                                 </a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">
-                                Quản trị viên
+                                Quản lý thông báo
                             </li>
                         </ol>
                     </nav>
@@ -36,10 +36,10 @@
                 <div>
                     <div class="card-header">
                         <h3 class="card-title">
-                            Danh sách quản trị viên
+                            Danh sách thông báo
                         </h3>
                         <div class="card-actions">
-                            <a href="{{ route('admin.admin.create') }}" class="btn btn-primary">
+                            <a href="{{ route('admin.notification.create') }}" class="btn btn-primary">
                                 <i class="ti ti-plus fs-4 me-1"></i>
                                 Thêm mới
                             </a>
@@ -59,9 +59,8 @@
     </div>
 @endsection
 
-
 @push('libs-js')
-    <script src="{{ asset('/js/buttons.server-side.js') }}"></script>
+    <script src="{{ asset('js/buttons.server-side.js') }}"></script>
 @endpush
 
 @push('scripts')

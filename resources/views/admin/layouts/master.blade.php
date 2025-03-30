@@ -66,7 +66,7 @@
         </div>
     </div>
 
-    {{-- @include('admin.layouts.partials.pusher') --}}
+    @include('admin.layouts.partials.pusher')
 
     <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
@@ -117,48 +117,50 @@
         });
     </script>
 
-    {{-- <script>
+    <script>
         $(document).ready(function() {
             function fetchNotification() {
                 $.ajax({
-                    url: "{{ route('admin.notification.my') }}",
+                    url: "{{ route('admin.notification.get') }}",
                     type: 'GET',
                     success: function(response) {
-                        $('#notify-count').text(response.notifications.length);
 
-                        const notifications = Object.values(response.notifications);
+                        const notificationsArr = response.data;
+                        $('#notify-count').text(notificationsArr.length);
+
+                        const notifications = Object.values(notificationsArr);
                         if (notifications.length > 0) {
                             notifications.forEach(element => {
                                 $('#notification-list').append(`
-                               <div class="list-group-item">
-                                    <div class="row align-items-center">
+                       <div class="list-group-item">
+                            <div class="row align-items-center">
 
-                                        ${element.is_read ==1 ? '<div class="col-auto"><span class="status-dot status-dot-animated bg-red d-block"></span></div>' : '<div class="col-auto"><span class="status-dot status-dot-animated bg-green d-block"></span></div>'}
+                                ${element.is_read ? '<div class="col-auto"><span class="status-dot status-dot-animated bg-red d-block"></span></div>' : '<div class="col-auto"><span class="status-dot status-dot-animated bg-green d-block"></span></div>'}
 
-                                        <div class="col text-truncate">
-                                            <a href="#" class="text-body d-block">
-                                                ${element.title}
-                                            </a>
-                                            <div class="d-block text-secondary text-truncate mt-n1">
-                                                ${element.content.substring(0, 100)}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            `);
-                            });
-                        } else {
-                            $('.list-group').append(`
-                            <div class="list-group-item" id="empty-notification">
-                                <div class="row align-items-center">
-                                    <div class="col text-truncate">
-                                        <a href="#" class="text-body d-block">
-                                            Không có thông báo mới
-                                        </a>
+                                <div class="col text-truncate">
+                                    <a href="#" class="text-body d-block">
+                                        ${element.title}
+                                    </a>
+                                    <div class="d-block text-secondary text-truncate mt-n1">
+                                        ${element.content.substring(0, 100)}
                                     </div>
                                 </div>
                             </div>
-                        `);
+                        </div>
+                    `);
+                            });
+                        } else {
+                            $('.list-group').append(`
+                    <div class="list-group-item" id="empty-notification">
+                        <div class="row align-items-center">
+                            <div class="col text-truncate">
+                                <a href="#" class="text-body d-block">
+                                    Không có thông báo mới
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `);
                         }
                     }
                 });
@@ -166,7 +168,8 @@
 
             fetchNotification();
         })
-    </script> --}}
+    </script>
+
 
     @if (session('success'))
         <script>

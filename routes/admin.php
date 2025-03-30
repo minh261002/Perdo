@@ -1,5 +1,6 @@
 <?php
 
+use App\Admin\Http\Controllers\Notification\NotificationController;
 use App\Admin\Http\Controllers\Transaction\TransactionController;
 use Illuminate\Support\Facades\Route;
 
@@ -352,6 +353,24 @@ Route::prefix('admin')->as('admin.')->group(function () {
 
             Route::middleware(['permission:deleteDiscount'])->group(function () {
                 Route::delete('/delete/{id}', [DiscountController::class, 'delete'])->name('delete');
+            });
+        });
+
+        Route::prefix('notification')->as('notification.')->group(function () {
+            Route::middleware(['permission:viewNotification'])->group(function () {
+                Route::get('/', [NotificationController::class, 'index'])->name('index');
+                Route::get('/get', [NotificationController::class, 'get'])->name('get');
+            });
+
+            Route::middleware(['permission:createNotification'])->group(function () {
+                Route::middleware(['permission:createNotification'])->group(function () {
+                    Route::get('/create', [NotificationController::class, 'create'])->name('create');
+                    Route::post('/store', [NotificationController::class, 'store'])->name('store');
+                });
+            });
+
+            Route::middleware(['permission:deleteNotification'])->group(function () {
+                Route::delete('/delete/{id}', [NotificationController::class, 'delete'])->name('delete');
             });
         });
 

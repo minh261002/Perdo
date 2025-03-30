@@ -34,10 +34,15 @@ class NotificationEvent implements ShouldBroadcast
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn(): Channel
+    public function broadcastOn(): array
     {
-        return new Channel($this->type === 'admin' ? "App.Models.Admin.{$this->id}" : "App.Models.User.{$this->id}");
+        return [
+            $this->type === 'admin'
+            ? new PrivateChannel("App.Models.Admin.{$this->id}")
+            : new PrivateChannel("App.Models.User.{$this->id}")
+        ];
     }
+
 
     /**
      * Get the data to broadcast.

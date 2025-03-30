@@ -20,6 +20,7 @@ class ServiceServiceProvider extends ServiceProvider
         'App\Admin\Services\Brand\BrandServiceInterface' => 'App\Admin\Services\Brand\BrandService',
         'App\Admin\Services\Product\ProductServiceInterface' => 'App\Admin\Services\Product\ProductService',
         'App\Admin\Services\Discount\DiscountServiceInterface' => 'App\Admin\Services\Discount\DiscountService',
+        'App\Admin\Services\Notification\NotificationServiceInterface' => 'App\Admin\Services\Notification\NotificationService',
         //
         'App\Services\Order\OrderServiceInterface' => 'App\Services\Order\OrderService',
         'App\Services\Profile\ProfileServiceInterface' => 'App\Services\Profile\ProfileService',

@@ -24,6 +24,7 @@ class ServiceRepositoryProvider extends ServiceProvider
         'App\Repositories\Order\OrderRepositoryInterface' => 'App\Repositories\Order\OrderRepository',
         'App\Repositories\Transaction\TransactionRepositoryInterface' => 'App\Repositories\Transaction\TransactionRepository',
         'App\Repositories\Order\OrderItemRepositoryInterface' => 'App\Repositories\Order\OrderItemRepository',
+        'App\Repositories\Notification\NotificationRepositoryInterface' => 'App\Repositories\Notification\NotificationRepository',
     ];
     /**
      * Register services.
