@@ -1,4 +1,6 @@
-<span @class([
-    'badge',
-    App\Enums\Transaction\PaymentStatus::from($payment_status)->badge(),
-])>{{ \App\Enums\Transaction\PaymentStatus::getDescription($payment_status) }}</span>
+<span
+    @class([
+        'badge',
+        App\Enums\Transport\TransportStatus::from(
+            $model->statuses->last()->status->value)->badge(),
+    ])>{{ \App\Enums\Transport\TransportStatus::getDescription($model->statuses->last()->status->value) }}</span>
