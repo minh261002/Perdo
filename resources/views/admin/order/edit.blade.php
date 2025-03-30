@@ -100,7 +100,7 @@
                                     <a href="#" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#modal-delivery">
                                         <i class="ti ti-truck-delivery fs-2 me-2"></i>
-                                        Vận chuyển
+                                        vận chuyển
                                     </a>
                                 @endif
                             </div>
@@ -267,7 +267,7 @@
                                         <select class="form-select" name="payment_method" id="payment_method" disabled>
                                             @foreach ($deliveryMethod as $key => $value)
                                                 <option value="{{ $key }}"
-                                                    {{ $key == $order->delivery->delivery_method ? 'selected' : '' }}>
+                                                    {{ $key == $order->delivery->method ? 'selected' : '' }}>
                                                     {{ $value }}
                                                 </option>
                                             @endforeach
@@ -319,7 +319,12 @@
         </div>
     </div>
 
-    <div class="modal modal-blur fade" id="modal-delivery" tabindex="-1" role="dialog" aria-hidden="true">
+    <form class="modal modal-blur fade" id="modal-delivery" tabindex="-1" role="dialog" aria-hidden="true"
+        method="POST" action="{{ route('admin.transport.store') }}">
+        @csrf
+
+        <input type="hidden" name="order_id" value="{{ $order->id }}">
+
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -327,11 +332,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="hidden" name="order_id" value="{{ $order->id }}">
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="col-12 mb-3">
-                        <label for="delivery_method" class="form-label">Chọn đơn vị vận chuyển</label>
-                        <select name="delivery_method" id="delivery_method" class="form-select">
+                        <label for="method" class="form-label">Chọn đơn vị vận chuyển</label>
+                        <select name="method" id="method" class="form-select">
                             @foreach ($deliveryMethod as $key => $value)
                                 <option value="{{ $key }}">{{ $value }}</option>
                             @endforeach
@@ -339,11 +342,11 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="create-delivery">Vận chuyển</button>
+                    <button type="submit" class="btn btn-primary" id="create-delivery">Bàn giao vận chuyển</button>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 @endsection
 
 @push('scripts')
@@ -367,35 +370,6 @@
             } else {
                 $('#cancel_reason').attr('hidden', true);
             }
-        })
-
-        $(document).ready(function() {
-            $('#create-delivery').on('click', function() {
-                let order_id = $('input[name="order_id"]').val();
-                let delivery_method = $('#delivery_method').val();
-                let warehouse_id = $('#warehouse_id').val();
-                let _token = $('input[name="_token"]').val();
-
-                $.ajax({
-                    url: "",
-                    type: 'POST',
-                    beforeSend: function() {
-                        $('#create-delivery').attr('disabled', true);
-                        $('#create-delivery').html(
-                            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Đang xử lý...'
-                        );
-                    },
-                    data: {
-                        _token: _token,
-                        order_id: order_id,
-                        delivery_method: delivery_method,
-                        warehouse_id: warehouse_id
-                    },
-                    success: function(response) {
-                        window.location.reload();
-                    }
-                })
-            })
         })
     </script>
 @endpush

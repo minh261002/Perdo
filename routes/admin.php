@@ -2,6 +2,7 @@
 
 use App\Admin\Http\Controllers\Notification\NotificationController;
 use App\Admin\Http\Controllers\Transaction\TransactionController;
+use App\Admin\Http\Controllers\Transport\TransportController;
 use Illuminate\Support\Facades\Route;
 
 use App\Admin\Http\Controllers\Auth\AuthController;
@@ -325,12 +326,16 @@ Route::prefix('admin')->as('admin.')->group(function () {
         // quản lý vận chuyển
         Route::prefix('transport')->as('transport.')->group(function () {
             Route::middleware(['permission:viewTransport'])->group(function () {
-                Route::get('/', [ProductController::class, 'index'])->name('index');
+                Route::get('/', [TransportController::class, 'index'])->name('index');
+            });
+
+            Route::middleware(['permission:createTransport'])->group(function () {
+                Route::post('/store', [TransportController::class, 'store'])->name('store');
             });
 
             Route::middleware(['permission:editTransport'])->group(function () {
-                Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('edit');
-                Route::put('/update', [ProductController::class, 'update'])->name('update');
+                Route::get('/edit/{id}', [TransportController::class, 'edit'])->name('edit');
+                Route::put('/update', [TransportController::class, 'update'])->name('update');
             });
         });
 

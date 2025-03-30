@@ -1,6 +1,50 @@
 <?php
 
 return [
+    'transports' => [
+        'transport_code' => [
+            'title' => 'Mã vận chuyển',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'order_id' => [
+            'title' => 'Đơn hàng',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'method' => [
+            'title' => 'Đơn vị vận chuyển',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'user' => [
+            'title' => 'Người nhận',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'status' => [
+            'title' => 'Trạng thái',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+        'created_at' => [
+            'title' => 'Ngày tạo',
+            'orderable' => true,
+            'exportable' => true,
+            'printable' => true,
+            'addClass' => 'text-center align-middle',
+        ],
+    ],
     'notifications' => [
         'admin_id' => [
             'title' => 'Admin nhận',

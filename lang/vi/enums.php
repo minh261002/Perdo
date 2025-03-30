@@ -6,6 +6,8 @@ use App\Enums\Discount\DiscountType;
 use App\Enums\Module\ModuleStatus;
 use App\Enums\Transaction\PaymentMethod;
 use App\Enums\Transaction\PaymentStatus;
+use App\Enums\Transport\TransportMethod;
+use App\Enums\Transport\TransportStatus;
 use App\Enums\User\UserLoginType;
 use App\Enums\User\UserRole;
 use App\Enums\Order\OrderStatus;
@@ -53,4 +55,18 @@ return [
         OrderStatus::Completed->value => 'Hoàn thành',
         OrderStatus::Cancelled->value => 'Đã hủy',
     ],
+    TransportMethod::class => [
+        TransportMethod::GHTK->value => 'Giao hàng tiết kiệm',
+    ],
+
+    TransportStatus::class => [
+        TransportStatus::Pending->value => 'Chưa lên đơn',
+        TransportStatus::Processing->value => 'Đã lên đơn',
+        TransportStatus::DriverReceived->value => 'Tài xế đã nhận hàng',
+        TransportStatus::Delivering->value => 'Tài xế đang giao hàng',
+        TransportStatus::Delivered->value => 'Giao hàng thành công, chưa đối soát',
+        TransportStatus::Completed->value => 'Giao hàng thành công, đã đối soát',
+        TransportStatus::Failed->value => 'Giao hàng thất bại',
+        TransportStatus::Cancelled->value => 'Đã hủy',
+    ]
 ];

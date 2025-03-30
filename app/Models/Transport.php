@@ -17,4 +17,14 @@ class Transport extends Model
     protected $casts = [
         'method' => TransportMethod::class
     ];
+
+    public function statuses()
+    {
+        return $this->hasMany(TransportStatus::class, 'transport_id', 'id');
+    }
+
+    public function order()
+    {
+        return $this->hasOne(Order::class, 'id', 'order_id');
+    }
 }
