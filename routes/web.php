@@ -58,9 +58,12 @@ Route::middleware('user.auth')->group(function () {
         Route::delete('/delete', [WishlistController::class, 'delete'])->name('delete');
     });
 
-    Route:: as('notification.')->group(function () {
+    Route::prefix('notification')->as('notification.')->group(function () {
         Route::get('/get', [NotificationController::class, 'get'])->name('get');
         Route::get('/read-all', [NotificationController::class, 'readAll'])->name('read.all');
+        Route::delete('/delete/{id}', [NotificationController::class, 'delete'])->name('delete');
+        Route::delete('/delete-all', [NotificationController::class, 'deleteAll'])->name('delete.all');
+        Route::get('/read/{id}', [NotificationController::class, 'read'])->name('read');
     });
 });
 

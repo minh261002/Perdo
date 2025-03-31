@@ -104,4 +104,12 @@ class ProfileController extends Controller
 
         return view('client.profile.wishlist', compact('wishlists'));
     }
+
+    public function notifications()
+    {
+        $user = Auth::guard('web')->user();
+        $notifications = $user->notifications()->orderBy('created_at', 'desc')->paginate(5);
+
+        return view('client.profile.notification', compact('notifications'));
+    }
 }

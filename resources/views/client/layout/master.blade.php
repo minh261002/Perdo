@@ -194,7 +194,8 @@
                     url: "{{ route('notification.get') }}",
                     type: 'GET',
                     success: function(response) {
-                        const notificationsArr = response.data.data;
+                        const notificationsArr = response.data;
+
                         $('#notify-count').text(notificationsArr.length);
 
                         const notifications = Object.values(notificationsArr);
@@ -218,18 +219,7 @@
                                 </div>
                             `);
                             });
-                        } else {
-                            $('.list-group').append(`
-                            <div class="list-group-item" id="empty-notification">
-                                <div class="row align-items-center">
-                                    <div class="col text-truncate">
-                                        <a href="#" class="text-body d-block">
-                                            Không có thông báo mới
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        `);
+
                         }
                     }
                 });
