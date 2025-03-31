@@ -48,10 +48,12 @@ Route::middleware('user.auth')->group(function () {
         Route::get('/don-hang/{order_code}/huy', [ProfileController::class, 'cancelOrder'])->name('order.cancel');
 
         Route::get('/ma-giam-gia', [ProfileController::class, 'discounts'])->name('discounts');
+        Route::get('/yeu-thich', [ProfileController::class, 'wishlists'])->name('wishlists');
     });
 
     Route:: as('wishlist.')->group(function () {
-        Route::post('/store', WishlistController::class)->name('store');
+        Route::post('/store', [WishlistController::class, 'store'])->name('store');
+        Route::delete('/delete', [WishlistController::class, 'delete'])->name('delete');
     });
 });
 

@@ -93,12 +93,12 @@
         <div class="col-md-6 mb-3">
 
             @if (auth()->guard('web')->user() && auth()->guard('web')->user()->wishlists->contains($product->id))
-                <button class="btn btn-danger w-100" id="removeWishlist">
+                <button class="btn btn-danger w-100 removeWishlist" data-product-id="{{ $product->id }}">
                     <i class="ti ti-heart me-2 fs-1"></i>
                     <span class="fs-3">Đã thích</span>
                 </button>
             @else
-                <button class="btn btn-outline-danger w-100" id="addWishlist">
+                <button class="btn btn-outline-danger w-100 addToWishlist" data-product-id="{{ $product->id }}">
                     <i class="ti ti-heart me-2 fs-1"></i>
                     <span class="fs-3">
                         Thêm vào danh sách yêu thích
@@ -150,6 +150,85 @@
                 }
             });
 
+            $(document).on('click', '.addToWishlist', function(e) {
+                e.preventDefault();
+                let productId = $(this).data('product-id');
+                let button = $(this);
+
+                button.prop('disabled', true).html(
+                    '<span class="spinner-border spinner-border-md" role="status"></span> '
+                );
+
+                $.ajax({
+                    url: "{{ route('wishlist.store') }}",
+                    method: 'POST',
+                    data: {
+                        product_id: productId,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        if (response.status == 'success') {
+                            FuiToast.success(response.message);
+                            button.replaceWith(`
+                    <button class="btn btn-danger w-100 removeWishlist" data-product-id="${productId}">
+                        <i class="ti ti-heart me-2 fs-1"></i>
+                        <span class="fs-3">Đã thích</span>
+                    </button>
+                `);
+                        } else {
+                            FuiToast.error(response.message);
+                        }
+                    },
+                    error: function(err) {
+                        FuiToast.error(err.responseJSON.message);
+                    },
+                    complete: function() {
+                        button.prop('disabled', false).html(
+                            '<i class="ti ti-heart me-2 fs-1"></i><span class="fs-3">Thêm vào danh sách yêu thích</span>'
+                        );
+                    }
+                });
+            });
+
+            $(document).on('click', '.removeWishlist', function(e) {
+                e.preventDefault();
+                let productId = $(this).data('product-id');
+                let button = $(this);
+
+                button.prop('disabled', true).html(
+                    '<span class="spinner-border spinner-border-md" role="status"></span> '
+                );
+
+                $.ajax({
+                    url: "{{ route('wishlist.delete') }}",
+                    method: 'DELETE',
+                    data: {
+                        product_id: productId,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        if (response.status == 'success') {
+                            FuiToast.success(response.message);
+                            button.replaceWith(`
+                    <button class="btn btn-outline-danger w-100 addToWishlist" data-product-id="${productId}">
+                        <i class="ti ti-heart me-2 fs-1"></i>
+                        <span class="fs-3">Thêm vào danh sách yêu thích</span>
+                    </button>
+                `);
+                        } else {
+                            FuiToast.error(response.message);
+                        }
+                    },
+                    error: function(err) {
+                        FuiToast.error(err.responseJSON.message);
+                    },
+                    complete: function() {
+                        button.prop('disabled', false).html(
+                            '<i class="ti ti-heart me-2 fs-1"></i><span class="fs-3">Đã thích</span>'
+                        );
+                    }
+                });
+            });
 
         });
     </script>

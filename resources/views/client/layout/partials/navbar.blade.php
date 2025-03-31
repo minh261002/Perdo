@@ -111,7 +111,7 @@
                         <a href="{{ route('profile.change.password.form') }}" class="dropdown-item">Đổi mật
                             khẩu</a>
                         <a href="{{ route('profile.orders') }}" class="dropdown-item">Đơn hàng</a>
-                        {{-- <a href="{{ route('wishlist.index') }}" class="dropdown-item">Yêu thích</a> --}}
+                        <a href="{{ route('profile.discounts') }}" class="dropdown-item">Mã giảm gía</a>
 
                         <div class="dropdown-divider m-0"></div>
                         <form action="{{ route('logout') }}" method="POST">

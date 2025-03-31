@@ -96,4 +96,11 @@ class ProfileController extends Controller
 
         return view('client.profile.order-detail', compact('order'));
     }
+
+    public function wishlists()
+    {
+        $user = Auth::guard('web')->user();
+        $wishlists = $user->wishlists()->paginate(6);
+        return view('client.profile.wishlist', compact('wishlists'));
+    }
 }
