@@ -187,15 +187,14 @@
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/gh/lelinh014756/fui-toast-js@master/assets/js/toast@1.0.1/fuiToast.min.js"></script>
 
-    {{-- <script>
+    <script>
         $(document).ready(function() {
             function fetchNotification() {
                 $.ajax({
                     url: "{{ route('notification.get') }}",
                     type: 'GET',
                     success: function(response) {
-
-                        const notificationsArr = response.data;
+                        const notificationsArr = response.data.data;
                         $('#notify-count').text(notificationsArr.length);
 
                         const notifications = Object.values(notificationsArr);
@@ -238,7 +237,7 @@
 
             fetchNotification();
         })
-    </script> --}}
+    </script>
 
     @if (session('success'))
         <script>

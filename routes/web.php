@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WishlistController;
@@ -49,11 +50,16 @@ Route::middleware('user.auth')->group(function () {
 
         Route::get('/ma-giam-gia', [ProfileController::class, 'discounts'])->name('discounts');
         Route::get('/yeu-thich', [ProfileController::class, 'wishlists'])->name('wishlists');
+        Route::get('/thong-bao', [ProfileController::class, 'notifications'])->name('notifications');
     });
 
     Route:: as('wishlist.')->group(function () {
         Route::post('/store', [WishlistController::class, 'store'])->name('store');
         Route::delete('/delete', [WishlistController::class, 'delete'])->name('delete');
+    });
+
+    Route:: as('notification.')->group(function () {
+        Route::get('/get', [NotificationController::class, 'get'])->name('get');
     });
 });
 

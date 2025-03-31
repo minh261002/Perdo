@@ -79,17 +79,42 @@
                 </div>
             </div>
         </form>
-        <div class="navbar-nav
-                    flex-row order-md-last gap-3">
-            <div class="nav-item">
-                <a href="{{ route('cart.index') }}" class="position-relative text-decoration-none" id="cart-icon">
-                    <i class="ti ti-shopping-cart  d-block w-100 h-100" style="font-size: 30px"></i>
-                    <span
-                        class="badge bg-red text-red-fg position-absolute top-0 start-100 translate-middle badge-circle"
-                        id="cart-count">
+        <div class="navbar-nav flex-row order-md-last">
+            <div class="nav-item dropdown d-none d-md-flex me-3">
+                <a href="{{ route('cart.index') }}" class="nav-link px-0">
+                    <i class="ti ti-package-export fs-1" style="font-size:28px !important;"></i>
+                </a>
+            </div>
+            <div class="nav-item dropdown d-none d-md-flex me-3">
+                <a href="{{ route('cart.index') }}" class="nav-link px-0 position-relative">
+                    <i class="ti ti-shopping-cart fs-1"></i>
+                    <span class="badge bg-pink text-pink-fg badge-notification badge-pill mt-2 me-2" id="cart-count">
                         {{ $cart_count }}
                     </span>
                 </a>
+            </div>
+            <div class="nav-item dropdown d-none d-md-flex me-3">
+                <a href="#" class="nav-link px-0 position-relative" data-bs-toggle="dropdown" tabindex="-2"
+                    aria-label="Show notifications">
+                    <i class="ti ti-bell fs-1"></i>
+                    <span class="badge bg-pink text-pink-fg badge-notification badge-pill mt-2 me-2"
+                        id="notify-count">0</span>
+                </a>
+
+                <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
+                    <div class="card" style="width: 400px">
+                        <div class="card-header">
+                            <i class="ti ti-bell fs-1 me-2"></i>
+                            <h3 class="card-title">Thông báo</h3>
+                        </div>
+
+                        <div class="list-group list-group-flush list-group-hoverable" id="notification-list"></div>
+
+                        <div class="card-footer text-center border-top">
+                            <a href="{{ route('profile.notifications') }}" class="text-secondary">Xem tất cả</a>
+                        </div>
+                    </div>
+                </div>
             </div>
             @if (Auth::guard('web')->check())
                 <div class="nav-item dropdown">
