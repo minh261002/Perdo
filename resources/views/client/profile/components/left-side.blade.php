@@ -12,12 +12,12 @@
             </a>
 
             <a href="{{ route('profile.orders') }}"
-                class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.orders']) }}">
+                class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.orders', 'profile.order.detail']) }}">
                 Đơn hàng
             </a>
 
-            <a href="{{ route('profile.orders') }}"
-                class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.orders']) }}">
+            <a href="{{ route('profile.notifications') }}"
+                class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.notifications']) }}">
                 Thông báo
             </a>
 
@@ -26,8 +26,8 @@
                 Mã giảm giá
             </a>
 
-            <a href="{{ route('profile.orders') }}"
-                class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.orders']) }}">
+            <a href="{{ route('profile.wishlists') }}"
+                class="list-group-item list-group-item-action d-flex align-items-center {{ setSidebarActive(['profile.wishlists']) }}">
                 Yêu thích
             </a>
         </div>

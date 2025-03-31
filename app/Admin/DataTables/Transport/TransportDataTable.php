@@ -61,16 +61,17 @@ class TransportDataTable extends BaseDataTable
     {
         $this->customEditColumns = [
             'created_at' => '{{formatDate($created_at)}}',
-            'amount' => '{{format_price($amount)}}',
-            'payment_status' => $this->view['status'],
-            'payment_method' => $this->view['method'],
+            'status' => function ($model) {
+                return view($this->view['status'], compact('model'));
+            },
+            'method' => $this->view['method'],
             'order_id' => function ($model) {
                 return view($this->view['order'], compact('model'));
             },
-            'user_id' => function ($model) {
+            'user' => function ($model) {
                 return view($this->view['user'], compact('model'));
             },
-            'transaction_code' => function ($model) {
+            'transport_code' => function ($model) {
                 return view($this->view['code'], compact('model'));
             },
         ];
@@ -87,6 +88,10 @@ class TransportDataTable extends BaseDataTable
     {
         $this->customRawColumns = [
             'action',
+            'status',
+            'method',
+            'order_id',
+            'user',
         ];
     }
 
@@ -96,6 +101,23 @@ class TransportDataTable extends BaseDataTable
             'order_id' => function ($query, $keyword) {
                 return $query->whereHas('order', function ($query) use ($keyword) {
                     $query->where('order_code', $keyword);
+                });
+            },
+            'user' => function ($query, $keyword) {
+                return $query->whereHas('order', function ($query) use ($keyword) {
+                    $query->where('user_id', $keyword);
+                })->orWhereHas('order', function ($query) use ($keyword) {
+                    $query->where('name', 'like', '%' . $keyword . '%');
+                });
+            },
+            'status' => function ($query, $keyword) {
+                return $query->whereHas('statuses', function ($query) use ($keyword) {
+                    $query->where('status', $keyword)
+                        ->where('created_at', function ($query) {
+                            $query->selectRaw('MAX(created_at)')
+                                ->from('transport_statuses')
+                                ->whereColumn('transport_id', 'transports.id');
+                        });
                 });
             },
         ];

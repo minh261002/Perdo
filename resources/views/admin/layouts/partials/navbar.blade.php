@@ -29,7 +29,7 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
-                        <div class="card">
+                        <div class="card" style="width: 400px;">
                             <div class="card-header">
                                 <i class="ti ti-bell fs-1 me-2"></i>
                                 <h3 class="card-title">Thông báo</h3>

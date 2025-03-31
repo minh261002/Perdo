@@ -83,4 +83,33 @@ class ProfileController extends Controller
         $discounts = $user->discounts()->paginate(6);
         return view('client.profile.discount', compact('discounts'));
     }
+
+    public function orderDetail($order_code)
+    {
+        $order = $this->orderRepository->getByQueryBuilder([
+            'order_code' => $order_code,
+        ], [
+            'items',
+            'transaction',
+            'statuses'
+        ])->first();
+
+        return view('client.profile.order-detail', compact('order'));
+    }
+
+    public function wishlists()
+    {
+        $user = Auth::guard('web')->user();
+        $wishlists = $user->wishlists()->paginate(6);
+
+        return view('client.profile.wishlist', compact('wishlists'));
+    }
+
+    public function notifications()
+    {
+        $user = Auth::guard('web')->user();
+        $notifications = $user->notifications()->orderBy('created_at', 'desc')->paginate(5);
+
+        return view('client.profile.notification', compact('notifications'));
+    }
 }

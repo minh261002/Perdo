@@ -6,8 +6,10 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -47,9 +49,21 @@ Route::middleware('user.auth')->group(function () {
         Route::get('/don-hang/{order_code}/huy', [ProfileController::class, 'cancelOrder'])->name('order.cancel');
 
         Route::get('/ma-giam-gia', [ProfileController::class, 'discounts'])->name('discounts');
+        Route::get('/yeu-thich', [ProfileController::class, 'wishlists'])->name('wishlists');
+        Route::get('/thong-bao', [ProfileController::class, 'notifications'])->name('notifications');
     });
 
     Route:: as('wishlist.')->group(function () {
+        Route::post('/store', [WishlistController::class, 'store'])->name('store');
+        Route::delete('/delete', [WishlistController::class, 'delete'])->name('delete');
+    });
+
+    Route::prefix('notification')->as('notification.')->group(function () {
+        Route::get('/get', [NotificationController::class, 'get'])->name('get');
+        Route::get('/read-all', [NotificationController::class, 'readAll'])->name('read.all');
+        Route::delete('/delete/{id}', [NotificationController::class, 'delete'])->name('delete');
+        Route::delete('/delete-all', [NotificationController::class, 'deleteAll'])->name('delete.all');
+        Route::get('/read/{id}', [NotificationController::class, 'read'])->name('read');
     });
 });
 

@@ -1,3 +1,3 @@
-<a href="{{ route('admin.transaction.edit', $model->id) }}">
-    {{ $model->transaction_code }}
+<a href="{{ route('admin.transport.edit', $model->id) }}">
+    {{ $model->transport_code }}
 </a>

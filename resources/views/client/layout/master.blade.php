@@ -156,7 +156,7 @@
             </div>
         </div>
 
-        {{-- @include('client.layout.partials.pusher') --}}
+        @include('client.layout.partials.pusher')
     </div>
 
 
@@ -187,15 +187,15 @@
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/gh/lelinh014756/fui-toast-js@master/assets/js/toast@1.0.1/fuiToast.min.js"></script>
 
-    {{-- <script>
+    <script>
         $(document).ready(function() {
             function fetchNotification() {
                 $.ajax({
                     url: "{{ route('notification.get') }}",
                     type: 'GET',
                     success: function(response) {
-
                         const notificationsArr = response.data;
+
                         $('#notify-count').text(notificationsArr.length);
 
                         const notifications = Object.values(notificationsArr);
@@ -219,18 +219,7 @@
                                 </div>
                             `);
                             });
-                        } else {
-                            $('.list-group').append(`
-                            <div class="list-group-item" id="empty-notification">
-                                <div class="row align-items-center">
-                                    <div class="col text-truncate">
-                                        <a href="#" class="text-body d-block">
-                                            Không có thông báo mới
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        `);
+
                         }
                     }
                 });
@@ -238,7 +227,7 @@
 
             fetchNotification();
         })
-    </script> --}}
+    </script>
 
     @if (session('success'))
         <script>

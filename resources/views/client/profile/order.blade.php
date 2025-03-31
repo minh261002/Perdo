@@ -83,8 +83,10 @@
                                                 </td>
                                                 <td>{{ $order->created_at }}</td>
                                                 <td>
-                                                    <a href="{{ route('profile.order.detail', $order->id) }}"
-                                                        class="btn btn-3">Xem chi tiết</a>
+                                                    <a href="{{ route('profile.order.detail', $order->order_code) }}"
+                                                        class="btn btn-primary btn-sm">
+                                                        <i class="ti ti-pencil fs-1"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
 
@@ -100,7 +102,6 @@
                                             <td colspan="6">
                                                 <div class="d-flex justify-content-end">
                                                     {{ $orders->withQueryString()->links('components.pagination') }}
-
                                                 </div>
                                             </td>
                                         </tr>

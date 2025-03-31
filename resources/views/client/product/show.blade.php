@@ -71,7 +71,7 @@
                     },
                     beforeSend: function() {
                         $('#addToCart').html(
-                            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>.'
+                            '<span class="spinner-border spinner-border-md" role="status" aria-hidden="true"></span>.'
                         );
                     },
                     success: function(response) {

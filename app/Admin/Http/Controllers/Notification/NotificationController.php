@@ -66,7 +66,8 @@ class NotificationController
     public function get()
     {
         $notifications = $this->repository->getByQueryBuilder([
-            'user_id' => Auth::guard('web')->user()->id,
+            'admin_id' => Auth::guard('admin')->user()->id,
+            'is_read' => false,
         ])->paginate(5);
         return response()->json($notifications);
     }
