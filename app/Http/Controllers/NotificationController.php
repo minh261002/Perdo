@@ -27,4 +27,21 @@ class NotificationController extends Controller
             'data' => $notifications,
         ]);
     }
+
+    public function readAll(Request $request)
+    {
+        $notifications = $this->repository->getByQueryBuilder([
+            'user_id' => auth()->guard('web')->user()->id,
+            'is_read' => false
+        ])->get();
+
+        foreach ($notifications as $notification) {
+            $notification->update(['is_read' => true]);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Đánh dấu tất cả thông báo là đã đọc',
+        ]);
+    }
 }

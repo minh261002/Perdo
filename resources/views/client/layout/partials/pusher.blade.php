@@ -36,12 +36,6 @@
                             ${data.body['content'].substring(0, 100)}
                         </div>
                     </div>
-
-                    <div class="col-auto">
-                        <a href="#" class="delete-notification text-danger" data-notyid="${data.body['notyId']}">
-                            <i class="ti ti-trash fs-1"></i>
-                        </a>
-                    </div>
                 </div>
             </div>
         `;

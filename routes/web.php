@@ -60,6 +60,7 @@ Route::middleware('user.auth')->group(function () {
 
     Route:: as('notification.')->group(function () {
         Route::get('/get', [NotificationController::class, 'get'])->name('get');
+        Route::get('/read-all', [NotificationController::class, 'readAll'])->name('read.all');
     });
 });
 
