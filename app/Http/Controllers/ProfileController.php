@@ -101,6 +101,7 @@ class ProfileController extends Controller
     {
         $user = Auth::guard('web')->user();
         $wishlists = $user->wishlists()->paginate(6);
+
         return view('client.profile.wishlist', compact('wishlists'));
     }
 }
