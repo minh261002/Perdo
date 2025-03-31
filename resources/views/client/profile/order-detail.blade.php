@@ -98,6 +98,15 @@
                                 </table>
 
                                 <div class="w-100 text-end">
+                                    @if (
+                                        $order->transaction->payment_status->value == \App\Enums\Transaction\PaymentStatus::Pending->value &&
+                                            $order->transaction->payment_method->value != \App\Enums\Transaction\PaymentMethod::COD->value)
+                                        <a href="{{ route('client.payment', $order->id) }}"
+                                            class="btn btn-primary d-print-none">
+                                            <i class="ti ti-credit-card fs-1 me-2"></i>
+                                            Thanh toán
+                                        </a>
+                                    @endif
                                     <a href="{{ route('admin.order.invoice.print', $order->id) }}"
                                         class="btn btn-primary d-print-none" id="printBtn">
                                         <i class="ti ti-file-type-pdf fs-1 me-2"></i>

@@ -156,7 +156,7 @@
             </div>
         </div>
 
-        {{-- @include('client.layout.partials.pusher') --}}
+        @include('client.layout.partials.pusher')
     </div>
 
 

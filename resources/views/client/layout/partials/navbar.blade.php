@@ -112,6 +112,7 @@
                             khẩu</a>
                         <a href="{{ route('profile.orders') }}" class="dropdown-item">Đơn hàng</a>
                         <a href="{{ route('profile.discounts') }}" class="dropdown-item">Mã giảm gía</a>
+                        <a href="{{ route('profile.wishlists') }}" class="dropdown-item">Yêu thích</a>
 
                         <div class="dropdown-divider m-0"></div>
                         <form action="{{ route('logout') }}" method="POST">
