@@ -7,5 +7,6 @@
     @include('client.home.components.brand')
     @include('client.home.components.discount')
     @include('client.home.components.newProduct')
+    @include('client.home.components.best-seller')
     @include('components.viewed')
 @endsection

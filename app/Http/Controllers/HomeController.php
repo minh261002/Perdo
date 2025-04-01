@@ -47,7 +47,12 @@ class HomeController extends Controller
         ])->get()->filter(function ($product) {
             return $product->created_at->diffInDays(now()) <= 7;
         });
+        $bestSellingProducts = $this->productRepository->getByQueryBuilder([
+            'status' => ActiveStatus::Active->value,
+        ])->get()->sortByDesc(function ($product) {
+            return $product->orders()->sum('quantity');
+        })->take(10);
 
-        return view('client.home.index', compact('homeSlider', 'homeBrand', 'homeDiscounts', 'newProducts'));
+        return view('client.home.index', compact('homeSlider', 'homeBrand', 'homeDiscounts', 'newProducts', 'bestSellingProducts'));
     }
 }

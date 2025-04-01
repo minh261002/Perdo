@@ -1,25 +1,19 @@
-@php
-    $viewedProducts = session('viewed_products', []);
-    $newProducts = \App\Models\Product::whereIn('id', $viewedProducts)
-        ->with('brand')
-        ->orderBy('created_at', 'desc')
-        ->take(12)
-        ->get();
-@endphp
-
 <div class="container mb-30px">
     <div class="card border-0">
         <div class="card-body">
             <div class="d-flex justify-content-center align-items-center gap-2 mb-5">
                 <img src="{{ asset('images/icon-title.svg') }}" alt="">
-                <h1 class="d-inline-block mb-0 text-primary fs-1">Sản phẩm vừa xem</h1>
+                <h1 class="d-inline-block mb-0 text-primary fs-1">Sản phẩm bán chạy</h1>
                 <img src="{{ asset('images/icon-title.svg') }}" alt="">
             </div>
 
             <div class="row">
-                @forelse ($newProducts as $product)
+                @foreach ($bestSellingProducts as $product)
                     <div class="col-6 col-md-3 pb-2 pb-md-3">
                         <div class="card rounded-2">
+                            <div class="ribbon bg-yellow">
+                                <i class="ti ti-star fs-1 text-white"></i>
+                            </div>
                             <div class="card-body">
                                 <a href="{{ route('product.show', $product->slug) }}">
                                     <img src="{{ asset($product->image) }}" alt=""
@@ -31,8 +25,7 @@
 
                                 <a href="{{ route('product.show', $product->slug) }}" class="nav-link p-0 text-dark">
                                     {{ limit_text($product->name, 70) }} </a>
-
-                                <span class="mb-1">
+                                <span>
                                     @for ($i = 0; $i <= 4; $i++)
                                         <i class="ti ti-star fs-4 text-warning"></i>
                                     @endfor
@@ -40,8 +33,8 @@
                                 </span>
 
                                 @if ($product->sale_price && $product->sale_price > 0)
-                                    <div class="mb-1 d-flex flex-wrap align-items-center gap-0 gap-md-3">
-                                        <p class="text-left fs-sm-3 fw-bold text-danger">
+                                    <div class="d-flex flex-wrap align-items-center gap-0 gap-md-3">
+                                        <p class="text-left fs-2 fw-bold text-danger">
                                             {{ format_price($product->sale_price) }}
                                         </p>
                                         <p class="text-left fs-4 text-secondary">
@@ -49,7 +42,7 @@
                                         </p>
                                     </div>
                                 @else
-                                    <p class="mb-1 text-left fs-3 fw-bold text-danger">
+                                    <p class="text-left fs-3 fw-bold text-danger">
                                         {{ format_price($product->price) }}
                                     </p>
                                 @endif
@@ -62,11 +55,12 @@
                             </div>
                         </div>
                     </div>
-                @empty
-                    <div class="col-12">
-                        <p class="text-center fs-3">Không có sản phẩm liên quan</p>
-                    </div>
-                @endforelse
+                @endforeach
+            </div>
+            <div class="w-100 d-flex justify-content-center mt-3">
+                <a href="" class="btn btn-primary">
+                    Xem thêm
+                </a>
             </div>
         </div>
     </div>

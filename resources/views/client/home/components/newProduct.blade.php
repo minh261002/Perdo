@@ -24,6 +24,13 @@
                                 <a href="{{ route('product.show', $product->slug) }}" class="nav-link p-0 text-dark">
                                     {{ limit_text($product->name, 70) }} </a>
 
+                                <span>
+                                    @for ($i = 0; $i <= 4; $i++)
+                                        <i class="ti ti-star fs-4 text-warning"></i>
+                                    @endfor
+                                    (123 đánh giá)
+                                </span>
+
                                 @if ($product->sale_price && $product->sale_price > 0)
                                     <div class="d-flex flex-wrap align-items-center gap-0 gap-md-3">
                                         <p class="text-left fs-2 fw-bold text-danger">
@@ -38,6 +45,12 @@
                                         {{ format_price($product->price) }}
                                     </p>
                                 @endif
+
+                                <span>
+                                    Đã bán: <span class="text-danger fw-bold">{{ $product->orders()->sum('quantity') }}
+                                    </span>
+                                    sản phẩm
+                                </span>
                             </div>
                         </div>
                     </div>

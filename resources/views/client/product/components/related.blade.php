@@ -19,12 +19,17 @@
                                 <p class="text-left fw-bold text-primary fs-3 mt-2">
                                     {{ $product->brand->name }}
                                 </p>
-
+                                <span class="mb-1">
+                                    @for ($i = 0; $i <= 4; $i++)
+                                        <i class="ti ti-star fs-4 text-warning"></i>
+                                    @endfor
+                                    (123 đánh giá)
+                                </span>
                                 <a href="{{ route('product.show', $product->slug) }}" class="nav-link p-0 text-dark">
                                     {{ limit_text($product->name, 70) }} </a>
 
                                 @if ($product->sale_price && $product->sale_price > 0)
-                                    <div class="d-flex flex-wrap align-items-center gap-0 gap-md-3">
+                                    <div class="mb-1 d-flex flex-wrap align-items-center gap-0 gap-md-3">
                                         <p class="text-left fs-sm-3 fw-bold text-danger">
                                             {{ format_price($product->sale_price) }}
                                         </p>
@@ -33,10 +38,16 @@
                                         </p>
                                     </div>
                                 @else
-                                    <p class="text-left fs-3 fw-bold text-danger">
+                                    <p class="mb-1 text-left fs-3 fw-bold text-danger">
                                         {{ format_price($product->price) }}
                                     </p>
                                 @endif
+
+                                <span>
+                                    Đã bán: <span class="text-danger fw-bold">{{ $product->orders()->sum('quantity') }}
+                                    </span>
+                                    sản phẩm
+                                </span>
                             </div>
                         </div>
                     </div>
