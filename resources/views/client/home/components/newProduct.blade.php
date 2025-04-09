@@ -8,7 +8,7 @@
             </div>
 
             <div class="row">
-                @foreach ($newProducts as $product)
+                @forelse ($newProducts as $product)
                     <div class="col-6 col-md-3 pb-2 pb-md-3">
                         <div class="card rounded-2">
                             <div class="ribbon bg-green">Mới</div>
@@ -54,12 +54,11 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
-            </div>
-            <div class="w-100 d-flex justify-content-center mt-3">
-                <a href="" class="btn btn-primary">
-                    Xem thêm
-                </a>
+                @empty
+                    <div class="col-12">
+                        <p class="text-center">Không có sản phẩm nào.</p>
+                    </div>
+                @endforelse
             </div>
         </div>
     </div>
