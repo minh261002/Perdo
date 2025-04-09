@@ -66,4 +66,11 @@ class UserController extends Controller
         $this->repository->delete($id);
         return response()->json(['status' => 'success', 'message' => 'Xóa khách hàng thành công']);
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $users = $this->repository->search($search);
+        return response()->json($users);
+    }
 }

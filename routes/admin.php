@@ -20,6 +20,7 @@ use App\Admin\Http\Controllers\Category\CategoryController;
 use App\Admin\Http\Controllers\Product\ProductController;
 use App\Admin\Http\Controllers\Discount\DiscountController;
 use App\Admin\Http\Controllers\Order\OrderController;
+use App\Admin\Http\Controllers\Chat\ChatController;
 
 Route::prefix('admin')->as('admin.')->group(function () {
 
@@ -377,6 +378,17 @@ Route::prefix('admin')->as('admin.')->group(function () {
             Route::middleware(['permission:deleteNotification'])->group(function () {
                 Route::delete('/delete/{id}', [NotificationController::class, 'delete'])->name('delete');
             });
+        });
+
+        Route::prefix('chat')->as('chat.')->group(function () {
+
+            Route::get('/', [ChatController::class, 'index'])->name('index');
+            Route::get('/show/{adminId}', [ChatController::class, 'show'])->name('show');
+            Route::post('/send', [ChatController::class, 'send'])->name('send');
+        });
+
+        Route::prefix('/search')->as('search.')->group(function () {
+            Route::get('/admin', [UserController::class, 'search'])->name('admin');
         });
 
     });

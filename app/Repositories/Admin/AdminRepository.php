@@ -11,4 +11,10 @@ class AdminRepository extends BaseRepository implements AdminRepositoryInterface
     {
         return Admin::class;
     }
+
+    public function search($keyword)
+    {
+        return $this->model->where('name', 'like', '%' . $keyword . '%')
+            ->orWhere('email', 'like', '%' . $keyword . '%');
+    }
 }

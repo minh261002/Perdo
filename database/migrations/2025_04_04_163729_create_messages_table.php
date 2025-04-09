@@ -12,15 +12,14 @@ return new class extends Migration {
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('conversation_id')->constrained()->onDelete('cascade');
-            $table->enum('sender_type', ['admin', 'user']);
-            $table->foreignId('sender_id');
-            $table->text('message');
+            $table->foreignId('sender_id')->constrained('admins')->onDelete('cascade');
+            $table->foreignId('receiver_id')->constrained('admins')->onDelete('cascade');
+            $table->text('message')->nullable();
+            $table->text('file')->nullable();
             $table->boolean('is_read')->default(false);
             $table->timestamps();
-            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('sender_id')->references('id')->on('admins')->onDelete('cascade');
         });
+
     }
 
     /**

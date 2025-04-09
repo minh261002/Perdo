@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{ asset('/libs/datatables/plugins/bs5/css/dataTables.bootstrap5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/libs/datatables/plugins/buttons/css/buttons.bootstrap5.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/libs/datatables/plugins/responsive/css/responsive.bootstrap5.min.css') }}">
+    <script src="{{ asset('js/jquery.js') }}"></script>
 
     @stack('styles')
 
@@ -68,7 +69,6 @@
 
     @include('admin.layouts.partials.pusher')
 
-    <script src="{{ asset('js/jquery.js') }}"></script>
     <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
 
     <script src="{{ asset('libs/datatables/jquery.dataTables.min.js') }}"></script>

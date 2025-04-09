@@ -59,4 +59,48 @@ class Admin extends Authenticatable
         }
         return false;
     }
+
+    public function sentMessages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    public function receivedMessages()
+    {
+        return $this->hasMany(Message::class, 'receiver_id');
+    }
+
+    public function lastMessageWith($adminId)
+    {
+        return $this->sentMessages()
+            ->where('receiver_id', $adminId)
+            ->orWhere('sender_id', $adminId)
+            ->orderByDesc('created_at')
+            ->first();
+    }
+
+    public function getLastMessages()
+    {
+        $messages = $this->sentMessages()
+            ->orWhereIn('receiver_id', $this->receivedMessages->pluck('sender_id'))
+            ->orderByDesc('created_at')
+            ->get()
+            ->groupBy('receiver_id');
+
+        return $messages->map(function ($conversation) {
+            return $conversation->first();
+        });
+    }
+
+
+    public function getMessagesForAdmin($adminId)
+    {
+        $admin = Admin::find($adminId);
+
+        $conversations = $admin->getLastMessages();
+
+        return response()->json([
+            'conversations' => $conversations
+        ]);
+    }
 }

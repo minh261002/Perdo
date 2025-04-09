@@ -1,7 +1,7 @@
 <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 <script>
-    var pusher = new Pusher("{{ env('PUSHER_APP_ID') }}", {
-        cluster: "{{ env('PUSHER_APP_CLUSTER') }}",
+    var pusher = new Pusher("3cc7a46e532c9e22baf5", {
+        cluster: "ap1",
         authEndpoint: '/broadcasting/auth',
         auth: {
             headers: {
@@ -11,9 +11,9 @@
     });
     Pusher.logToConsole = true;
 
-    var userId = '{{ Auth::guard('web')->user()->id ?? 0 }}';
+    var userId = '{{ Auth::guard('admin')->user()->id ?? 0 }}';
 
-    var channel = pusher.subscribe(`App.Models.User.${userId}`);
+    var channel = pusher.subscribe(`App.Models.Admin.${userId}`);
 
     channel.bind('notification', function(data) {
         FuiToast.success('Bạn có thông báo mới từ ' + data.body.adminName, {
@@ -51,5 +51,35 @@
         }
         $('#notification-list').prepend(html);
         $('#notification-list-box').prepend(html);
+    });
+
+    channel.bind('message', function(data) {
+        let receiverId = $('.chat-bubbles').data('receiver-id');
+        // if (receiverId == data.senderId) {
+        let html = `
+                <div class="chat-item">
+                    <div class="row align-items-end justify-content-end">
+                        <div class="col col-lg-6">
+                            <div class="chat-bubble chat-bubble-me">
+                                <div class="chat-bubble-body fw-medium fs-4">
+                                    <p>${data.message}</p>
+                                </div>
+                                <div class="chat-bubble-title">
+                                    <div class="row justify-content-end">
+                                        <div class="col-auto chat-bubble-date">
+                                            ${data.created_at}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        $('.chat-bubbles').append(html);
+        $('.scrollable').animate({
+            scrollTop: $('.scrollable')[0].scrollHeight
+        }, 1000);
+        // }
     });
 </script>

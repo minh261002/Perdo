@@ -22,6 +22,7 @@ class ServiceServiceProvider extends ServiceProvider
         'App\Admin\Services\Discount\DiscountServiceInterface' => 'App\Admin\Services\Discount\DiscountService',
         'App\Admin\Services\Notification\NotificationServiceInterface' => 'App\Admin\Services\Notification\NotificationService',
         'App\Admin\Services\Transport\TransportServiceInterface' => 'App\Admin\Services\Transport\TransportService',
+        'App\Admin\Services\Chat\ChatServiceInterface' => 'App\Admin\Services\Chat\ChatService',
         //
         'App\Services\Order\OrderServiceInterface' => 'App\Services\Order\OrderService',
         'App\Services\Profile\ProfileServiceInterface' => 'App\Services\Profile\ProfileService',

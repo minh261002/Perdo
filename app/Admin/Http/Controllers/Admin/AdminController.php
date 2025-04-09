@@ -8,6 +8,7 @@ use App\Admin\Http\Requests\Admin\AdminRequest;
 use App\Repositories\Admin\AdminRepositoryInterface;
 use App\Repositories\Role\RoleRepositoryInterface;
 use App\Admin\Services\Admin\AdminServiceInterface;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -60,5 +61,12 @@ class AdminController extends Controller
     {
         $this->repository->delete($id);
         return response()->json(['status' => 'success', 'message' => 'Xóa quản trị viên thành công']);
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
+        $users = $this->repository->search($search);
+        return response()->json($users);
     }
 }
