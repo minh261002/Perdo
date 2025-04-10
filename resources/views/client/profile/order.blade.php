@@ -87,6 +87,11 @@
                                                         class="btn btn-primary btn-sm">
                                                         <i class="ti ti-pencil fs-1"></i>
                                                     </a>
+
+                                                    <a href="{{ route('profile.order.invoice', $order->order_code) }}"
+                                                        class="btn btn-outline-primary btn-sm">
+                                                        <i class="ti ti-file-type-pdf fs-1"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
 

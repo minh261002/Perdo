@@ -45,8 +45,9 @@ Route::middleware('user.auth')->group(function () {
         Route::put('/doi-mat-khau', [ProfileController::class, 'changePassword'])->name('change.password');
 
         Route::get('/don-hang', [ProfileController::class, 'orders'])->name('orders');
-        Route::get('/don-hang/{order_code}', [ProfileController::class, 'orderDetail'])->name('order.detail');
-        Route::get('/don-hang/{order_code}/huy', [ProfileController::class, 'cancelOrder'])->name('order.cancel');
+        Route::get('/don-hang/{order_code}/invoice', [ProfileController::class, 'invoice'])->name('order.invoice');
+        Route::get('/don-hang/{order_code}', [ProfileController::class, 'detail'])->name('order.detail');
+        Route::post('/don-hang/{order_code}/huy', [ProfileController::class, 'cancelOrder'])->name('order.cancel');
 
         Route::get('/ma-giam-gia', [ProfileController::class, 'discounts'])->name('discounts');
         Route::get('/yeu-thich', [ProfileController::class, 'wishlists'])->name('wishlists');

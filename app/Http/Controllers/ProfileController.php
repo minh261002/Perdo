@@ -84,7 +84,20 @@ class ProfileController extends Controller
         return view('client.profile.discount', compact('discounts'));
     }
 
-    public function orderDetail($order_code)
+    public function invoice($order_code)
+    {
+        $order = $this->orderRepository->getByQueryBuilder([
+            'order_code' => $order_code,
+        ], [
+            'items',
+            'transaction',
+            'statuses'
+        ])->first();
+
+        return view('client.profile.order-invoice', compact('order'));
+    }
+
+    public function detail($order_code)
     {
         $order = $this->orderRepository->getByQueryBuilder([
             'order_code' => $order_code,
@@ -96,6 +109,7 @@ class ProfileController extends Controller
 
         return view('client.profile.order-detail', compact('order'));
     }
+
 
     public function wishlists()
     {
@@ -111,5 +125,23 @@ class ProfileController extends Controller
         $notifications = $user->notifications()->orderBy('created_at', 'desc')->paginate(5);
 
         return view('client.profile.notification', compact('notifications'));
+    }
+
+    public function cancelOrder(Request $request, $order_code)
+    {
+
+        $cancel_reason = $request->input('cancel_reason');
+
+        $order = $this->orderRepository->getByQueryBuilder([
+            'order_code' => $order_code,
+        ])->first();
+        $order->update([
+            'cancel_reason' => $cancel_reason,
+        ]);
+        $order->statuses()->create([
+            'status' => 'cancelled',
+        ]);
+
+        return redirect()->back()->with('success', 'Hủy đơn hàng thành công');
     }
 }
