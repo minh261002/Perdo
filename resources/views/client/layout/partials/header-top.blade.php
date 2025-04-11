@@ -3,7 +3,7 @@
         <div id="topbar" class="carousel slide text-center text-white fs-4 py-1 fw-bold">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    Miễn phí vận chuyển đối với đơn hàng trên 500K
+                    Săn sale gì chưa người đẹp
                 </div>
                 <div class="carousel-item">
                     Ưu đãi giảm giá 10% cho đơn hàng trên 1 triệu

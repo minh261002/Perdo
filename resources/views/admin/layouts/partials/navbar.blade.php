@@ -11,13 +11,10 @@
 
         <div class="navbar-nav flex-row order-md-last">
             <div class="d-none d-md-flex gap-2">
-                <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Enable dark mode"
-                    data-bs-toggle="tooltip" data-bs-placement="bottom">
-                    <i class="ti ti-moon fs-1"></i>
-                </a>
-                <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Enable light mode"
-                    data-bs-toggle="tooltip" data-bs-placement="bottom">
-                    <i class="ti ti-sun fs-1"></i>
+                <a href="{{ route('admin.chat.index') }}" class="nav-link px-0 position-relative">
+                    <i class="ti ti-message fs-1"></i>
+                    <span class="badge bg-pink text-pink-fg badge-notification badge-pill mt-2 me-2"
+                        id="chat-notify-count">0</span>
                 </a>
 
                 <div class="nav-item dropdown d-none d-md-flex me-3">
